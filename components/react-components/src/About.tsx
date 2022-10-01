@@ -1,16 +1,13 @@
 import React from 'react';
-import about from './data/about.json';
 import './About.css';
 
-const [aboutData1, aboutData2] = about.aboutData;
-
-function About() {
+function About(props: { p1: string; p2: string }) {
   return (
     <>
       <h2 className="About-title">About Us</h2>
-      <p className="About-text">{aboutData1.description}</p>
+      <p className="About-text">{props.p1}</p>
       <hr className="About-line" />
-      <p className="About-text">{aboutData2.description}</p>
+      <p className="About-text">{props.p2}</p>
     </>
   );
 }

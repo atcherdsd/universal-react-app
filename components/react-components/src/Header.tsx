@@ -5,14 +5,17 @@ import { BrowserRouter as Router, NavLink, Routes, Route } from 'react-router-do
 import About from './About';
 import Main from './Main';
 import Error from './Error';
+import about from './data/about.json';
 
-function Header() {
+const [aboutData1, aboutData2] = about.aboutData;
+
+function Header(props: { sitename: string }) {
   return (
     <Router>
       <header className="Header-container">
         <div className="Header-logo__container">
           <img src={logo} className="Header-logo" alt="logo" />
-          <h1 className="Headear-title">smartphone universe</h1>
+          <h1 className="Headear-title">{props.sitename}</h1>
         </div>
         <div className="Header-right">
           <nav className="Header-menu">
@@ -33,7 +36,10 @@ function Header() {
       </header>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/about" element={<About />} />
+        <Route
+          path="/about"
+          element={<About p1={aboutData1.description} p2={aboutData2.description} />}
+        />
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>
