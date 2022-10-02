@@ -9,7 +9,9 @@ import about from './data/about.json';
 
 const [aboutData1, aboutData2] = about.aboutData;
 
-function Header(props: { sitename: string }) {
+function Header(props: { sitename: string; links: object }) {
+  const links = props.links;
+
   return (
     <Router>
       <header className="Header-container">
@@ -20,16 +22,22 @@ function Header(props: { sitename: string }) {
         <div className="Header-right">
           <nav className="Header-menu">
             <ul className="Header-links">
-              <li>
-                <NavLink className="Header-link" end to="/">
-                  Main
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="Header-link" to="/about">
-                  About Us
-                </NavLink>
-              </li>
+              {Object.keys(links).map((elem, index) => {
+                const item: string = Object.values(links)[index];
+                return item === '/' ? (
+                  <li key={item}>
+                    <NavLink className="Header-link" end to={item}>
+                      {elem}
+                    </NavLink>
+                  </li>
+                ) : (
+                  <li key={item}>
+                    <NavLink className="Header-link" to={item}>
+                      {elem}
+                    </NavLink>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>

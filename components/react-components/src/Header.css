@@ -8,6 +8,7 @@
     width: calc(100% - 40px);
     max-width: 1200px;
     min-height: 4rem;
+    flex-wrap: wrap;
 }
 
 .Header-logo__container {
@@ -47,9 +48,10 @@
     cursor: pointer;
     background-color: #61dafb;
     border-radius: 0.6rem;
-    padding: 0.4rem;
+    padding: 0.2rem 0.6rem 0.5rem;
     color: #fff;
     text-decoration: none;
+    text-transform: capitalize;
 }
 .Header-link:last-child {
     margin-right: 0;

@@ -1,0 +1,96 @@
+.Card-container {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Card-header {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.Card-title {
+    width: 70%;
+    text-align: left;
+    color: #5281d5;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.Card-logo__container {
+    padding-left: 2rem;
+}
+.Card-logo {
+    max-height: 1.5rem;
+}
+
+.Card-content__container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Card-image {
+    height: 10rem;
+    vertical-align: top;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.Card-description__container {
+    max-width: 30rem;
+}
+.Card-main-content {
+    width: 45%;
+}
+.Card-review__container {
+    background-color: #e1e9e9;
+    border-radius: 0.4rem;
+    padding: 0 0.5rem;
+    display: flex;
+    max-width: 30rem;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+.Card-review {
+    text-align: left;
+}
+.Card-review-text {
+    font-weight: bold;
+}
+.Card-review-base {
+    color: #4c76c1;
+    font-size: 1.1rem;
+}
+.Card-rating__container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    background-image: linear-gradient(180deg,#00b21c,#177412);
+    border-radius: 0.4rem;
+    color: #fff;
+    padding: 0.3rem;
+}
+
+.Card-description {
+    text-align: left;
+}
+.Card-price__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.Card-price {
+    font-size: 1.875rem;
+    color: #5281d5;
+}
+.Card-stock {
+    color: #3ba441;
+    font-weight: bold;
+}
+
+.Card-line {
+    border: 0;
+    height: 0.1rem;
+    background: linear-gradient(90deg,transparent 0,#d8d8d8 5%,#d8d8d8 95%,transparent);
+    margin: 2rem;
+}
