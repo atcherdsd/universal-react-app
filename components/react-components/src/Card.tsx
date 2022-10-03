@@ -1,19 +1,6 @@
 import React, { ReactNode } from 'react';
 import './Card.css';
-
-type Positions = {
-  title: string;
-  review: string;
-  rating: string;
-  price: string;
-  stock: string;
-  delivery: string;
-  logo: string;
-  img: string;
-  description: {
-    info: string[];
-  };
-};
+import { Positions } from 'Search';
 
 function Card(props: Positions) {
   return (
@@ -41,13 +28,15 @@ function Card(props: Positions) {
           </div>
           <div className="Card-description__container">
             <div className="Card-description">
-              {props.description.info.map((elem): ReactNode => {
-                return (
-                  <li className="Card-description__item" key={elem}>
-                    {elem}
-                  </li>
-                );
-              })}
+              <ul>
+                {props.description.info.map((elem): ReactNode => {
+                  return (
+                    <li className="Card-description__item" key={elem}>
+                      {elem}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         </div>

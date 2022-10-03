@@ -3,7 +3,7 @@ import './Search.css';
 import goodsData from './data/goods.json';
 import Card from './Card';
 
-type Positions = {
+export type Positions = {
   title: string;
   review: string;
   rating: string;
@@ -18,7 +18,9 @@ type Positions = {
 };
 
 function Search() {
-  const [searchValue, setSearchValue] = useState(localStorage.getItem('searchValue') as string);
+  const [searchValue, setSearchValue] = useState(
+    (localStorage.getItem('searchValue') as string) || ''
+  );
 
   function searchText(event: { target: { value: string } }) {
     setSearchValue(event.target.value);
@@ -39,6 +41,7 @@ function Search() {
     <>
       <section className="Search-section">
         <hr className="Search-line"></hr>
+        <h1 className="Search-title">Search:</h1>
         <div className="Search-container">
           <input
             className="Search-input"
