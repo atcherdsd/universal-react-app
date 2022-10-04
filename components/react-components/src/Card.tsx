@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import './Card.css';
 import { Positions } from 'Search';
 
-function Card(props: Positions) {
+function Card(props: Positions): JSX.Element {
   return (
     <div className="Card-container">
       <div className="Card-header">
@@ -29,7 +29,7 @@ function Card(props: Positions) {
           <div className="Card-description__container">
             <div className="Card-description">
               <ul>
-                {props.description.info.map((elem): ReactNode => {
+                {props.description.info.map((elem: string): ReactNode => {
                   return (
                     <li className="Card-description__item" key={elem}>
                       {elem}

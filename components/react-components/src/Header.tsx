@@ -9,7 +9,12 @@ import about from './data/about.json';
 
 const [aboutData1, aboutData2] = about.aboutData;
 
-function Header(props: { sitename: string; links: object }) {
+interface IHeaderProps {
+  sitename: string;
+  links: object;
+}
+
+function Header(props: IHeaderProps): JSX.Element {
   const links = props.links;
 
   return (
@@ -22,7 +27,7 @@ function Header(props: { sitename: string; links: object }) {
         <div className="Header-right">
           <nav className="Header-menu">
             <ul className="Header-links">
-              {Object.keys(links).map((elem, index) => {
+              {Object.keys(links).map((elem: string, index: number): JSX.Element => {
                 const item: string = Object.values(links)[index];
                 return item === '/' ? (
                   <li key={item} className="Header-link-item">

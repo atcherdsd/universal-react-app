@@ -2,12 +2,7 @@ import React from 'react';
 import Search from './Search';
 import './Main.css';
 
-// type Props = {
-//   title: string;
-//   key: string;
-// };
-
-function Main() {
+function Main(): JSX.Element {
   return (
     <div className="Main-container">
       <Search />

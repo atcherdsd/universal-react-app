@@ -1,7 +1,12 @@
 import React from 'react';
 import './About.css';
 
-function About(props: { p1: string; p2: string }) {
+interface IAboutProps {
+  p1: string;
+  p2: string;
+}
+
+const About: React.FC<IAboutProps> = (props) => {
   return (
     <>
       <h2 className="About-title">About Us</h2>
@@ -10,6 +15,6 @@ function About(props: { p1: string; p2: string }) {
       <p className="About-text">{props.p2}</p>
     </>
   );
-}
+};
 
 export default About;

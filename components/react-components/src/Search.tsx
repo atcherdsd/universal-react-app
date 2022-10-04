@@ -17,22 +17,22 @@ export type Positions = {
   };
 };
 
-function Search() {
+function Search(): JSX.Element {
   const [searchValue, setSearchValue] = useState(
     (localStorage.getItem('searchValue') as string) || ''
   );
 
-  function searchText(event: { target: { value: string } }) {
+  function searchText(event: { target: { value: string } }): void {
     setSearchValue(event.target.value);
   }
 
-  const dataSearch = goodsData.goods.filter(
-    (item: Positions) =>
+  const dataSearch: Positions[] = goodsData.goods.filter(
+    (item: Positions): boolean =>
       item.title.toString().toLowerCase().includes(searchValue.toString().toLowerCase()) ||
       item.description.info.toString().toLowerCase().includes(searchValue.toString().toLowerCase())
   );
 
-  function setLocalStorage() {
+  function setLocalStorage(): void {
     localStorage.setItem('searchValue', searchValue);
   }
   useEffect(setLocalStorage);
