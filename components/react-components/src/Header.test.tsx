@@ -13,6 +13,7 @@ describe('Header component', () => {
     expect(screen.getAllByRole('list').length).toEqual(21);
     expect(screen.getByAltText('logo')).toBeInTheDocument();
     expect(screen.getAllByRole('separator')[1]).toBeInTheDocument();
+    expect(screen.getAllByAltText('Smartphone').length).toEqual(20);
 
     const nav = screen.getAllByRole('navigation');
     expect(nav.length).toEqual(1);
