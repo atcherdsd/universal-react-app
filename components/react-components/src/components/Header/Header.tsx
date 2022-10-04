@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo-phone.svg';
+import logo from '../.././logo-phone.svg';
 import './Header.css';
 import { BrowserRouter as Router, NavLink, Routes, Route } from 'react-router-dom';
-import About from './About';
-import Main from './Main';
-import Error from './Error';
-import about from './data/about.json';
+import About from '../../pages/About/About';
+import Main from '../../pages/Main/Main';
+import Error from '../../pages/Error/Error';
+import about from '../../data/about.json';
 
 const [aboutData1, aboutData2] = about.aboutData;
 

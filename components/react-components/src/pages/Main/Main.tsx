@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from './Search';
+import Search from '../../components/Search/Search';
 import './Main.css';
 
 function Main(): JSX.Element {

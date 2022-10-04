@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import './Search.css';
-import goodsData from './data/goods.json';
-import Card from './Card';
+import goodsData from '../../data/goods.json';
+import Card from '../../components/Card/Card';
 
 export type Positions = {
   title: string;

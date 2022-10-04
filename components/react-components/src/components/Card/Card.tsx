@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import './Card.css';
-import { Positions } from 'Search';
+import { Positions } from '../Search/Search';
 
 function Card(props: Positions): JSX.Element {
   return (
