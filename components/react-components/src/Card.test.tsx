@@ -43,22 +43,22 @@ describe('Card component', () => {
     expect(screen.queryByText('from 6')).toBeNull();
     expect(screen.queryByRole('nav')).toBeNull();
   });
-  // it('Card snapshot', () => {
-  //   const snapshot = render(
-  //     <Card
-  //       title={''}
-  //       review={''}
-  //       rating={''}
-  //       price={''}
-  //       stock={''}
-  //       delivery={''}
-  //       logo={''}
-  //       img={''}
-  //       description={{
-  //         info: [],
-  //       }}
-  //     />
-  //   );
-  //   expect(snapshot).toMatchSnapshot();
-  // });
+  it('Card snapshot', () => {
+    const snapshot = render(
+      <Card
+        title={''}
+        review={''}
+        rating={''}
+        price={''}
+        stock={''}
+        delivery={''}
+        logo={''}
+        img={''}
+        description={{
+          info: [],
+        }}
+      />
+    );
+    expect(snapshot).toMatchSnapshot();
+  });
 });
