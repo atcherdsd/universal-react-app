@@ -25,14 +25,16 @@ function Header(props: { sitename: string; links: object }) {
               {Object.keys(links).map((elem, index) => {
                 const item: string = Object.values(links)[index];
                 return item === '/' ? (
-                  <li className="Header-link" key={item}>
-                    <NavLink end to={item}>
+                  <li key={item} className="Header-link-item">
+                    <NavLink className="Header-link" end to={item}>
                       {elem}
                     </NavLink>
                   </li>
                 ) : (
-                  <li className="Header-link" key={item}>
-                    <NavLink to={item}>{elem}</NavLink>
+                  <li key={item} className="Header-link-item">
+                    <NavLink className="Header-link" to={item}>
+                      {elem}
+                    </NavLink>
                   </li>
                 );
               })}
