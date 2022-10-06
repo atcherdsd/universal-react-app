@@ -1,7 +1,7 @@
 import React from 'react';
 import './Error.css';
 
-function Error(): JSX.Element {
+function NotFound(): JSX.Element {
   return (
     <>
       <h1 className="Error-title">404</h1>
