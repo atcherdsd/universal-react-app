@@ -35,7 +35,7 @@ function Search(): JSX.Element {
   function setLocalStorage(): void {
     localStorage.setItem('searchValue', searchValue);
   }
-  useEffect(setLocalStorage);
+  useEffect(setLocalStorage, []);
 
   return (
     <>
