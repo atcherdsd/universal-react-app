@@ -4,7 +4,7 @@ import './Header.css';
 import { BrowserRouter as Router, NavLink, Routes, Route } from 'react-router-dom';
 import About from '../../pages/About/About';
 import Main from '../../pages/Main/Main';
-import Error from '../../pages/Error/Error';
+import NotFound from '../../pages/NotFound/NotFound';
 import about from '../../data/about.json';
 
 const [aboutData1, aboutData2] = about.aboutData;
@@ -53,7 +53,7 @@ function Header(props: IHeaderProps): JSX.Element {
           path="/about"
           element={<About p1={aboutData1.description} p2={aboutData2.description} />}
         />
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

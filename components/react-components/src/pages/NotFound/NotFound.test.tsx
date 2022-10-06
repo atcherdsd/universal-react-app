@@ -1,32 +1,32 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Error from './Error';
+import NotFound from './NotFound';
 
-describe('Error component', () => {
-  test('Error component renders', () => {
-    render(<Error />);
+describe('NotFound component', () => {
+  test('shold render NotFound component', () => {
+    render(<NotFound />);
     expect(screen.getByText(/oops/i)).toBeInTheDocument();
     expect(screen.getByRole('heading')).toBeInTheDocument();
     expect(screen.getByText(/page/)).toBeInTheDocument();
   });
   it('Classes are available', () => {
-    render(<Error />);
-    expect(screen.getByRole('heading')).toHaveClass('Error-title');
-    expect(screen.getByText(/page/)).toHaveClass('Error-message');
+    render(<NotFound />);
+    expect(screen.getByRole('heading')).toHaveClass('NotFound-title');
+    expect(screen.getByText(/page/)).toHaveClass('NotFound-message');
   });
   it('Styles are available', () => {
-    render(<Error />);
-    const elementParagraph = document.querySelector('.Error-message') as Element;
+    render(<NotFound />);
+    const elementParagraph = document.querySelector('.NotFound-message') as Element;
     const fontSizeInParagraph = window.getComputedStyle(elementParagraph).fontSize;
     expect(fontSizeInParagraph).toBeDefined();
   });
-  test('Error component do not have data', () => {
-    render(<Error />);
+  test('NotFound component do not have data', () => {
+    render(<NotFound />);
     expect(screen.queryByText('fun')).toBeNull();
     expect(screen.queryByRole('img')).toBeNull();
     expect(screen.queryByRole('separator')).toBeNull();
 
-    const elementParagraph = document.querySelector('.Error-message') as Element;
+    const elementParagraph = document.querySelector('.NotFound-message') as Element;
     const textColor = window.getComputedStyle(elementParagraph).color;
     expect(textColor).toBeFalsy();
   });
