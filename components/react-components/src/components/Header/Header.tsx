@@ -18,7 +18,7 @@ function Header(props: IHeaderProps): JSX.Element {
   const links = props.links;
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <header className="Header-container">
         <div className="Header-logo__container">
           <img src={logo} className="Header-logo" alt="logo" />
