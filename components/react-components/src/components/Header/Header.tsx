@@ -6,6 +6,7 @@ import About from '../../pages/About/About';
 import Main from '../../pages/Main/Main';
 import NotFound from '../../pages/NotFound/NotFound';
 import about from '../../data/about.json';
+import Forms from 'pages/Forms/Forms';
 
 const [aboutData1, aboutData2] = about.aboutData;
 
@@ -49,6 +50,7 @@ function Header(props: IHeaderProps): JSX.Element {
       </header>
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/forms" element={<Forms />} />
         <Route
           path="/about"
           element={<About p1={aboutData1.description} p2={aboutData2.description} />}

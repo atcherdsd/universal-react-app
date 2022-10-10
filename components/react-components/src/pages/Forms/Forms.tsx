@@ -1,15 +1,19 @@
+import Form from 'components/Form/Form';
 import React from 'react';
-// import './About.css';
+import './Forms.css';
 
 // interface IAboutProps {
 //   p1: string;
 //   p2: string;
 // }
 
-const Forms: React.FC = () => {
+const Forms: React.FC = (): JSX.Element => {
   return (
     <>
-      <h2 className="Forms-title">This is page for forms</h2>
+      <hr className="Forms-line" />
+      <h2 className="Forms-title">Ordering</h2>
+      <Form />
+      {/* <OrdersList /> */}
     </>
   );
 };

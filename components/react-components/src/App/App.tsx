@@ -4,11 +4,13 @@ import Header from '../components/Header/Header';
 
 type Links = {
   main: string;
+  forms: string;
   'about us': string;
 };
 
 const links: Links = {
   main: '/',
+  forms: '/forms',
   'about us': '/about',
 };
 

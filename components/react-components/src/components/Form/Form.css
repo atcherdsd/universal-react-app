@@ -1,0 +1,5 @@
+.Form-line {
+    border: 0;
+    height: 0.1rem;
+    background: linear-gradient(90deg,transparent 0,#d8d8d8 15%,#d8d8d8 85%,transparent);
+}
