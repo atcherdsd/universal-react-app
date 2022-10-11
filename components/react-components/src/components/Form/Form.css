@@ -1,5 +1,152 @@
+.Form-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 20px;
+}
+
 .Form-line {
     border: 0;
     height: 0.1rem;
     background: linear-gradient(90deg,transparent 0,#d8d8d8 15%,#d8d8d8 85%,transparent);
+}
+.Form-header {
+    text-align: left;
+    padding-left: 7rem;
+}
+.Form-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.Form-field,
+.Form-field__name {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    font-size: 1.1rem;
+    text-align: left;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.Form-field {
+    width: 60%;
+}
+.Form-field__name {
+    width: 48%;
+    margin: 0;
+}
+
+.Form-radio__point {
+    display: none;
+}
+
+.Form-radio__label:last-child {
+    margin-left: 1rem;
+}
+.Form-radio__value {
+    padding: 0.2rem 2rem 0.3rem;
+    border: 0.15rem solid #61dafb;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+.Form-radio__value:hover {
+    background-color: #61dafb;
+    color: #fff;
+    transition: 0.2s;
+}
+.Form-radio__value:active {
+    color: #48412d;
+}
+
+.Form-radio__point:checked~.Form-radio__value {
+    background-color: #61dafb;
+    color: #fff;
+}
+
+.Form-name {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+.Form-control,
+.Form-select {
+    border: 0.15rem solid #61dafb;
+    width: 100%;
+    text-align: left;
+    margin: 0 auto;
+    border-radius: 0.875rem;
+    height: 2rem;
+}
+.Form-select {
+    outline: none;
+    height: 2.4rem;
+}
+.Form-control__radio,
+.Form-control__country {
+    margin: 0 auto;
+}
+.Form-control__date,
+.Form-control__zip,
+.Form-control__file {
+    border: 0.15rem solid #61dafb;
+    margin: 0 auto;
+    border-radius: 0.875rem;
+    height: 2rem;
+    padding: 0 1rem;
+}
+.Form-input {
+    height: 2rem;
+    padding: 0 0.5rem 0 1rem;
+    border: none;
+    border-radius: 0.875rem;
+    outline: none;
+    font-size: 1.1rem;
+    color: #48412d;
+    width: 90%;
+}
+.Form-input__file {
+    cursor: pointer;
+}
+.Form-radio,
+.Form-checkbox {
+    margin-right: 1rem;
+}
+
+.Form-submit {
+    margin: 2rem 0 1rem;
+    cursor: pointer;
+    background-color: #61dafb;
+    border-radius: 0.6rem;
+    padding: 0.6rem;
+    color: #fff;
+    border: none;
+    font-size: 1.3rem;
+    width: 9rem;
+}
+.Form-submit:hover {
+    color: #800038;
+    background-color: bisque;
+    transition: 0.2s;
+}
+
+@media(max-width: 870px) {
+    .Form-header {
+        padding-left: 0;
+    }
+    .Form-name {
+        flex-direction: column;
+        width: 100%;
+        gap: 1.5rem;
+    }
+    .Form-field,
+    .Form-field__name {
+        width: 100%;
+    }
+    .Form-input {
+        width: 80%;
+    }
 }
