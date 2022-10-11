@@ -84,6 +84,8 @@
 .Form-select {
     outline: none;
     height: 2.4rem;
+    text-align: center;
+    cursor: pointer;
 }
 .Form-control__radio,
 .Form-control__country {
@@ -98,7 +100,8 @@
     height: 2rem;
     padding: 0 1rem;
 }
-.Form-input {
+.Form-input,
+.Form-input__date {
     height: 2rem;
     padding: 0 0.5rem 0 1rem;
     border: none;

@@ -1,0 +1,12 @@
+.OrdersList-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.OrdersList-message {
+    font-size: 2rem;
+    color: #48412d;
+}

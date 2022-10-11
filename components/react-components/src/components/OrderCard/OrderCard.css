@@ -1,0 +1,25 @@
+.OrderCard-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    border: 0.2rem solid #48412d;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    background-color: bisque;
+    gap: 0.5rem;
+}
+
+.OrderCard-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+@media(max-width:1000px) {
+    .OrderCard-item {
+        gap: unset;
+        flex-direction: column;
+    }
+}

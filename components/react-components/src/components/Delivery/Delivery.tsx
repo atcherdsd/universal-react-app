@@ -17,7 +17,7 @@ function Delivery(props: Countries): JSX.Element {
         <div className="Form-control__country">
           <select defaultValue="country" className="Form-select">
             <option value="country" disabled>
-              Choose country
+              Choose a country
             </option>
             {props.countries.map((elem: Country): ReactNode => {
               return (
@@ -38,7 +38,7 @@ function Delivery(props: Countries): JSX.Element {
       <div className="Form-field">
         <label className="Form-label">Delivery date</label>
         <div className="Form-control__date">
-          <input className="Form-input" type="date" />
+          <input className="Form-input__date" type="date" />
         </div>
       </div>
     </div>
