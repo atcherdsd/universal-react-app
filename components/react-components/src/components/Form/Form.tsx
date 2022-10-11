@@ -1,8 +1,10 @@
 import React, { FormEvent, ReactNode, RefObject, useRef } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
+import { InitialData } from 'pages/Forms/Forms';
 
 type FormData = {
+  key: string;
   gender: string;
   firstName: string;
   lastName: string;
@@ -22,11 +24,12 @@ type Country = {
   code: string;
 };
 
-function Form(props: { addData: (orderCard: Record<string, string>) => void }): JSX.Element {
+function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element {
   let formData = {} as FormData;
 
   function clearFormData() {
     formData = {
+      key: '',
       gender: '',
       firstName: '',
       lastName: '',
@@ -135,10 +138,17 @@ function Form(props: { addData: (orderCard: Record<string, string>) => void }): 
     };
   }
 
+  const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (): string => {
+    return (formData.file = fileInput.current!.files![0].name);
+  };
+
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
+    const date = new Date();
+    formData.key = date.getTime().toString();
     const newCard = { ...formData };
     console.log(newCard);
+    console.log(formData.key);
     props.addData(newCard);
     clearFormData();
     clearFilledForm();
@@ -232,7 +242,7 @@ function Form(props: { addData: (orderCard: Record<string, string>) => void }): 
                   className="Form-input__file"
                   type="file"
                   accept="image/*"
-                  onChange={generateChangeHandler('file')}
+                  onChange={handleFileChange}
                   ref={fileInput}
                 />
               </div>

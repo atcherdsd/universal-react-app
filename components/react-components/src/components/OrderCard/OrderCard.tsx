@@ -1,49 +1,52 @@
+import { InitialData } from 'pages/Forms/Forms';
 import React from 'react';
 import './OrderCard.css';
 
-function OrderCard(props: Record<string, string>): JSX.Element {
+function OrderCard(props: InitialData): JSX.Element {
   return (
     <div className="OrderCard-container">
-      <div>{props.text}</div>
+      <h2 className="OrderCard-title">Accepted order</h2>
       <div className="OrderCard-item">
         <div>Order accepted from </div>
-        <div>Mr. Tom Din</div>
+        <div>
+          {props.gender} {props.firstName} {props.lastName}
+        </div>
       </div>
       <div className="OrderCard-item">
         <div>For communication provided email </div>
-        <div>wer@we.io</div>
+        <div>{props.email}</div>
       </div>
       <div className="OrderCard-item">
         <div>Client&apos;s date of birth </div>
-        <div>01.01.2000</div>
+        <div>{props.birthday}</div>
       </div>
       <div className="OrderCard-item">
         <div>Provided image </div>
-        <div>...</div>
+        <div>{props.file}</div>
       </div>
       <div className="OrderCard-item">
         <div>Receiving notifications: </div>
-        <div>...</div>
+        <div>{props.promotions}</div>
       </div>
       <div className="OrderCard-item">
         <div>Permission to use personal data: </div>
-        <div>...</div>
+        <div>{props.personalData}</div>
       </div>
       <div className="OrderCard-item">
         <div>Participation in promotions: </div>
-        <div>...</div>
+        <div>{props.bonusProgram}</div>
       </div>
       <div className="OrderCard-item">
         <div>Delivery country: </div>
-        <div>...</div>
+        <div>{props.country}</div>
       </div>
       <div className="OrderCard-item">
         <div>Zip-code: </div>
-        <div>...</div>
+        <div>{props.zipCode}</div>
       </div>
       <div className="OrderCard-item">
         <div>Delivery date: </div>
-        <div>...</div>
+        <div>{props.deliveryDate}</div>
       </div>
     </div>
   );
