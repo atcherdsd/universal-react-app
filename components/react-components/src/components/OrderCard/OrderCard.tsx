@@ -30,11 +30,11 @@ function OrderCard(props: InitialData): JSX.Element {
       </div>
       <div className="OrderCard-item">
         <div>Permission to use personal data: </div>
-        <div>{props.personalData}</div>
+        <div>{props.personalData ? 'Yes' : 'No'}</div>
       </div>
       <div className="OrderCard-item">
-        <div>Participation in promotions: </div>
-        <div>{props.bonusProgram}</div>
+        <div>Participation in bonus programs: </div>
+        <div>{props.bonusProgram ? 'Yes' : 'No'}</div>
       </div>
       <div className="OrderCard-item">
         <div>Delivery country: </div>

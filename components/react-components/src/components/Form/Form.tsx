@@ -138,8 +138,18 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
     };
   }
 
-  const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (): string => {
+  const handleFileChange = (): string => {
     return (formData.file = fileInput.current!.files![0].name);
+  };
+  const handlePersonalDataChange = (): string => {
+    return personalDataInput.current!.checked
+      ? (formData.personalData = 'Yes')
+      : (formData.personalData = '');
+  };
+  const handleBonusChange = (): string => {
+    return bonusInput.current!.checked
+      ? (formData.bonusProgram = 'Yes')
+      : (formData.bonusProgram = '');
   };
 
   const handleFormSubmit = (event: FormEvent) => {
@@ -277,8 +287,8 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   className="Form-checkbox"
                   type="checkbox"
                   name="personal-data"
-                  value="Want receive"
-                  onChange={generateChangeHandler('personalData')}
+                  value="Yes"
+                  onChange={handlePersonalDataChange}
                   ref={personalDataInput}
                 />
                 I agree to the use of my personal data for advertising purposes
@@ -288,8 +298,8 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   className="Form-checkbox"
                   type="checkbox"
                   name="bonus"
-                  value="Don't want receive"
-                  onChange={generateChangeHandler('bonusProgram')}
+                  value="Yes"
+                  onChange={handleBonusChange}
                   ref={bonusInput}
                 />
                 I would like to take part in the free bonus points program
