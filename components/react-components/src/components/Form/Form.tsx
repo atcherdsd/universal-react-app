@@ -216,7 +216,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
       if (formData.promotions) {
         setErrorPromotions('');
       }
-      if (formData.country !== 'country') {
+      if (formData.country && formData.country !== 'country') {
         setErrorCountry('');
       }
       if (formData.zipCode && formData.zipCode.length >= 2) {
