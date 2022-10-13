@@ -5,7 +5,6 @@ import { InitialData } from 'pages/Forms/Forms';
 
 function OrdersList(props: { data: InitialData[] }): JSX.Element {
   const data = props.data;
-  console.log('data from OrdersList:', data);
   return (
     <>
       <section className="OrdersList-section">

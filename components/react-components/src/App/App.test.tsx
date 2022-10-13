@@ -19,4 +19,13 @@ describe('App component', () => {
     expect(screen.queryByText(/Xiaomi/i)).toBeNull();
     expect(screen.queryByText(/Samsung/i)).toBeNull();
   });
+  it('Links work', () => {
+    render(<App />);
+    const formsLink = screen.getByText(/forms/i) as Element;
+    const aboutLink = screen.getByText(/about us/i) as Element;
+    userEvent.click(formsLink);
+    expect(screen.getByText('Ordering')).toBeInTheDocument();
+    userEvent.click(aboutLink);
+    expect(screen.getByText('About Us')).toBeInTheDocument();
+  });
 });

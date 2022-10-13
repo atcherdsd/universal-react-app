@@ -3,11 +3,6 @@ import OrdersList from 'components/OrdersList/OrdersList';
 import React, { useState } from 'react';
 import './Forms.css';
 
-// interface IAboutProps {
-//   p1: string;
-//   p2: string;
-// }
-
 export type InitialData = {
   key: string;
   gender: string;
@@ -24,8 +19,6 @@ export type InitialData = {
   deliveryDate: string;
 };
 
-// const initialData: InitialData[] = [{ title: 'Your order:' }];
-
 const Forms: React.FC = (): JSX.Element => {
   const [initialData, setInitialData] = useState([] as InitialData[]);
 
@@ -33,7 +26,6 @@ const Forms: React.FC = (): JSX.Element => {
     initialData.push(orderCard);
     setInitialData((initialData) => [...initialData]);
   };
-  console.log('initialData from Forms:', initialData);
 
   return (
     <>
