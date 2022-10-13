@@ -19,7 +19,7 @@ describe('Forms component', () => {
     const textTransformInHeading = window.getComputedStyle(elementHeading).textTransform;
     expect(textTransformInHeading).toBeDefined();
   });
-  test('NotFound component do not have data', () => {
+  test('Forms component do not have data', () => {
     render(<Forms />);
     expect(screen.queryByText('smartphone')).toBeNull();
     expect(screen.queryByRole('img')).toBeNull();
