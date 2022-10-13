@@ -135,6 +135,20 @@
     background-color: bisque;
     transition: 0.2s;
 }
+.Form-submit:disabled {
+    cursor: auto;
+    background-color: #bbecfa;
+    color: #fff;
+}
+
+.Form-error,
+.Form-error__file {
+    font-size: 1rem;
+    color: #ff0000;
+}
+.Form-error__file {
+    margin-top: 0.5rem;
+}
 
 @media(max-width: 870px) {
     .Form-header {

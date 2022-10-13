@@ -18,7 +18,7 @@ function OrderCard(props: InitialData): JSX.Element {
       </div>
       <div className="OrderCard-item">
         <div>Client&apos;s date of birth </div>
-        <div>{props.birthday}</div>
+        {props.birthday ? <div>{props.birthday}</div> : 'No data'}
       </div>
       <div className="OrderCard-item">
         <div>Provided image </div>
