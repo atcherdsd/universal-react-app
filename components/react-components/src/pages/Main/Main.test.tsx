@@ -7,10 +7,14 @@ describe('Main component', () => {
     render(<Main />);
     expect(screen.getAllByRole('generic')[0]).toBeInTheDocument();
     expect(screen.getAllByText(/4,7/)[2]).toBeInTheDocument();
+    expect(screen.getAllByText(/Xiaomi/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByRole('separator')[1]).toBeInTheDocument();
+    expect(screen.getAllByAltText('Smartphone').length).toEqual(20);
   });
   it('Classes are available', () => {
     render(<Main />);
     expect(screen.getAllByRole('generic')[1]).toHaveClass('Main-container');
+    expect(screen.getAllByRole('listitem')[0]).toHaveClass('Card-description__item');
   });
   it('Styles are available', () => {
     render(<Main />);
