@@ -94,3 +94,12 @@
     background: linear-gradient(90deg,transparent 0,#d8d8d8 5%,#d8d8d8 95%,transparent);
     margin: 2rem;
 }
+@media (max-width: 600px) {
+    .Card-content__container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .Card-main-content {
+        width: 100%;
+    }
+}

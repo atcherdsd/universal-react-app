@@ -91,6 +91,9 @@
 .Form-control__country {
     margin: 0 auto;
 }
+.Form-control__country {
+    height: 2.1rem;
+}
 .Form-control__date,
 .Form-control__zip,
 .Form-control__file {
@@ -150,7 +153,7 @@
     margin-top: 0.5rem;
 }
 
-@media(max-width: 870px) {
+@media(max-width: 1060px) {
     .Form-header {
         padding-left: 0;
     }
@@ -165,5 +168,25 @@
     }
     .Form-input {
         width: 80%;
+    }
+    .Form-control {
+        width: 70%;
+    }
+}
+@media(max-width: 680px) {
+    .Form-control {
+        width: 100%;
+    }
+}
+@media(max-width: 480px) {
+    .Header-links {
+        flex-direction: column;
+    }
+    .Form-content {
+        gap: 3rem;
+        margin-bottom: 2rem;
+    }
+    .Form-name {
+        gap: 2.5rem;
     }
 }

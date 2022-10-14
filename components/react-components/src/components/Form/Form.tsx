@@ -114,7 +114,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
       submitButton.current!.disabled = true;
       hasError = true;
     }
-    if (!formData.firstName.match(regexpName)) {
+    if (formData.firstName && !formData.firstName.match(regexpName)) {
       setErrorFirstName('First Name is invalid');
       submitButton.current!.disabled = true;
       hasError = true;
@@ -124,7 +124,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
       submitButton.current!.disabled = true;
       hasError = true;
     }
-    if (!formData.lastName.match(regexpName)) {
+    if (formData.lastName && !formData.lastName.match(regexpName)) {
       setErrorLastName('Last Name is invalid');
       submitButton.current!.disabled = true;
       hasError = true;
@@ -456,8 +456,8 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                     );
                   })}
                 </select>
+                {errorCountry && <div className="Form-error">{errorCountry}</div>}
               </div>
-              {errorCountry && <div className="Form-error">{errorCountry}</div>}
             </div>
             <div className="Form-field">
               <label className="Form-label">Zip-code *</label>
