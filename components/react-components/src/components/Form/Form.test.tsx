@@ -51,12 +51,34 @@ describe('Form component', () => {
 
     fireEvent.change(firstNameInput, { target: { value: 'Michael' } });
     expect(screen.getByDisplayValue('Michael')).toBeInTheDocument();
+    expect(firstNameInput).toHaveValue('Michael');
     expect(lastNameInput).toContainHTML('');
     expect(onChangeFirstName).toHaveBeenCalledTimes(1);
     expect(button).not.toHaveAttribute('disabled');
 
     fireEvent.click(form);
     expect(onChangeForm).toHaveBeenCalled();
+
+    fireEvent.click(button);
+    expect(screen.getByText(/enter last name/i)).toBeInTheDocument();
+  });
+  it('should render radio inputs', () => {
+    render(<Form addData={function addData(): void {}} />);
+    const radioInputs = screen.getAllByRole('radio') as HTMLInputElement[];
+    expect(radioInputs.length).toEqual(4);
+    expect(radioInputs[0].value).toBe('Mr');
+    expect(radioInputs[1].value).toBe('Mrs');
+    expect(radioInputs[2].value).toBe('Want receive');
+    expect(radioInputs[3].value).toBe("Don't want receive");
+  });
+  it('should render date inputs', () => {
+    render(<Form addData={function addData(): void {}} />);
+    const dateInputs = document.querySelectorAll(
+      '.Form-input__date'
+    ) as NodeListOf<HTMLInputElement>;
+    expect(dateInputs.length).toEqual(2);
+    userEvent.type(dateInputs[0], '1990-10-10');
+    expect(dateInputs[0].value).toBe('1990-10-10');
   });
   it('Checkbox should work', () => {
     const onChangeCheckbox = jest.fn();
