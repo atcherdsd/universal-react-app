@@ -1,18 +1,21 @@
 import React from 'react';
 import './About.css';
+import about from 'data/about.json';
 
-interface IAboutProps {
-  p1: string;
-  p2: string;
+interface IAboutData {
+  description: string;
 }
 
-const About: React.FC<IAboutProps> = (props) => {
+const [aboutData1, aboutData2]: IAboutData[] = about.aboutData;
+
+const About: React.FC = () => {
   return (
     <>
+      <hr className="About-line__common" />
       <h2 className="About-title">About Us</h2>
-      <p className="About-text">{props.p1}</p>
+      <p className="About-text">{aboutData1.description}</p>
       <hr className="About-line" />
-      <p className="About-text">{props.p2}</p>
+      <p className="About-text">{aboutData2.description}</p>
     </>
   );
 };
