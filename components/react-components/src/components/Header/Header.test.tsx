@@ -1,10 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Header from './Header';
+import { links } from 'App/App';
 
 describe('Header component', () => {
   test('Header component renders', () => {
-    render(<Header sitename={''} links={Object} />);
+    render(<Header sitename={''} links={links} />);
     expect(screen.getByRole('banner')).toBeInTheDocument();
     expect(screen.getAllByRole('heading')[0]).toBeInTheDocument();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
@@ -16,19 +17,19 @@ describe('Header component', () => {
     expect(nav.length).toEqual(1);
   });
   it('Classes are available', () => {
-    render(<Header sitename={''} links={Object} />);
+    render(<Header sitename={''} links={links} />);
     expect(screen.getByRole('banner')).toHaveClass('Header-container');
     expect(screen.getAllByRole('heading')[0]).toHaveClass('Headear-title');
     expect(screen.getAllByRole('list')[0]).toHaveClass('Header-links');
   });
   it('Styles are available', () => {
-    render(<Header sitename={''} links={Object} />);
+    render(<Header sitename={''} links={links} />);
     const navContainer = document.querySelector('.Header-right') as Element;
     const navContainerHeight = window.getComputedStyle(navContainer).height;
     expect(navContainerHeight).toBeDefined();
   });
   test('Header component do not have data', () => {
-    render(<Header sitename={''} links={Object} />);
+    render(<Header sitename={''} links={links} />);
     expect(screen.queryByText(/home/i)).toBeNull();
     expect(screen.queryByRole('paragraph')).toBeNull();
 

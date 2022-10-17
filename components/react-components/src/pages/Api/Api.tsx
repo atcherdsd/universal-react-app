@@ -30,7 +30,7 @@ const Api: React.FC = (): JSX.Element => {
   return (
     <>
       <hr className="Api-line" />
-      <h2 className="Api-title">Ordering</h2>
+      <h2 className="Api-title">Api</h2>
       {/* <Form addData={addData} />
       <OrdersList data={initialData} /> */}
     </>

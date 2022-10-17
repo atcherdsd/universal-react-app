@@ -2,11 +2,29 @@ import React from 'react';
 import logo from '../.././logo-phone.svg';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
+import { Links, links } from 'App/App';
 
 interface IHeaderProps {
   sitename: string;
-  links: object;
+  links: Links;
 }
+
+const makeListItems = (object: Links, elem: string, index: number): JSX.Element => {
+  const item: string = Object.values(object)[index];
+  return item === links.main ? (
+    <li key={item} className="Header-link-item">
+      <NavLink className="Header-link" end to={item}>
+        {elem}
+      </NavLink>
+    </li>
+  ) : (
+    <li key={item} className="Header-link-item">
+      <NavLink className="Header-link" to={item}>
+        {elem}
+      </NavLink>
+    </li>
+  );
+};
 
 function Header(props: IHeaderProps): JSX.Element {
   const links = props.links;
@@ -21,20 +39,7 @@ function Header(props: IHeaderProps): JSX.Element {
         <nav className="Header-menu">
           <ul className="Header-links">
             {Object.keys(links).map((elem: string, index: number): JSX.Element => {
-              const item: string = Object.values(links)[index];
-              return item === '/' ? (
-                <li key={item} className="Header-link-item">
-                  <NavLink className="Header-link" end to={item}>
-                    {elem}
-                  </NavLink>
-                </li>
-              ) : (
-                <li key={item} className="Header-link-item">
-                  <NavLink className="Header-link" to={item}>
-                    {elem}
-                  </NavLink>
-                </li>
-              );
+              return makeListItems(links, elem, index);
             })}
           </ul>
         </nav>

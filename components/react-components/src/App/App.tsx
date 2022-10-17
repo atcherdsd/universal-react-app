@@ -8,17 +8,17 @@ import NotFound from 'pages/NotFound/NotFound';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Api from 'pages/Api/Api';
 
-type Links = {
+export type Links = {
   main: string;
   forms: string;
-  api: string;
+  API: string;
   'about us': string;
 };
 
-const links: Links = {
+export const links: Links = {
   main: '/',
   forms: '/forms',
-  api: '/api',
+  API: '/api',
   'about us': '/about',
 };
 
@@ -37,7 +37,7 @@ const routes: IRoutes[] = [
     element: Forms,
   },
   {
-    path: links.api,
+    path: links.API,
     element: Api,
   },
   {
