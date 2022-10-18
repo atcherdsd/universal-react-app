@@ -1,5 +1,4 @@
-// import Form from 'components/Form/Form';
-// import OrdersList from 'components/OrdersList/OrdersList';
+import SearchBar from 'components/SearchBar/SearchBar';
 import React from 'react';
 import './Api.css';
 
@@ -30,9 +29,8 @@ const Api: React.FC = (): JSX.Element => {
   return (
     <>
       <hr className="Api-line" />
-      <h2 className="Api-title">Api</h2>
-      {/* <Form addData={addData} />
-      <OrdersList data={initialData} /> */}
+      <h2 className="Api-title">News aggregator</h2>
+      <SearchBar />
     </>
   );
 };
