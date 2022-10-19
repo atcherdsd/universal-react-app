@@ -6,6 +6,12 @@
     border: 0.1rem solid #5281d5;
     box-sizing: border-box;
     margin-bottom: 1rem;
+    cursor: pointer;
+    position: relative;
+}
+.SearchResult-container:hover {
+    background-color: #5281d5;
+    text-decoration: underline;
 }
 
 .SearchResult-content__container {
@@ -15,12 +21,7 @@
     justify-content: center;
     background: linear-gradient(310deg,transparent 0,#d8d8d8 5%,#90bfe5 95%, transparent);
 }
-.SearchResult-image {
-    height: 10rem;
-    vertical-align: top;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
+
 .SearchResult-main-content {
     display: flex;
     flex-direction: column;
@@ -44,6 +45,21 @@
 .SearchResult-title {
     font-size: 1.5rem;
     padding-top: 1rem;
+}
+
+.SearchResult-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: rgba(41, 41, 41, 0.6);
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    z-index: 5;
 }
 
 @media (max-width: 600px) {
