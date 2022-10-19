@@ -7,9 +7,7 @@ function SearchResult(props: Data): JSX.Element {
   const date = props.published_at.slice(0, 10);
   const [isOpenedModal, setIsOpenedModal] = useState(false);
 
-  function handleResult(event: React.MouseEvent): void {
-    console.log('Click!!');
-    event.stopPropagation();
+  function handleResult(): void {
     setIsOpenedModal(() => !isOpenedModal);
   }
 

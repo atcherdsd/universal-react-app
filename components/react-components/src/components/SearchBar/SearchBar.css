@@ -72,3 +72,23 @@
     color: #48412d;
     margin: 0 auto;
 }
+
+.SearchBar-loader {
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 0.2rem solid #a97862;
+    border-top: 0.25rem solid #bd5341;
+    border-radius: 100%;
+    animation: spin 1s infinite linear;
+}
+.SearchBar-error {
+    font-size: 2rem;
+}
+
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
+}

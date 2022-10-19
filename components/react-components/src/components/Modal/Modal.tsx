@@ -3,7 +3,7 @@ import { Data } from 'components/SearchBar/SearchBar';
 import React from 'react';
 import './Modal.css';
 
-type HandleResult = { (event: React.MouseEvent): void };
+type HandleResult = { (): void };
 
 interface IModalProps {
   data: Data;

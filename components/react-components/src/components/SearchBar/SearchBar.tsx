@@ -23,6 +23,8 @@ export type Data = {
   source: string;
   url: string;
 };
+
+const basicURL = 'http://api.mediastack.com/v1/news';
 const KEY = '0b4c84b5f95151eef1cf75d1eaa4ddc0';
 const languages = 'en,-zh,-ar';
 
@@ -31,6 +33,7 @@ function SearchBar(): JSX.Element {
     (localStorage.getItem('searchValue') as string) || ''
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState('');
 
   const [contentItem, setContentItem] = useState({
     pagination: {},
@@ -45,25 +48,22 @@ function SearchBar(): JSX.Element {
   }
   useEffect(setLocalStorage, [searchValue]);
 
-  async function handleFormSubmit(event: ChangeEvent<HTMLFormElement>) {
+  async function handleFormSubmit(event: ChangeEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     setContentItem({ data: [] as Data[] });
     setIsLoading(true);
-    const url = 'http://api.mediastack.com/v1/news';
+    setError('');
+
     try {
       const response = await fetch(
-        `${url}?access_key=${KEY}&keywords=${searchValue}&languages=${languages}`
+        `${basicURL}?access_key=${KEY}&keywords=${searchValue}&languages=${languages}`
       );
-      console.log(response);
       if (!response.ok) throw new Error('Server error');
 
       const data: IContentItem = await response.json();
-      console.log('data from api', data);
       setContentItem(data);
-      console.log('after api: ', data);
     } catch (err) {
-      console.error((err as Error).message);
-      throw err;
+      setError((err as Error).message);
     } finally {
       setIsLoading(false);
     }
@@ -95,9 +95,12 @@ function SearchBar(): JSX.Element {
         <hr className="SearchBar-line"></hr>
       </section>
       <div className="SearchBar-results">
-        {(contentItem as IContentItem).data.length ? (
+        {isLoading ? (
+          <div className="SearchBar-loader"></div>
+        ) : error ? (
+          <div className="SearchBar-error">{error}. Please try again later</div>
+        ) : (contentItem as IContentItem).data.length ? (
           (contentItem as IContentItem).data.map((item): ReactNode => {
-            console.log('contentItem', contentItem);
             return (
               <SearchResult
                 key={item.url}
@@ -115,7 +118,7 @@ function SearchBar(): JSX.Element {
             );
           })
         ) : (
-          <p className="SearchBar-warning">Sorry! No matches found</p>
+          <p className="SearchBar-warning">List of articles is empty</p>
         )}
       </div>
     </>
