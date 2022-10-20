@@ -59,6 +59,38 @@ describe('SearchBar component', () => {
 
     fireEvent.change(searchInput, { target: { value: '' } });
   });
+  it('should call fetch', () => {
+    render(<SearchBar />);
+    const fakeData = {
+      author: 'Jeff Jenkins',
+      title: 'Samsung: Strong Buy On Fundamentals',
+      description: 'Samsung Unveils Expandable Screen',
+      image: 'https://data.com/samsung/image.jpg',
+      category: 'techno',
+      language: 'en',
+      country: 'us',
+      published_at: '2022-07-09',
+      source: 'CNN',
+      url: 'https://data.com/samsung',
+    };
+
+    const mockJsonPromise = Promise.resolve(fakeData);
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+
+    const basicURL = 'http://api.mediastack.com/v1/news';
+    const KEY = '0b4c84b5f95151eef1cf75d1eaa4ddc0';
+    const languages = 'en,-zh,-ar';
+    const searchInput = screen.getByRole('searchbox');
+    const button = screen.getByRole('button');
+    fireEvent.change(searchInput, { target: { value: 'Jeff Jenkins' } });
+
+    fireEvent.click(button);
+    expect(global.fetch).toHaveBeenCalledWith(
+      `${basicURL}?access_key=${KEY}&keywords=${fakeData.author}&languages=${languages}`
+    );
+    fireEvent.change(searchInput, { target: { value: '' } });
+  });
   it('Сlasses are available', () => {
     render(<SearchBar />);
 
@@ -84,7 +116,7 @@ describe('SearchBar component', () => {
     userEvent.type(searchInput, 'Apple');
     expect(screen.getByDisplayValue('Apple')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Apple')).toHaveClass('SearchBar-search');
-    expect(screen.getByDisplayValue('Apple')).not.toHaveClass('actve');
+    expect(screen.getByDisplayValue('Apple')).not.toHaveClass('active');
     expect(screen.queryByDisplayValue(/watch/i)).toBeNull();
   });
 });
