@@ -33,7 +33,7 @@ function SearchBar(): JSX.Element {
     (localStorage.getItem('searchValue') as string) || ''
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string>('');
 
   const [contentItem, setContentItem] = useState({
     pagination: {},

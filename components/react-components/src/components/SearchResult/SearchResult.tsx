@@ -8,7 +8,7 @@ function SearchResult(props: Data): JSX.Element {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
 
   function handleResult(): void {
-    setIsOpenedModal(() => !isOpenedModal);
+    setIsOpenedModal(!isOpenedModal);
   }
 
   return (
