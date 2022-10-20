@@ -13,7 +13,7 @@ describe('Header component', () => {
     );
   });
 
-  test('Header component renders', () => {
+  test('should render Header component', () => {
     expect(screen.getByRole('banner')).toBeInTheDocument();
     expect(screen.getAllByRole('heading')[0]).toBeInTheDocument();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
@@ -23,6 +23,16 @@ describe('Header component', () => {
 
     const nav = screen.getAllByRole('navigation');
     expect(nav.length).toEqual(1);
+    const links = document.querySelectorAll('.Header-link');
+    expect(links.length).toBeGreaterThanOrEqual(4);
+    const main = screen.getByText(/main/i);
+    expect(main).toBeInTheDocument();
+    const forms = screen.getByText(/forms/i);
+    expect(forms).toBeInTheDocument();
+    const aboutUs = screen.getByText(/about us/i);
+    expect(aboutUs).toBeInTheDocument();
+    const api = screen.getByText(/api/i);
+    expect(api).toBeInTheDocument();
   });
   it('Classes are available', () => {
     expect(screen.getByRole('banner')).toHaveClass('Header-container');
