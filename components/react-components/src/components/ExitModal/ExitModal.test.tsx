@@ -7,7 +7,7 @@ describe('ExitModal component', () => {
     render(<ExitModal />);
   });
 
-  test('shold render ExitModal component', () => {
+  test('should render ExitModal component', () => {
     const svg = document.getElementsByTagName('svg')[0] as SVGElement;
     expect(svg).toBeInTheDocument();
   });
