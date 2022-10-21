@@ -3,30 +3,24 @@ import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
 
 export interface IContentItem {
-  pagination?: {
-    limit: number;
-    offset: number;
-    count: number;
-    total: number;
-  };
-  data: Data[];
+  articles: Data[];
 }
+
 export type Data = {
-  author: string | null;
+  source: {
+    id: string;
+    name: string;
+  };
+  author?: string;
   title: string;
   description: string;
-  image: string | null;
-  category: string;
-  language: string;
-  country: string;
-  published_at: string;
-  source: string;
   url: string;
+  urlToImage?: string;
+  publishedAt: string;
 };
 
-const basicURL = 'http://api.mediastack.com/v1/news';
-const KEY = '0b4c84b5f95151eef1cf75d1eaa4ddc0';
-const languages = 'en,-zh,-ar';
+const basicURL = 'https://newsapi.org/v2/everything';
+const KEY = '4534aef3a47842e78c7908130d0e50a1';
 
 function SearchBar(): JSX.Element {
   const [searchValue, setSearchValue] = useState(
@@ -36,8 +30,7 @@ function SearchBar(): JSX.Element {
   const [error, setError] = useState<string>('');
 
   const [contentItem, setContentItem] = useState({
-    pagination: {},
-    data: [] as Data[],
+    articles: [] as Data[],
   } as IContentItem);
 
   function searchText(event: { target: { value: string } }): void {
@@ -50,14 +43,12 @@ function SearchBar(): JSX.Element {
 
   async function handleFormSubmit(event: ChangeEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    setContentItem({ data: [] as Data[] });
+    setContentItem({ articles: [] as Data[] });
     setIsLoading(true);
     setError('');
 
     try {
-      const response = await fetch(
-        `${basicURL}?access_key=${KEY}&keywords=${searchValue}&languages=${languages}`
-      );
+      const response = await fetch(`${basicURL}?apiKey=${KEY}&q=${searchValue}`);
       if (!response.ok) throw new Error('Server error');
 
       const data: IContentItem = await response.json();
@@ -99,19 +90,16 @@ function SearchBar(): JSX.Element {
           <div className="SearchBar-loader"></div>
         ) : error ? (
           <div className="SearchBar-error">{error}. Please try again later</div>
-        ) : (contentItem as IContentItem).data.length ? (
-          (contentItem as IContentItem).data.map((item): ReactNode => {
+        ) : contentItem.articles.length ? (
+          contentItem.articles.map((item): ReactNode => {
             return (
               <SearchResult
                 key={item.url}
                 author={item.author}
                 title={item.title}
                 description={item.description}
-                image={item.image}
-                category={item.category}
-                language={item.language}
-                country={item.country}
-                published_at={item.published_at}
+                urlToImage={item.urlToImage}
+                publishedAt={item.publishedAt}
                 source={item.source}
                 url={item.url}
               />

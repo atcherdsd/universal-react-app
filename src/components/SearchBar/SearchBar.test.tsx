@@ -66,11 +66,11 @@ describe('SearchBar component', () => {
       title: 'Samsung: Strong Buy On Fundamentals',
       description: 'Samsung Unveils Expandable Screen',
       image: 'https://data.com/samsung/image.jpg',
-      category: 'techno',
-      language: 'en',
-      country: 'us',
-      published_at: '2022-07-09',
-      source: 'CNN',
+      publishedAt: '2022-07-09',
+      source: {
+        id: 'cnn',
+        name: 'CNN',
+      },
       url: 'https://data.com/samsung',
     };
 
@@ -78,17 +78,15 @@ describe('SearchBar component', () => {
     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-    const basicURL = 'http://api.mediastack.com/v1/news';
-    const KEY = '0b4c84b5f95151eef1cf75d1eaa4ddc0';
-    const languages = 'en,-zh,-ar';
+    const basicURL = 'https://newsapi.org/v2/everything';
+    const KEY = '4534aef3a47842e78c7908130d0e50a1';
+
     const searchInput = screen.getByRole('searchbox');
     const button = screen.getByRole('button');
     fireEvent.change(searchInput, { target: { value: 'Jeff Jenkins' } });
 
     fireEvent.click(button);
-    expect(global.fetch).toHaveBeenCalledWith(
-      `${basicURL}?access_key=${KEY}&keywords=${fakeData.author}&languages=${languages}`
-    );
+    expect(global.fetch).toHaveBeenCalledWith(`${basicURL}?apiKey=${KEY}&q=${fakeData.author}`);
     fireEvent.change(searchInput, { target: { value: '' } });
   });
   it('Сlasses are available', () => {

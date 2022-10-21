@@ -1,6 +1,6 @@
 import ExitModal from 'components/ExitModal/ExitModal';
 import { Data } from 'components/SearchBar/SearchBar';
-import React from 'react';
+import React, { RefObject, useEffect, useRef } from 'react';
 import './Modal.css';
 
 type HandleResult = { (): void };
@@ -11,9 +11,9 @@ interface IModalProps {
 }
 
 function Modal(props: IModalProps): JSX.Element {
-  const date = props.data.published_at.slice(0, 10);
+  const date = props.data.publishedAt.slice(0, 10);
 
-  const decodeHtmlCharCodes = (str: string) =>
+  const decodeHtmlCharCodes = (str: string): string =>
     str
       .replace(/(&#(\d+);)/g, (_match, _capture, charCode: string) =>
         String.fromCharCode(+charCode)
@@ -25,29 +25,37 @@ function Modal(props: IModalProps): JSX.Element {
       .replace(/&amp;/g, '&')
       .replace(/&reg;/g, '®')
       .replace(/&trade;/g, '™');
+  const descriptionDiv = useRef() as RefObject<HTMLDivElement>;
+
+  useEffect(() => {
+    const replaceLink = (text: string): string => {
+      descriptionDiv.current!.innerHTML = text;
+      return decodeHtmlCharCodes(descriptionDiv.current!.innerHTML);
+    };
+    replaceLink(props.data.description);
+  }, [props.data.description]);
 
   return (
     <div className="Modal-container">
       <div className="Modal-content__container" onClick={(event) => event.stopPropagation()}>
         <div className="Modal-main-content">
           <div className="Modal-content__header">
-            <div className="Modal-source">Source: {decodeHtmlCharCodes(props.data.source)}</div>
-            <div className="Modal-category">News category: {props.data.category}</div>
-            <div className="Modal-country">Country: {props.data.country}</div>
-            <div className="Modal-language">{props.data.language}</div>
+            <div className="Modal-source">
+              Source: {decodeHtmlCharCodes(props.data.source.name)}
+            </div>
           </div>
           <div className="Modal-content__main">
-            {props.data.image && (
+            {props.data.urlToImage && (
               <div className="Modal-image__container">
-                <img className="Modal-image" src={props.data.image} alt="News image" />
+                <img className="Modal-image" src={props.data.urlToImage} alt="News image" />
               </div>
             )}
             <div
               className="Modal-content__info"
-              style={props.data.image ? { width: '60%' } : { width: '100%' }}
+              style={props.data.urlToImage ? { width: '60%' } : { width: '100%' }}
             >
               <div className="Modal-title">{decodeHtmlCharCodes(props.data.title)}</div>
-              <div className="Modal-description">{decodeHtmlCharCodes(props.data.description)}</div>
+              <div className="Modal-description" ref={descriptionDiv}></div>
             </div>
           </div>
           <div className="Modal-content__footer">

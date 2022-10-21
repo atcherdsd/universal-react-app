@@ -7,15 +7,15 @@ describe('Modal component', () => {
     render(
       <Modal
         data={{
-          author: null,
+          author: '',
           title: '',
           description: '',
-          image: null,
-          category: '',
-          language: '',
-          country: '',
-          published_at: '',
-          source: '',
+          urlToImage: '',
+          publishedAt: '',
+          source: {
+            id: '',
+            name: '',
+          },
           url: '',
         }}
         handleResult={() => void {}}
