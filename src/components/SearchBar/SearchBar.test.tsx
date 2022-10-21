@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import SearchBar from './SearchBar';
 import userEvent from '@testing-library/user-event';
 
@@ -32,35 +32,33 @@ describe('SearchBar component', () => {
     const form = document.querySelector('.SearchBar-content__container') as HTMLElement;
     const searchInput = screen.getByRole('searchbox');
     const button = screen.getByRole('button');
-
-    expect(searchInput).toContainHTML('');
-    expect(button).not.toHaveAttribute('disabled');
-
     form.onchange = jest.fn();
     const onChangeForm = form.onchange;
     searchInput.onchange = jest.fn();
     const onChangeSearch = searchInput.onchange;
 
-    fireEvent.change(searchInput, { target: { value: 'Samsung' } });
-    expect(screen.getByDisplayValue('Samsung')).toBeInTheDocument();
-    expect(searchInput).toHaveValue('Samsung');
-    expect(onChangeSearch).toHaveBeenCalledTimes(1);
+    expect(searchInput).toContainHTML('');
+    expect(button).not.toHaveAttribute('disabled');
 
-    fireEvent.click(button);
-    expect(onChangeForm).toHaveBeenCalled();
-    const loader = document.querySelector('.SearchBar-loader');
-    expect(loader).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.change(searchInput, { target: { value: 'Samsung' } });
 
-    const results = await (screen.findAllByText(/Samsung/i) as Promise<HTMLElement[]>);
-    expect(results.length).toBeGreaterThanOrEqual(25);
-    const searchResultContainers = document.querySelectorAll('.SearchResult-container');
-    expect(searchResultContainers.length).toEqual(25);
-    expect(screen.getAllByRole('generic').length).toBeGreaterThan(50);
+      expect(screen.getByDisplayValue('Samsung')).toBeInTheDocument();
+      expect(searchInput).toHaveValue('Samsung');
+      expect(onChangeSearch).toHaveBeenCalledTimes(1);
 
-    fireEvent.change(searchInput, { target: { value: '' } });
+      fireEvent.click(button);
+      expect(onChangeForm).toHaveBeenCalled();
+      const loader = document.querySelector('.SearchBar-loader');
+      expect(loader).not.toBeInTheDocument();
+
+      fireEvent.change(searchInput, { target: { value: '' } });
+    });
   });
-  it('should call fetch', () => {
+  it('should call fetch', async () => {
     render(<SearchBar />);
+    const searchInput = screen.getByRole('searchbox');
+    const button = screen.getByRole('button');
     const fakeData = {
       author: 'Jeff Jenkins',
       title: 'Samsung: Strong Buy On Fundamentals',
@@ -73,21 +71,22 @@ describe('SearchBar component', () => {
       },
       url: 'https://data.com/samsung',
     };
+    await act(async () => {
+      const mockJsonPromise = Promise.resolve(fakeData);
+      const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
+      global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-    const mockJsonPromise = Promise.resolve(fakeData);
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+      const basicURL = 'https://newsapi.org/v2/everything';
+      const KEY = '4534aef3a47842e78c7908130d0e50a1';
 
-    const basicURL = 'https://newsapi.org/v2/everything';
-    const KEY = '4534aef3a47842e78c7908130d0e50a1';
+      fireEvent.change(searchInput, { target: { value: 'Jeff Jenkins' } });
 
-    const searchInput = screen.getByRole('searchbox');
-    const button = screen.getByRole('button');
-    fireEvent.change(searchInput, { target: { value: 'Jeff Jenkins' } });
+      fireEvent.click(button);
 
-    fireEvent.click(button);
-    expect(global.fetch).toHaveBeenCalledWith(`${basicURL}?apiKey=${KEY}&q=${fakeData.author}`);
-    fireEvent.change(searchInput, { target: { value: '' } });
+      expect(global.fetch).toHaveBeenCalledWith(`${basicURL}?apiKey=${KEY}&q=${fakeData.author}`);
+
+      fireEvent.change(searchInput, { target: { value: '' } });
+    });
   });
   it('Сlasses are available', () => {
     render(<SearchBar />);
@@ -111,7 +110,9 @@ describe('SearchBar component', () => {
     expect(screen.queryByRole('combobox')).toBeNull();
 
     const searchInput = screen.getByRole('searchbox');
-    userEvent.type(searchInput, 'Apple');
+    act(() => {
+      userEvent.type(searchInput, 'Apple');
+    });
     expect(screen.getByDisplayValue('Apple')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Apple')).toHaveClass('SearchBar-search');
     expect(screen.getByDisplayValue('Apple')).not.toHaveClass('active');
