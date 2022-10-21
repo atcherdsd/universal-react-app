@@ -1,8 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import Modal from './Modal';
-// import SearchBar from 'components/SearchBar/SearchBar';
-// import SearchResult from 'components/SearchResult/SearchResult';
 
 describe('Modal component', () => {
   test('should render Modal component', () => {
