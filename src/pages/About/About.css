@@ -2,14 +2,25 @@
     border: 0;
     height: 0.15rem;
     background: linear-gradient(90deg,transparent 0,#d8d8d8 5%,#61dafb 95%,transparent);
-    margin: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.About-title {
+    text-transform: uppercase;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 0;
 }
 .About-line {
     border: 0;
     height: 1px;
     background: linear-gradient(90deg,transparent 0,#d8d8d8 5%,#d8d8d8 95%,transparent);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .About-text {
-    margin: 2rem 2rem;
+    margin: 0 auto;
+    padding: 2rem;
+    max-width: 1200px;
 }

@@ -1,23 +1,8 @@
 import Form from 'components/Form/Form';
 import OrdersList from 'components/OrdersList/OrdersList';
+import { InitialData } from 'components/utilities/types';
 import React, { useState } from 'react';
 import './Forms.css';
-
-export type InitialData = {
-  key: string;
-  gender: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  birthday: string;
-  file: string;
-  promotions: string;
-  personalData: string;
-  bonusProgram: string;
-  country: string;
-  zipCode: string;
-  deliveryDate: string;
-};
 
 const Forms: React.FC = (): JSX.Element => {
   const [initialData, setInitialData] = useState([] as InitialData[]);

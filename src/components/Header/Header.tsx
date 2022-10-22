@@ -2,12 +2,9 @@ import React from 'react';
 import logo from '../.././logo-phone.svg';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
-import { Links, links } from 'App/App';
-
-interface IHeaderProps {
-  sitename: string;
-  links: Links;
-}
+import { links } from 'App/App';
+import { Links } from 'components/utilities/types';
+import { IHeaderProps } from 'components/utilities/interfaces';
 
 const makeListItems = (object: Links, elem: string, index: number): JSX.Element => {
   const item: string = Object.values(object)[index];

@@ -1,14 +1,7 @@
 import ExitModal from 'components/ExitModal/ExitModal';
-import { Data } from 'components/SearchBar/SearchBar';
+import { IModalProps } from 'components/utilities/interfaces';
 import React, { RefObject, useEffect, useRef } from 'react';
 import './Modal.css';
-
-type HandleResult = { (): void };
-
-interface IModalProps {
-  data: Data;
-  handleResult: HandleResult;
-}
 
 function Modal(props: IModalProps): JSX.Element {
   const date = props.data.publishedAt.slice(0, 10);

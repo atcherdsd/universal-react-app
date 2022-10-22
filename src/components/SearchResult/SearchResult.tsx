@@ -1,5 +1,5 @@
 import Modal from 'components/Modal/Modal';
-import { Data } from 'components/SearchBar/SearchBar';
+import { Data } from 'components/utilities/types';
 import React, { useState } from 'react';
 import './SearchResult.css';
 

@@ -1,41 +1,12 @@
 import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
-
-export interface IContentItem {
-  articles: Data[];
-}
-
-export type Data = {
-  source: {
-    name: string;
-  };
-  title: string;
-  description: string;
-  url: string;
-  image?: string;
-  publishedAt: string;
-};
-
-enum StatusCode {
-  BadRequest = '400',
-  Unauthorized = '401',
-  Forbidden = '403',
-  TooManyRequests = '429',
-  InternalServerError = '500',
-}
-enum ErrorMessage {
-  BadRequest = 'Your request is not valid. Please fill in the search field and try again',
-  Unauthorized = 'Your API key is incorrect. Use a valid key',
-  Forbidden = 'You have reached your daily request limit, the next reset is at 00:00 UTC',
-  TooManyRequests = 'You have made more requests per second than you are allowed',
-  InternalServerError = 'We had a problem with our server. Try again later',
-  AnotherError = 'Server error. Try again later',
-}
+import { Data } from 'components/utilities/types';
+import { IContentItem } from 'components/utilities/interfaces';
+import { ErrorMessage, StatusCode } from 'components/utilities/enums';
 
 const basicURL = 'https://gnews.io/api/v4/search';
 const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
-// const KEY = 'd42b009b63ab35e';
 
 function SearchBar(): JSX.Element {
   const [searchValue, setSearchValue] = useState(

@@ -10,7 +10,7 @@
     border: 0;
     height: 0.15rem;
     background: linear-gradient(90deg,transparent 0,#d8d8d8 5%,#61dafb 95%,transparent);
-    margin: 1rem;
+    margin: 0 0 1rem;
 }
 .SearchBar-field {
     display: flex;

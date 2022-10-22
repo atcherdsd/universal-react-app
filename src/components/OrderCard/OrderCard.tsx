@@ -1,4 +1,4 @@
-import { InitialData } from 'pages/Forms/Forms';
+import { InitialData } from 'components/utilities/types';
 import React from 'react';
 import './OrderCard.css';
 

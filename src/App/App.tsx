@@ -7,13 +7,8 @@ import Main from 'pages/Main/Main';
 import NotFound from 'pages/NotFound/NotFound';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Api from 'pages/Api/Api';
-
-export type Links = {
-  main: string;
-  forms: string;
-  API: string;
-  'about us': string;
-};
+import { Links } from 'components/utilities/types';
+import { IRoutes } from 'components/utilities/interfaces';
 
 export const links: Links = {
   main: '/',
@@ -21,11 +16,6 @@ export const links: Links = {
   API: '/api',
   'about us': '/about',
 };
-
-interface IRoutes {
-  path: string;
-  element: React.ComponentType;
-}
 
 const routes: IRoutes[] = [
   {

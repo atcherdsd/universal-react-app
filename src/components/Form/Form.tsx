@@ -1,28 +1,7 @@
 import React, { FormEvent, ReactNode, RefObject, useRef, useState } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
-import { InitialData } from 'pages/Forms/Forms';
-
-type FormData = {
-  key: string;
-  gender: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  birthday: string;
-  file: string;
-  promotions: string;
-  personalData: string;
-  bonusProgram: string;
-  country: string;
-  zipCode: string;
-  deliveryDate: string;
-};
-
-type Country = {
-  name: string;
-  code: string;
-};
+import { InitialData, FormData, Country } from 'components/utilities/types';
 
 function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element {
   let formData = {} as FormData;

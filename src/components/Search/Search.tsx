@@ -2,20 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import './Search.css';
 import goodsData from '../../data/goods.json';
 import Card from '../../components/Card/Card';
-
-export type Positions = {
-  title: string;
-  review: string;
-  rating: string;
-  price: string;
-  stock: string;
-  delivery: string;
-  logo: string;
-  img: string;
-  description: {
-    info: string[];
-  };
-};
+import { Positions } from 'components/utilities/types';
 
 function Search(): JSX.Element {
   const [searchValue, setSearchValue] = useState(
