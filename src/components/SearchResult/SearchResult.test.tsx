@@ -8,12 +8,12 @@ describe('SearchResult component', () => {
     const snapshot = render(
       <SearchResult
         source={{
-          id: '',
           name: '',
         }}
         title=""
         description=""
         url=""
+        image=""
         publishedAt=""
       />
     );
@@ -23,12 +23,12 @@ describe('SearchResult component', () => {
     render(
       <SearchResult
         source={{
-          id: '',
           name: '',
         }}
         title=""
         description=""
         url=""
+        image=""
         publishedAt=""
       />
     );
@@ -43,14 +43,12 @@ describe('SearchResult component', () => {
           <Modal
             data={{
               source: {
-                id: '',
                 name: '',
               },
-              author: undefined,
               title: '',
               description: '',
               url: '',
-              urlToImage: undefined,
+              image: undefined,
               publishedAt: '',
             }}
             handleResult={() => void {}}

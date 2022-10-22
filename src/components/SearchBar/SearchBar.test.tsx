@@ -60,13 +60,11 @@ describe('SearchBar component', () => {
     const searchInput = screen.getByRole('searchbox');
     const button = screen.getByRole('button');
     const fakeData = {
-      author: 'Jeff Jenkins',
       title: 'Samsung: Strong Buy On Fundamentals',
       description: 'Samsung Unveils Expandable Screen',
       image: 'https://data.com/samsung/image.jpg',
       publishedAt: '2022-07-09',
       source: {
-        id: 'cnn',
         name: 'CNN',
       },
       url: 'https://data.com/samsung',
@@ -79,11 +77,11 @@ describe('SearchBar component', () => {
       const basicURL = 'https://newsapi.org/v2/everything';
       const KEY = '4534aef3a47842e78c7908130d0e50a1';
 
-      fireEvent.change(searchInput, { target: { value: 'Jeff Jenkins' } });
+      fireEvent.change(searchInput, { target: { value: 'Samsung: Strong Buy On Fundamentals' } });
 
       fireEvent.click(button);
 
-      expect(global.fetch).toHaveBeenCalledWith(`${basicURL}?apiKey=${KEY}&q=${fakeData.author}`);
+      expect(global.fetch).toHaveBeenCalledWith(`${basicURL}?apiKey=${KEY}&q=${fakeData.title}`);
 
       fireEvent.change(searchInput, { target: { value: '' } });
     });

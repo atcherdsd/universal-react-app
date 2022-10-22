@@ -8,19 +8,18 @@ export interface IContentItem {
 
 export type Data = {
   source: {
-    id: string;
     name: string;
   };
-  author?: string;
   title: string;
   description: string;
   url: string;
-  urlToImage?: string;
+  image?: string;
   publishedAt: string;
 };
 
-const basicURL = 'https://newsapi.org/v2/everything';
-const KEY = '4534aef3a47842e78c7908130d0e50a1';
+const basicURL = 'https://gnews.io/api/v4/search';
+const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
+// const KEY = 'd42b009b63ab35e';
 
 function SearchBar(): JSX.Element {
   const [searchValue, setSearchValue] = useState(
@@ -48,8 +47,10 @@ function SearchBar(): JSX.Element {
     setError('');
 
     try {
-      const response = await fetch(`${basicURL}?apiKey=${KEY}&q=${searchValue}`);
-      if (!response.ok) throw new Error('Server error');
+      const response = await fetch(`${basicURL}?token=${KEY}&q=${searchValue}`);
+      if (response.status.toString() === '400')
+        throw new Error('Your request is not valid. Please fill in the request field');
+      else if (!response.ok) throw new Error('Server error. Please try again later');
 
       const data: IContentItem = await response.json();
       setContentItem(data);
@@ -89,16 +90,15 @@ function SearchBar(): JSX.Element {
         {isLoading ? (
           <div className="SearchBar-loader"></div>
         ) : error ? (
-          <div className="SearchBar-error">{error}. Please try again later</div>
+          <div className="SearchBar-error">{error}</div>
         ) : contentItem.articles.length ? (
           contentItem.articles.map((item): ReactNode => {
             return (
               <SearchResult
                 key={item.url}
-                author={item.author}
                 title={item.title}
                 description={item.description}
-                urlToImage={item.urlToImage}
+                image={item.image}
                 publishedAt={item.publishedAt}
                 source={item.source}
                 url={item.url}

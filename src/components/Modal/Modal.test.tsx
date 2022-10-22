@@ -7,13 +7,11 @@ describe('Modal component', () => {
     const snapshot = render(
       <Modal
         data={{
-          author: '',
           title: '',
           description: '',
-          urlToImage: '',
+          image: '',
           publishedAt: '',
           source: {
-            id: '',
             name: '',
           },
           url: '',
@@ -27,13 +25,11 @@ describe('Modal component', () => {
     const { unmount } = render(
       <Modal
         data={{
-          author: '',
           title: '',
           description: '',
-          urlToImage: '',
+          image: '',
           publishedAt: '',
           source: {
-            id: '',
             name: '',
           },
           url: '',

@@ -45,14 +45,14 @@ function Modal(props: IModalProps): JSX.Element {
             </div>
           </div>
           <div className="Modal-content__main">
-            {props.data.urlToImage && (
+            {props.data.image && (
               <div className="Modal-image__container">
-                <img className="Modal-image" src={props.data.urlToImage} alt="News image" />
+                <img className="Modal-image" src={props.data.image} alt="News image" />
               </div>
             )}
             <div
               className="Modal-content__info"
-              style={props.data.urlToImage ? { width: '60%' } : { width: '100%' }}
+              style={props.data.image ? { width: '60%' } : { width: '100%' }}
             >
               <div className="Modal-title">{decodeHtmlCharCodes(props.data.title)}</div>
               <div className="Modal-description" ref={descriptionDiv}></div>
@@ -60,7 +60,6 @@ function Modal(props: IModalProps): JSX.Element {
           </div>
           <div className="Modal-content__footer">
             <div className="Modal-date">Publication date: {date}</div>
-            {props.data.author && <div className="Modal-author">Author: {props.data.author}</div>}
             <a href={props.data.url} className="Modal-url" target="blank" rel="noreferrer">
               See in source
             </a>
