@@ -1,27 +1,8 @@
 import React from 'react';
 import logo from '../.././logo-phone.svg';
 import './Header.css';
-import { NavLink } from 'react-router-dom';
-import { links } from 'App/App';
-import { Links } from 'components/utilities/types';
 import { IHeaderProps } from 'components/utilities/interfaces';
-
-const makeListItems = (object: Links, elem: string, index: number): JSX.Element => {
-  const item: string = Object.values(object)[index];
-  return item === links.main ? (
-    <li key={item} className="Header-link-item">
-      <NavLink className="Header-link" end to={item}>
-        {elem}
-      </NavLink>
-    </li>
-  ) : (
-    <li key={item} className="Header-link-item">
-      <NavLink className="Header-link" to={item}>
-        {elem}
-      </NavLink>
-    </li>
-  );
-};
+import { makeListItems } from 'components/utilities/utils';
 
 function Header(props: IHeaderProps): JSX.Element {
   const links = props.links;

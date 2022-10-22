@@ -4,9 +4,7 @@ import SearchResult from 'components/SearchResult/SearchResult';
 import { Data } from 'components/utilities/types';
 import { IContentItem } from 'components/utilities/interfaces';
 import { ErrorMessage, StatusCode } from 'components/utilities/enums';
-
-const basicURL = 'https://gnews.io/api/v4/search';
-const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
+import { BASIC_URL, KEY } from 'components/utilities/utils';
 
 function SearchBar(): JSX.Element {
   const [searchValue, setSearchValue] = useState(
@@ -34,7 +32,7 @@ function SearchBar(): JSX.Element {
     setError('');
 
     try {
-      const response = await fetch(`${basicURL}?token=${KEY}&q=${searchValue}`);
+      const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValue}`);
       switch (response.status.toString()) {
         case StatusCode.BadRequest:
           throw new Error(ErrorMessage.BadRequest);

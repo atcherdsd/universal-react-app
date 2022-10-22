@@ -1,23 +1,12 @@
 import ExitModal from 'components/ExitModal/ExitModal';
 import { IModalProps } from 'components/utilities/interfaces';
+import { decodeHtmlCharCodes } from 'components/utilities/utils';
 import React, { RefObject, useEffect, useRef } from 'react';
 import './Modal.css';
 
 function Modal(props: IModalProps): JSX.Element {
   const date = props.data.publishedAt.slice(0, 10);
 
-  const decodeHtmlCharCodes = (str: string): string =>
-    str
-      .replace(/(&#(\d+);)/g, (_match, _capture, charCode: string) =>
-        String.fromCharCode(+charCode)
-      )
-      .replace(/&rsquo;/g, '’')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&hellip;/g, '…')
-      .replace(/&mdash;/g, '—')
-      .replace(/&amp;/g, '&')
-      .replace(/&reg;/g, '®')
-      .replace(/&trade;/g, '™');
   const descriptionDiv = useRef() as RefObject<HTMLDivElement>;
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import SearchBar from './SearchBar';
 import userEvent from '@testing-library/user-event';
+import { BASIC_URL, KEY } from 'components/utilities/utils';
 
 describe('SearchBar component', () => {
   test('should render SearchBar component', () => {
@@ -74,14 +75,11 @@ describe('SearchBar component', () => {
       const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
       global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-      const basicURL = 'https://gnews.io/api/v4/search';
-      const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
-
       fireEvent.change(searchInput, { target: { value: 'Samsung: Strong Buy On Fundamentals' } });
 
       fireEvent.click(button);
 
-      expect(global.fetch).toHaveBeenCalledWith(`${basicURL}?token=${KEY}&q=${fakeData.title}`);
+      expect(global.fetch).toHaveBeenCalledWith(`${BASIC_URL}?token=${KEY}&q=${fakeData.title}`);
 
       fireEvent.change(searchInput, { target: { value: '' } });
     });
