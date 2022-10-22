@@ -23,38 +23,18 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
       deliveryDate: '',
     };
   }
-
-  const genderMrInput = useRef() as RefObject<HTMLInputElement>;
-  const genderMrsInput = useRef() as RefObject<HTMLInputElement>;
-  const firstInput = useRef() as RefObject<HTMLInputElement>;
-  const lastInput = useRef() as RefObject<HTMLInputElement>;
-  const emailInput = useRef() as RefObject<HTMLInputElement>;
-  const birthdayInput = useRef() as RefObject<HTMLInputElement>;
-  const fileInput = useRef() as RefObject<HTMLInputElement>;
-  const promoWantInput = useRef() as RefObject<HTMLInputElement>;
-  const promoDontInput = useRef() as RefObject<HTMLInputElement>;
-  const personalDataInput = useRef() as RefObject<HTMLInputElement>;
-  const bonusInput = useRef() as RefObject<HTMLInputElement>;
-  const countrySelect = useRef() as RefObject<HTMLSelectElement>;
-  const zipInput = useRef() as RefObject<HTMLInputElement>;
-  const deliveryDateInput = useRef() as RefObject<HTMLInputElement>;
-  const submitButton = useRef() as RefObject<HTMLInputElement>;
+  const formRef = useRef() as RefObject<HTMLFormElement>;
 
   function clearFilledForm(): void {
-    genderMrInput.current!.checked = false;
-    genderMrsInput.current!.checked = false;
-    firstInput.current!.value = '';
-    lastInput.current!.value = '';
-    emailInput.current!.value = '';
-    birthdayInput.current!.value = '';
-    fileInput.current!.value = '';
-    promoWantInput.current!.checked = false;
-    promoDontInput.current!.checked = false;
-    personalDataInput.current!.checked = false;
-    bonusInput.current!.checked = false;
-    countrySelect.current!.value = 'country';
-    zipInput.current!.value = '';
-    deliveryDateInput.current!.value = '';
+    Array.from(formRef.current!.elements).forEach((elem, index) => {
+      if (index < 2 || (index > 6 && index < 11)) {
+        (elem as HTMLInputElement).checked = false;
+      } else if ((index >= 2 && index < 7) || index > 11) {
+        (elem as HTMLInputElement).value = '';
+      } else if (index === 11) {
+        (elem as HTMLSelectElement).value = 'country';
+      }
+    });
   }
 
   const [errorFirstName, setErrorFirstName] = useState('');
@@ -83,78 +63,71 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
   const regexpEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const stringNow: string = new Date().toString();
   const regexpImage = /\png|svg|jpeg|jpg|gif|ico$/i;
+  let hasError: boolean;
+
+  const handleError = (): void => {
+    (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
+    hasError = true;
+  };
 
   function validate(): boolean {
     resetErrorMessages();
 
-    let hasError = false;
+    hasError = false;
     if (!formData.firstName) {
       setErrorFirstName('Mandatory field, please enter First Name');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (formData.firstName && !formData.firstName.match(regexpName)) {
       setErrorFirstName('First Name is invalid');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (!formData.lastName) {
       setErrorLastName('Mandatory field, please enter Last Name');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (formData.lastName && !formData.lastName.match(regexpName)) {
       setErrorLastName('Last Name is invalid');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (!formData.email) {
       setErrorEmail('Mandatory field, please enter E-Mail');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (!formData.email.match(regexpEmail)) {
       setErrorEmail('The format of the email address must be: example@mail.ab');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (Date.parse(formData.birthday) > Date.parse(stringNow)) {
       setErrorBirthday('Date is not correct');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (
       formData.file !== 'No data' &&
       !formData.file.split('.').splice(-1).toString().match(regexpImage)
     ) {
       setErrorImage('The file format can be .png, .svg, .jpeg, .jpg, .gif or .ico');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (!formData.promotions) {
       setErrorPromotions('Mandatory field, please choose an option');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (formData.country === 'country') {
       setErrorCountry('Mandatory field, please choose a country');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (!formData.zipCode || formData.zipCode.length < 2) {
       setErrorZip('Mandatory field, zip code length must be at least 2');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (!formData.deliveryDate) {
       setErrorDeliveryDate('Mandatory field, please choose a date');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     if (Date.parse(formData.deliveryDate) < Date.parse(stringNow)) {
       setErrorDeliveryDate('Date is not correct');
-      submitButton.current!.disabled = true;
-      hasError = true;
+      handleError();
     }
     return hasError;
   }
@@ -162,7 +135,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
   function generateChangeHandler<T extends keyof FormData>(propertyName: T) {
     return (event: { target: { value: FormData[T] } }) => {
       formData[propertyName] = event.target.value;
-
       if (
         errorFirstName ||
         errorLastName ||
@@ -174,8 +146,8 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
         errorZip ||
         errorDeliveryDate
       )
-        submitButton.current!.disabled = true;
-      else submitButton.current!.disabled = false;
+        (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
+      else (formRef.current!.elements[14] as HTMLInputElement).disabled = false;
 
       if (formData.firstName) {
         setErrorFirstName('');
@@ -208,30 +180,34 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
   }
 
   const handleGenderChange = (): string => {
-    if (genderMrInput.current!.checked) formData.gender = genderMrInput.current!.value;
-    else if (genderMrsInput.current!.checked) formData.gender = genderMrsInput.current!.value;
+    if ((formRef.current!.elements[0] as HTMLInputElement).checked) {
+      formData.gender = (formRef.current!.elements[0] as HTMLInputElement).value;
+    } else if ((formRef.current!.elements[1] as HTMLInputElement).checked)
+      formData.gender = (formRef.current!.elements[1] as HTMLInputElement).value;
     else formData.gender = '';
     return formData.gender;
   };
   const handlePromoChange = (): string => {
-    if (promoWantInput.current!.checked) formData.promotions = promoWantInput.current!.value;
-    else if (promoDontInput.current!.checked) formData.promotions = promoDontInput.current!.value;
+    if ((formRef.current!.elements[7] as HTMLInputElement).checked)
+      formData.promotions = (formRef.current!.elements[7] as HTMLInputElement).value;
+    else if ((formRef.current!.elements[8] as HTMLInputElement).checked)
+      formData.promotions = (formRef.current!.elements[8] as HTMLInputElement).value;
     else formData.promotions = '';
     return formData.promotions;
   };
   const handleFileChange = (): string => {
-    if (fileInput.current!.files!.length) {
-      formData.file = fileInput.current!.files![0].name;
+    if ((formRef.current!.elements[6] as HTMLInputElement).files!.length) {
+      formData.file = (formRef.current!.elements[6] as HTMLInputElement).files![0].name;
     } else formData.file = 'No data';
     return formData.file;
   };
   const handlePersonalDataChange = (): string => {
-    return personalDataInput.current!.checked
+    return (formRef.current!.elements[9] as HTMLInputElement).checked
       ? (formData.personalData = 'Yes')
       : (formData.personalData = '');
   };
   const handleBonusChange = (): string => {
-    return bonusInput.current!.checked
+    return (formRef.current!.elements[10] as HTMLInputElement).checked
       ? (formData.bonusProgram = 'Yes')
       : (formData.bonusProgram = '');
   };
@@ -241,17 +217,17 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
     const date = new Date();
     formData.key = date.getTime().toString();
     handleGenderChange();
-    formData.firstName = firstInput.current!.value.toUpperCase();
-    formData.lastName = lastInput.current!.value.toUpperCase();
-    formData.email = emailInput.current!.value;
-    formData.birthday = birthdayInput.current!.value;
+    formData.firstName = (formRef.current!.elements[2] as HTMLInputElement).value.toUpperCase();
+    formData.lastName = (formRef.current!.elements[3] as HTMLInputElement).value.toUpperCase();
+    formData.email = (formRef.current!.elements[4] as HTMLInputElement).value;
+    formData.birthday = (formRef.current!.elements[5] as HTMLInputElement).value;
     handleFileChange();
     handlePromoChange();
     handlePersonalDataChange();
     handleBonusChange();
-    formData.country = countrySelect.current!.value;
-    formData.zipCode = zipInput.current!.value.toUpperCase();
-    formData.deliveryDate = deliveryDateInput.current!.value;
+    formData.country = (formRef.current!.elements[11] as HTMLInputElement).value;
+    formData.zipCode = (formRef.current!.elements[12] as HTMLInputElement).value.toUpperCase();
+    formData.deliveryDate = (formRef.current!.elements[13] as HTMLInputElement).value;
 
     const newCard = { ...formData };
 
@@ -260,7 +236,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
       alert('Your data has been successfully saved');
       clearFormData();
       clearFilledForm();
-      submitButton.current!.disabled = true;
+      (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
     }
   }
 
@@ -268,7 +244,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
     <>
       <section className="Form-container">
         <hr className="Form-line"></hr>
-        <form className="Form-content__container" onSubmit={handleFormSubmit}>
+        <form className="Form-content__container" onSubmit={handleFormSubmit} ref={formRef}>
           <h2 className="Form-header">About you</h2>
           <div className="Form-content">
             <div className="Form-field">
@@ -281,7 +257,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                     name="gender"
                     value="Mr"
                     onChange={generateChangeHandler('gender')}
-                    ref={genderMrInput}
                   />
                   <span className="Form-radio__value">Mr</span>
                 </label>
@@ -292,7 +267,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                     name="gender"
                     value="Mrs"
                     onChange={generateChangeHandler('gender')}
-                    ref={genderMrsInput}
                   />
                   <span className="Form-radio__value">Mrs</span>
                 </label>
@@ -306,7 +280,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                     className="Form-input"
                     type="text"
                     onChange={generateChangeHandler('firstName')}
-                    ref={firstInput}
                   />
                   {errorFirstName && <div className="Form-error">{errorFirstName}</div>}
                 </div>
@@ -318,7 +291,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                     className="Form-input"
                     type="text"
                     onChange={generateChangeHandler('lastName')}
-                    ref={lastInput}
                   />
                   {errorLastName && <div className="Form-error">{errorLastName}</div>}
                 </div>
@@ -331,7 +303,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   className="Form-input"
                   type="text"
                   onChange={generateChangeHandler('email')}
-                  ref={emailInput}
                 />
                 {errorEmail && <div className="Form-error">{errorEmail}</div>}
               </div>
@@ -343,7 +314,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   className="Form-input__date"
                   type="date"
                   onChange={generateChangeHandler('birthday')}
-                  ref={birthdayInput}
                 />
                 {errorBirthday && <div className="Form-error">{errorBirthday}</div>}
               </div>
@@ -356,7 +326,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   type="file"
                   accept="image/*"
                   onChange={handleFileChange}
-                  ref={fileInput}
                 />
                 {errorImage && <div className="Form-error__file">{errorImage}</div>}
               </div>
@@ -370,7 +339,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   name="promotions"
                   value="Want receive"
                   onChange={generateChangeHandler('promotions')}
-                  ref={promoWantInput}
                 />
                 I want to receive notifications about promo and sales by e-mail
               </label>
@@ -381,7 +349,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   name="promotions"
                   value="Don't want receive"
                   onChange={generateChangeHandler('promotions')}
-                  ref={promoDontInput}
                 />
                 I don’t want to receive notifications about promo and sales by e-mail
               </label>
@@ -396,7 +363,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   name="personal-data"
                   value="Yes"
                   onChange={handlePersonalDataChange}
-                  ref={personalDataInput}
                 />
                 I agree to the use of my personal data for advertising purposes
               </label>
@@ -407,7 +373,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   name="bonus"
                   value="Yes"
                   onChange={handleBonusChange}
-                  ref={bonusInput}
                 />
                 I would like to take part in the free bonus points program
               </label>
@@ -422,7 +387,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   defaultValue="country"
                   className="Form-select"
                   onChange={generateChangeHandler('country')}
-                  ref={countrySelect}
                 >
                   <option value="country" disabled>
                     Choose a country
@@ -445,7 +409,6 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   className="Form-input"
                   type="text"
                   onChange={generateChangeHandler('zipCode')}
-                  ref={zipInput}
                 />
                 {errorZip && <div className="Form-error">{errorZip}</div>}
               </div>
@@ -457,13 +420,12 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   className="Form-input__date"
                   type="date"
                   onChange={generateChangeHandler('deliveryDate')}
-                  ref={deliveryDateInput}
                 />
                 {errorDeliveryDate && <div className="Form-error">{errorDeliveryDate}</div>}
               </div>
             </div>
           </div>
-          <input type="submit" className="Form-submit" value="Submit" ref={submitButton} disabled />
+          <input type="submit" className="Form-submit" value="Submit" disabled />
         </form>
         <hr className="Form-line"></hr>
       </section>

@@ -35,21 +35,7 @@ export type InitialData = {
   deliveryDate: string;
 };
 
-export type FormData = {
-  key: string;
-  gender: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  birthday: string;
-  file: string;
-  promotions: string;
-  personalData: string;
-  bonusProgram: string;
-  country: string;
-  zipCode: string;
-  deliveryDate: string;
-};
+export type FormData = InitialData;
 
 export type Country = {
   name: string;
