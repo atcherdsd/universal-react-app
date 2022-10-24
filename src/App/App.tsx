@@ -5,7 +5,7 @@ import About from 'pages/About/About';
 import Forms from 'pages/Forms/Forms';
 import Main from 'pages/Main/Main';
 import NotFound from 'pages/NotFound/NotFound';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Api from 'pages/Api/Api';
 import { Links } from 'components/utilities/types';
 import { IRoutes } from 'components/utilities/interfaces';
@@ -42,16 +42,17 @@ const routes: IRoutes[] = [
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <>
+      <div className="App">
         <Header sitename="smartphone universe" links={links} />
-        <Routes>
-          {routes.map((route) => (
-            <Route key={route.path} path={route.path} element={<route.element />} />
-          ))}
-        </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+
+      <Routes>
+        {routes.map((route) => (
+          <Route key={route.path} path={route.path} element={<route.element />} />
+        ))}
+      </Routes>
+    </>
   );
 }
 

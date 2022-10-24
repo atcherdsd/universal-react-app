@@ -10,6 +10,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 1.5rem 1rem 0;
+    text-align: center;
 }
 .About-line {
     border: 0;
@@ -23,4 +24,5 @@
     margin: 0 auto;
     padding: 2rem;
     max-width: 1200px;
+    text-align: center;
 }

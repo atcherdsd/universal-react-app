@@ -2,15 +2,23 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('App component', () => {
+  beforeEach(() => {
+    render(
+      <BrowserRouter>
+        render(
+        <App />
+        );
+      </BrowserRouter>
+    );
+  });
   test('App renders', () => {
-    render(<App />);
     const linkElement = screen.getByText(/about us/i);
     expect(linkElement).toBeInTheDocument();
   });
   test('Search filter works', () => {
-    render(<App />);
     expect(screen.queryByDisplayValue(/apple/)).toBeNull();
 
     userEvent.type(screen.getByRole('searchbox'), 'app');
@@ -20,7 +28,6 @@ describe('App component', () => {
     expect(screen.queryByText(/Samsung/i)).toBeNull();
   });
   it('Links work', () => {
-    render(<App />);
     const formsLink = screen.getByText(/forms/i) as Element;
     const aboutLink = screen.getByText(/about us/i) as Element;
     userEvent.click(formsLink);
