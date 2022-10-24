@@ -66,6 +66,13 @@
     justify-content: center;
     flex-grow: 1;
 }
+.info__w60 {
+    width: 60%;
+}
+.info__w100 {
+    width: 100%;
+}
+
 .Modal-language {    
     background-color: #90bfe5;
     color: blue;

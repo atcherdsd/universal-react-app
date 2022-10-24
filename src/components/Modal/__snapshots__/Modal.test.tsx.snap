@@ -27,8 +27,7 @@ Object {
               class="Modal-content__main"
             >
               <div
-                class="Modal-content__info"
-                style="width: 100%;"
+                class="Modal-content__info info__w100"
               >
                 <div
                   class="Modal-title"
@@ -95,8 +94,7 @@ Object {
             class="Modal-content__main"
           >
             <div
-              class="Modal-content__info"
-              style="width: 100%;"
+              class="Modal-content__info info__w100"
             >
               <div
                 class="Modal-title"

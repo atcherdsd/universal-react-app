@@ -33,8 +33,11 @@ function Modal(props: IModalProps): JSX.Element {
               </div>
             )}
             <div
-              className="Modal-content__info"
-              style={props.data.image ? { width: '60%' } : { width: '100%' }}
+              className={
+                props.data.image
+                  ? 'Modal-content__info  info__w60'
+                  : 'Modal-content__info info__w100'
+              }
             >
               <div className="Modal-title">{decodeHtmlCharCodes(props.data.title)}</div>
               <div className="Modal-description" ref={descriptionDiv}></div>

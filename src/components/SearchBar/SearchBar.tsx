@@ -55,6 +55,10 @@ function SearchBar(): JSX.Element {
     }
   }
 
+  useEffect(() => {
+    return function clean() {};
+  }, []);
+
   return (
     <>
       <section className="SearchBar-section">
