@@ -1,7 +1,8 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import Form from './Form';
 import userEvent from '@testing-library/user-event';
+import OrderCard from 'components/OrderCard/OrderCard';
 
 describe('Form component', () => {
   test('should render Form component', () => {
@@ -94,6 +95,61 @@ describe('Form component', () => {
     expect(checkbox).not.toBeChecked();
     fireEvent.click(checkbox);
     expect(onChangeCheckbox).toHaveBeenCalledTimes(1);
+  });
+  it('function onChangeCheckbox should work', () => {
+    render(<Form addData={function addData(): void {}} />);
+
+    const checkboxInput1 = screen.getAllByRole('checkbox')[0] as HTMLInputElement;
+    const checkboxInput2 = screen.getAllByRole('checkbox')[1] as HTMLInputElement;
+    checkboxInput1.onchange = jest.fn();
+    const onChangeCheckboxInput1 = checkboxInput1.onchange;
+    checkboxInput2.onchange = jest.fn();
+    const onChangeCheckboxInput2 = checkboxInput2.onchange;
+
+    expect(checkboxInput1).not.toBeChecked();
+    expect(checkboxInput2).not.toBeChecked();
+
+    userEvent.click(checkboxInput1);
+    expect(onChangeCheckboxInput1).toHaveBeenCalledTimes(1);
+    expect(onChangeCheckboxInput2).not.toHaveBeenCalled();
+    expect(checkboxInput1).toBeChecked();
+    expect(checkboxInput2).not.toBeChecked();
+
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+    act(() => {
+      expect(
+        render(
+          <OrderCard
+            key=""
+            gender=""
+            firstName=""
+            lastName=""
+            email=""
+            birthday=""
+            file=""
+            promotions=""
+            personalData=""
+            bonusProgram=""
+            country=""
+            zipCode=""
+            deliveryDate=""
+          />
+        )
+      );
+    });
+
+    userEvent.click(checkboxInput2);
+    expect(checkboxInput1).toBeChecked();
+    expect(checkboxInput2).toBeChecked();
+
+    userEvent.click(checkboxInput2);
+    expect(checkboxInput1).toBeChecked();
+    expect(checkboxInput2).not.toBeChecked();
+
+    userEvent.click(checkboxInput1);
+    expect(checkboxInput1).not.toBeChecked();
+    expect(checkboxInput2).not.toBeChecked();
   });
   it('Сlasses are available', () => {
     render(<Form addData={function addData(): void {}} />);
