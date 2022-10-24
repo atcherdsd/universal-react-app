@@ -7,23 +7,23 @@ import { ErrorMessage, StatusCode } from 'components/utilities/enums';
 import { BASIC_URL, KEY } from 'components/utilities/utils';
 
 function SearchBar(): JSX.Element {
-  const [searchValue, setSearchValue] = useState(
-    (localStorage.getItem('searchValue') as string) || ''
+  const [searchValueApi, setSearchValueApi] = useState(
+    (localStorage.getItem('searchValueApi') as string) || ''
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
 
   const [contentItem, setContentItem] = useState({
     articles: [] as Data[],
   } as IContentItem);
+  const [error, setError] = useState<string>('');
 
   function searchText(event: { target: { value: string } }): void {
-    setSearchValue(event.target.value);
+    setSearchValueApi(event.target.value);
   }
   function setLocalStorage(): void {
-    localStorage.setItem('searchValue', searchValue);
+    localStorage.setItem('searchValueApi', searchValueApi);
   }
-  useEffect(setLocalStorage, [searchValue]);
+  useEffect(setLocalStorage, [searchValueApi]);
 
   async function handleFormSubmit(event: ChangeEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -32,7 +32,7 @@ function SearchBar(): JSX.Element {
     setError('');
 
     try {
-      const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValue}`);
+      const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValueApi}`);
       switch (response.status.toString()) {
         case StatusCode.BadRequest:
           throw new Error(ErrorMessage.BadRequest);
@@ -71,7 +71,7 @@ function SearchBar(): JSX.Element {
                 placeholder="What are you looking for?"
                 autoFocus
                 onChange={searchText}
-                value={searchValue}
+                value={searchValueApi}
               />
             </label>
           </div>
