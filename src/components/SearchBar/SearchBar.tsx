@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
+import React, { ChangeEvent, ReactNode, useCallback, useEffect, useState } from 'react';
 import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
 import { Data } from 'components/utilities/types';
@@ -25,35 +25,39 @@ function SearchBar(): JSX.Element {
   }
   useEffect(setLocalStorage, [searchValueApi]);
 
-  async function handleFormSubmit(event: ChangeEvent<HTMLFormElement>): Promise<void> {
-    event.preventDefault();
-    setContentItem({ articles: [] as Data[] });
-    setIsLoading(true);
-    setError('');
+  const handleFormSubmit = useCallback(
+    async (event: ChangeEvent<HTMLFormElement>): Promise<void> => {
+      event.preventDefault();
+      setContentItem({ articles: [] as Data[] });
+      setIsLoading(true);
+      setError('');
 
-    try {
-      const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValueApi}`);
-      switch (response.status.toString()) {
-        case StatusCode.BadRequest:
-          throw new Error(ErrorMessage.BadRequest);
-        case StatusCode.Unauthorized:
-          throw new Error(ErrorMessage.Unauthorized);
-        case StatusCode.Forbidden:
-          throw new Error(ErrorMessage.Forbidden);
-        case StatusCode.TooManyRequests:
-          throw new Error(ErrorMessage.TooManyRequests);
-        case StatusCode.InternalServerError:
-          throw new Error(ErrorMessage.InternalServerError);
+      try {
+        const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValueApi}`);
+        switch (response.status.toString()) {
+          case StatusCode.BadRequest:
+            throw new Error(ErrorMessage.BadRequest);
+          case StatusCode.Unauthorized:
+            throw new Error(ErrorMessage.Unauthorized);
+          case StatusCode.Forbidden:
+            throw new Error(ErrorMessage.Forbidden);
+          case StatusCode.TooManyRequests:
+            throw new Error(ErrorMessage.TooManyRequests);
+          case StatusCode.InternalServerError:
+            throw new Error(ErrorMessage.InternalServerError);
+        }
+        if (!response.ok) throw Error(ErrorMessage.AnotherError);
+        const data: IContentItem = await response.json();
+        setContentItem(data);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setIsLoading(false);
       }
-      if (!response.ok) throw Error(ErrorMessage.AnotherError);
-      const data: IContentItem = await response.json();
-      setContentItem(data);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+      console.log('callback works');
+    },
+    [searchValueApi]
+  );
 
   useEffect(() => {
     return function clean() {};
