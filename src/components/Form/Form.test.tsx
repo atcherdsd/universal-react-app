@@ -36,7 +36,6 @@ describe('Form component', () => {
   it('onChange works', () => {
     render(<Form addData={function addData(): void {}} />);
 
-    const form = document.querySelector('.Form-content__container') as HTMLElement;
     const firstNameInput = screen.getAllByRole('textbox')[0];
     const lastNameInput = screen.getAllByRole('textbox')[1];
     const button = screen.getByRole('button');
@@ -45,8 +44,6 @@ describe('Form component', () => {
     expect(lastNameInput).toContainHTML('');
     expect(button).toHaveAttribute('disabled');
 
-    form.onchange = jest.fn();
-    const onChangeForm = form.onchange;
     firstNameInput.onchange = jest.fn();
     const onChangeFirstName = firstNameInput.onchange;
 
@@ -57,11 +54,9 @@ describe('Form component', () => {
     expect(onChangeFirstName).toHaveBeenCalledTimes(1);
     expect(button).not.toHaveAttribute('disabled');
 
-    fireEvent.click(form);
-    expect(onChangeForm).toHaveBeenCalled();
-
-    fireEvent.click(button);
-    expect(screen.getByText(/enter last name/i)).toBeInTheDocument();
+    userEvent.click(button);
+    const error = document.querySelectorAll('.Form-error')[0];
+    expect(error).toBeInTheDocument();
   });
   it('should render radio inputs', () => {
     render(<Form addData={function addData(): void {}} />);
@@ -166,14 +161,15 @@ describe('Form component', () => {
   });
   test('Form renders without data', () => {
     render(<Form addData={function addData(): void {}} />);
-
     expect(screen.queryByRole('searchbox')).toBeNull();
     expect(screen.queryByText(/sorry/i)).toBeNull();
 
-    const inputField = screen.getAllByRole('textbox')[0];
-    userEvent.type(inputField, 'Tom');
+    const inputField = document.querySelectorAll('.Form-input')[0];
+    act(() => {
+      fireEvent.change(inputField, { target: { value: 'Tom' } });
+    });
+
     expect(screen.getByDisplayValue('Tom')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('Tom')).toHaveClass('Form-input');
     expect(screen.getByDisplayValue('Tom')).not.toHaveClass('Form-radio__point');
     expect(screen.queryByDisplayValue(/name/i)).toBeNull();
 

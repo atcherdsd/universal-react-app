@@ -54,7 +54,6 @@ function SearchBar(): JSX.Element {
       } finally {
         setIsLoading(false);
       }
-      console.log('callback works');
     },
     [searchValueApi]
   );

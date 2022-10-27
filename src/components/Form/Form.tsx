@@ -1,7 +1,8 @@
-import React, { FormEvent, ReactNode, RefObject, useRef, useState } from 'react';
+import React, { ReactNode, RefObject, useRef } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
 import { InitialData, FormData, Country } from 'components/utilities/types';
+import { useForm } from 'react-hook-form';
 
 function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element {
   let formData = {} as FormData;
@@ -18,7 +19,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
       promotions: '',
       personalData: '',
       bonusProgram: '',
-      country: '',
+      country: 'country',
       zipCode: '',
       deliveryDate: '',
     };
@@ -37,145 +38,27 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
     });
   }
 
-  const [errorFirstName, setErrorFirstName] = useState('');
-  const [errorLastName, setErrorLastName] = useState('');
-  const [errorEmail, setErrorEmail] = useState('');
-  const [errorBirthday, setErrorBirthday] = useState('');
-  const [errorImage, setErrorImage] = useState('');
-  const [errorPromotions, setErrorPromotions] = useState('');
-  const [errorCountry, setErrorCountry] = useState('');
-  const [errorZip, setErrorZip] = useState('');
-  const [errorDeliveryDate, setErrorDeliveryDate] = useState('');
-
-  function resetErrorMessages(): void {
-    setErrorFirstName('');
-    setErrorLastName('');
-    setErrorEmail('');
-    setErrorBirthday('');
-    setErrorImage('');
-    setErrorPromotions('');
-    setErrorCountry('');
-    setErrorZip('');
-    setErrorDeliveryDate('');
-  }
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    mode: 'onChange',
+  });
 
   const regexpName = /(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/;
   const regexpEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const stringNow: string = new Date().toString();
-  const regexpImage = /\png|svg|jpeg|jpg|gif|ico$/i;
-  let hasError: boolean;
-
-  const handleError = (): void => {
-    (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
-    hasError = true;
-  };
-
-  function validate(): boolean {
-    resetErrorMessages();
-
-    hasError = false;
-    if (!formData.firstName) {
-      setErrorFirstName('Mandatory field, please enter First Name');
-      handleError();
-    }
-    if (formData.firstName && !formData.firstName.match(regexpName)) {
-      setErrorFirstName('First Name is invalid');
-      handleError();
-    }
-    if (!formData.lastName) {
-      setErrorLastName('Mandatory field, please enter Last Name');
-      handleError();
-    }
-    if (formData.lastName && !formData.lastName.match(regexpName)) {
-      setErrorLastName('Last Name is invalid');
-      handleError();
-    }
-    if (!formData.email) {
-      setErrorEmail('Mandatory field, please enter E-Mail');
-      handleError();
-    }
-    if (!formData.email.match(regexpEmail)) {
-      setErrorEmail('The format of the email address must be: example@mail.ab');
-      handleError();
-    }
-    if (Date.parse(formData.birthday) > Date.parse(stringNow)) {
-      setErrorBirthday('Date is not correct');
-      handleError();
-    }
-    if (
-      formData.file !== 'No data' &&
-      !formData.file.split('.').splice(-1).toString().match(regexpImage)
-    ) {
-      setErrorImage('The file format can be .png, .svg, .jpeg, .jpg, .gif or .ico');
-      handleError();
-    }
-    if (!formData.promotions) {
-      setErrorPromotions('Mandatory field, please choose an option');
-      handleError();
-    }
-    if (formData.country === 'country') {
-      setErrorCountry('Mandatory field, please choose a country');
-      handleError();
-    }
-    if (!formData.zipCode || formData.zipCode.length < 2) {
-      setErrorZip('Mandatory field, zip code length must be at least 2');
-      handleError();
-    }
-    if (!formData.deliveryDate) {
-      setErrorDeliveryDate('Mandatory field, please choose a date');
-      handleError();
-    }
-    if (Date.parse(formData.deliveryDate) < Date.parse(stringNow)) {
-      setErrorDeliveryDate('Date is not correct');
-      handleError();
-    }
-    return hasError;
-  }
+  const regexpImage = /\.(png|svg|jpe?g|jpg|gif|ico)$/i;
 
   function generateChangeHandler<T extends keyof FormData>(propertyName: T) {
     return (event: { target: { value: FormData[T] } }) => {
       formData[propertyName] = event.target.value;
-      if (
-        errorFirstName ||
-        errorLastName ||
-        errorEmail ||
-        errorBirthday ||
-        errorImage ||
-        errorPromotions ||
-        errorCountry ||
-        errorZip ||
-        errorDeliveryDate
-      )
+
+      (formRef.current!.elements[14] as HTMLInputElement).disabled = false;
+      if (Object.keys(errors).length > 0)
         (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
       else (formRef.current!.elements[14] as HTMLInputElement).disabled = false;
-
-      if (formData.firstName) {
-        setErrorFirstName('');
-      }
-      if (formData.lastName) {
-        setErrorLastName('');
-      }
-      if (formData.email && formData.email.match(regexpEmail)) {
-        setErrorEmail('');
-      }
-      if (Date.parse(formData.birthday) <= Date.parse(stringNow)) {
-        setErrorBirthday('');
-      }
-      if (formData.file && formData.file.split('.').splice(-1).toString().match(regexpImage)) {
-        setErrorImage('');
-      }
-      if (formData.promotions) {
-        setErrorPromotions('');
-      }
-      if (formData.country && formData.country !== 'country') {
-        setErrorCountry('');
-      }
-      if (formData.zipCode && formData.zipCode.length >= 2) {
-        setErrorZip('');
-      }
-      if (Date.parse(formData.deliveryDate) >= Date.parse(stringNow)) {
-        setErrorDeliveryDate('');
-      }
     };
   }
 
@@ -198,7 +81,11 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
   const handleFileChange = (): string => {
     if ((formRef.current!.elements[6] as HTMLInputElement).files!.length) {
       formData.file = (formRef.current!.elements[6] as HTMLInputElement).files![0].name;
-    } else formData.file = 'No data';
+      (formRef.current!.elements[14] as HTMLInputElement).disabled = false;
+    } else {
+      (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
+      formData.file = 'No data';
+    }
     return formData.file;
   };
   const handlePersonalDataChange = (): string => {
@@ -212,8 +99,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
       : (formData.bonusProgram = '');
   };
 
-  function handleFormSubmit(event: FormEvent) {
-    event.preventDefault();
+  function handleFormSubmit() {
     const date = new Date();
     formData.key = date.getTime().toString();
     handleGenderChange();
@@ -231,20 +117,22 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
 
     const newCard = { ...formData };
 
-    if (!validate()) {
-      props.addData(newCard);
-      alert('Your data has been successfully saved');
-      clearFormData();
-      clearFilledForm();
-      (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
-    }
+    props.addData(newCard);
+    alert('Your data has been successfully saved');
+    clearFormData();
+    clearFilledForm();
+    (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
   }
 
   return (
     <>
       <section className="Form-container">
         <hr className="Form-line"></hr>
-        <form className="Form-content__container" onSubmit={handleFormSubmit} ref={formRef}>
+        <form
+          className="Form-content__container"
+          onSubmit={handleSubmit(handleFormSubmit)}
+          ref={formRef}
+        >
           <h2 className="Form-header">About you</h2>
           <div className="Form-content">
             <div className="Form-field">
@@ -279,9 +167,18 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   <input
                     className="Form-input"
                     type="text"
-                    onChange={generateChangeHandler('firstName')}
+                    {...register('firstName', {
+                      required: 'Mandatory field, please enter First Name',
+                      pattern: {
+                        value: regexpName,
+                        message: 'First Name is invalid',
+                      },
+                      onChange: generateChangeHandler('firstName'),
+                    })}
                   />
-                  {errorFirstName && <div className="Form-error">{errorFirstName}</div>}
+                  {errors.firstName && (
+                    <div className="Form-error">{errors.firstName.message as string}</div>
+                  )}
                 </div>
               </div>
               <div className="Form-field__name">
@@ -290,9 +187,18 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   <input
                     className="Form-input"
                     type="text"
-                    onChange={generateChangeHandler('lastName')}
+                    {...register('lastName', {
+                      required: 'Mandatory field, please enter Last Name',
+                      pattern: {
+                        value: regexpName,
+                        message: 'Last Name is invalid',
+                      },
+                      onChange: generateChangeHandler('lastName'),
+                    })}
                   />
-                  {errorLastName && <div className="Form-error">{errorLastName}</div>}
+                  {errors.lastName && (
+                    <div className="Form-error">{errors.lastName.message as string}</div>
+                  )}
                 </div>
               </div>
             </div>
@@ -302,9 +208,16 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                 <input
                   className="Form-input"
                   type="text"
-                  onChange={generateChangeHandler('email')}
+                  {...register('email', {
+                    required: 'Mandatory field, please enter E-Mail',
+                    pattern: {
+                      value: regexpEmail,
+                      message: 'The format of the email address must be: example@mail.ab',
+                    },
+                    onChange: generateChangeHandler('email'),
+                  })}
                 />
-                {errorEmail && <div className="Form-error">{errorEmail}</div>}
+                {errors.email && <div className="Form-error">{errors.email.message as string}</div>}
               </div>
             </div>
             <div className="Form-field">
@@ -313,9 +226,17 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                 <input
                   className="Form-input__date"
                   type="date"
-                  onChange={generateChangeHandler('birthday')}
+                  {...register('birthday', {
+                    max: {
+                      value: stringNow,
+                      message: 'Date is not correct',
+                    },
+                    onChange: generateChangeHandler('birthday'),
+                  })}
                 />
-                {errorBirthday && <div className="Form-error">{errorBirthday}</div>}
+                {errors.birthday && (
+                  <div className="Form-error">{errors.birthday.message as string}</div>
+                )}
               </div>
             </div>
             <div className="Form-field">
@@ -325,9 +246,15 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                   className="Form-input__file"
                   type="file"
                   accept="image/*"
-                  onChange={handleFileChange}
+                  {...register('file', {
+                    pattern: {
+                      value: regexpImage,
+                      message: 'The file format can be .png, .svg, .jpeg, .jpg, .gif or .ico',
+                    },
+                    onChange: handleFileChange,
+                  })}
                 />
-                {errorImage && <div className="Form-error__file">{errorImage}</div>}
+                {errors.file && <div className="Form-error">{errors.file.message as string}</div>}
               </div>
             </div>
             <div className="Form-field">
@@ -336,9 +263,11 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                 <input
                   className="Form-radio"
                   type="radio"
-                  name="promotions"
                   value="Want receive"
-                  onChange={generateChangeHandler('promotions')}
+                  {...register('promotions', {
+                    required: 'Mandatory field, please choose an option',
+                    onChange: generateChangeHandler('promotions'),
+                  })}
                 />
                 I want to receive notifications about promo and sales by e-mail
               </label>
@@ -346,14 +275,18 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                 <input
                   className="Form-radio"
                   type="radio"
-                  name="promotions"
                   value="Don't want receive"
-                  onChange={generateChangeHandler('promotions')}
+                  {...register('promotions', {
+                    required: 'Mandatory field, please choose an option',
+                    onChange: generateChangeHandler('promotions'),
+                  })}
                 />
                 I don’t want to receive notifications about promo and sales by e-mail
               </label>
-              {!errorPromotions && <div className="Form-error">&nbsp;</div>}
-              {errorPromotions && <div className="Form-error">{errorPromotions}</div>}
+              {!errors.promotions && <div className="Form-error">&nbsp;</div>}
+              {errors.promotions && (
+                <div className="Form-error">{errors.promotions.message as string}</div>
+              )}
             </div>
             <div className="Form-field">
               <label className="Form-label">
@@ -386,7 +319,14 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                 <select
                   defaultValue="country"
                   className="Form-select"
-                  onChange={generateChangeHandler('country')}
+                  {...register('country', {
+                    required: 'Mandatory field, please choose a country',
+                    pattern: {
+                      value: /^((?!country).)*$/i,
+                      message: 'Mandatory field, please choose a country',
+                    },
+                    onChange: generateChangeHandler('country'),
+                  })}
                 >
                   <option value="country" disabled>
                     Choose a country
@@ -399,7 +339,9 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                     );
                   })}
                 </select>
-                {errorCountry && <div className="Form-error">{errorCountry}</div>}
+                {errors.country && (
+                  <div className="Form-error">{errors.country.message as string}</div>
+                )}
               </div>
             </div>
             <div className="Form-field">
@@ -408,9 +350,18 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                 <input
                   className="Form-input"
                   type="text"
-                  onChange={generateChangeHandler('zipCode')}
+                  {...register('zipCode', {
+                    required: 'Mandatory field, zip code length must be at least 2',
+                    min: {
+                      value: 2,
+                      message: 'Mandatory field, zip code length must be at least 2',
+                    },
+                    onChange: generateChangeHandler('zipCode'),
+                  })}
                 />
-                {errorZip && <div className="Form-error">{errorZip}</div>}
+                {errors.zipCode && (
+                  <div className="Form-error">{errors.zipCode.message as string}</div>
+                )}
               </div>
             </div>
             <div className="Form-field">
@@ -419,9 +370,18 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
                 <input
                   className="Form-input__date"
                   type="date"
-                  onChange={generateChangeHandler('deliveryDate')}
+                  {...register('deliveryDate', {
+                    required: 'Mandatory field, please choose a date',
+                    min: {
+                      value: stringNow,
+                      message: 'Date is not correct',
+                    },
+                    onChange: generateChangeHandler('deliveryDate'),
+                  })}
                 />
-                {errorDeliveryDate && <div className="Form-error">{errorDeliveryDate}</div>}
+                {errors.deliveryDate && (
+                  <div className="Form-error">{errors.deliveryDate.message as string}</div>
+                )}
               </div>
             </div>
           </div>
