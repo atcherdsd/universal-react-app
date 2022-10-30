@@ -8,8 +8,8 @@ function Modal(props: IModalProps): JSX.Element {
   const descriptionDiv = useRef() as RefObject<HTMLDivElement>;
 
   useEffect(() => {
-    const replaceLink = (text: string): string => {
-      descriptionDiv.current!.innerHTML = text;
+    const replaceLink = (contentWithHTMLLinkTags: string): string => {
+      descriptionDiv.current!.innerHTML = contentWithHTMLLinkTags;
       return decodeHtmlCharCodes(descriptionDiv.current!.innerHTML);
     };
     replaceLink(props.data.description);
