@@ -8,15 +8,9 @@ export const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
 
 export const makeListItems = (object: Links, elem: string, index: number): JSX.Element => {
   const item: string = Object.values(object)[index];
-  return item === links.main ? (
+  return (
     <li key={item} className="Header-link-item">
-      <NavLink className="Header-link" end to={item}>
-        {elem}
-      </NavLink>
-    </li>
-  ) : (
-    <li key={item} className="Header-link-item">
-      <NavLink className="Header-link" to={item}>
+      <NavLink className="Header-link" end={item === links.main} to={item}>
         {elem}
       </NavLink>
     </li>
