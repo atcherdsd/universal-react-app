@@ -21,7 +21,7 @@ function SearchResult(props: Data): JSX.Element {
       </div>
       {isOpenedModal && (
         <div className="SearchResult-modal" onClick={handleResult}>
-          <Modal data={props} handleResult={handleResult} />
+          <Modal data={props} date={date} handleResult={handleResult} />
         </div>
       )}
     </div>

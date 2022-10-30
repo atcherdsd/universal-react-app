@@ -5,8 +5,6 @@ import React, { RefObject, useEffect, useRef } from 'react';
 import './Modal.css';
 
 function Modal(props: IModalProps): JSX.Element {
-  const date = props.data.publishedAt.slice(0, 10);
-
   const descriptionDiv = useRef() as RefObject<HTMLDivElement>;
 
   useEffect(() => {
@@ -44,7 +42,7 @@ function Modal(props: IModalProps): JSX.Element {
             </div>
           </div>
           <div className="Modal-content__footer">
-            <div className="Modal-date">Publication date: {date}</div>
+            <div className="Modal-date">Publication date: {props.date}</div>
             <a href={props.data.url} className="Modal-url" target="blank" rel="noreferrer">
               See in source
             </a>

@@ -20,5 +20,6 @@ export interface IContentItem {
 
 export interface IModalProps {
   data: Data;
+  date: string;
   handleResult: HandleResult;
 }

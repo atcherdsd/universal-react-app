@@ -16,6 +16,7 @@ describe('Modal component', () => {
           },
           url: '',
         }}
+        date=""
         handleResult={() => void {}}
       />
     );
@@ -34,6 +35,7 @@ describe('Modal component', () => {
           },
           url: '',
         }}
+        date=""
         handleResult={() => void {}}
       />
     );

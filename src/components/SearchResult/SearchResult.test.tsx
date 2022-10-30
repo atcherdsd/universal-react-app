@@ -51,6 +51,7 @@ describe('SearchResult component', () => {
               image: undefined,
               publishedAt: '',
             }}
+            date=""
             handleResult={() => void {}}
           />
         )
