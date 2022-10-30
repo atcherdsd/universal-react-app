@@ -1,4 +1,4 @@
-import ExitModal from 'components/ExitModal/ExitModal';
+import IcoModalExit from 'components/IcoModalExit/IcoModalExit';
 import { IModalProps } from 'components/utilities/interfaces';
 import { decodeHtmlCharCodes } from 'components/utilities/utils';
 import React, { RefObject, useEffect, useRef } from 'react';
@@ -50,8 +50,8 @@ function Modal(props: IModalProps): JSX.Element {
             </a>
           </div>
         </div>
-        <div className="Modal-exit" onClick={props.handleResult}>
-          <ExitModal />
+        <div className="Modal-exit-ico" onClick={props.handleResult}>
+          <IcoModalExit />
         </div>
       </div>
     </div>

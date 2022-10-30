@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ExitModal from './ExitModal';
+import IcoModalExit from './IcoModalExit';
 
-describe('ExitModal component', () => {
+describe('IcoModalExit component', () => {
   beforeEach(() => {
-    render(<ExitModal />);
+    render(<IcoModalExit />);
   });
 
-  test('should render ExitModal component', () => {
+  test('should render IcoModalExit component', () => {
     const svg = document.getElementsByTagName('svg')[0] as SVGElement;
     expect(svg).toBeInTheDocument();
   });
@@ -16,7 +16,7 @@ describe('ExitModal component', () => {
     const svgWidth = window.getComputedStyle(svg).width;
     expect(svgWidth).toBeDefined();
   });
-  test('ExitModal component do not have data', () => {
+  test('IcoModalExit component do not have data', () => {
     expect(screen.queryByRole('img')).toBeNull();
   });
 });

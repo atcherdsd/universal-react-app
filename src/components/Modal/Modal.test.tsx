@@ -37,7 +37,7 @@ describe('Modal component', () => {
         handleResult={() => void {}}
       />
     );
-    const exit = document.querySelector('.Modal-exit') as HTMLDivElement;
+    const exit = document.querySelector('.Modal-exit-ico') as HTMLDivElement;
     exit.onclick = jest.fn();
     const onClick = exit.onclick;
 
