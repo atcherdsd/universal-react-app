@@ -6,6 +6,9 @@ import { makeListItems } from 'components/utilities/utils';
 
 function Header(props: IHeaderProps): JSX.Element {
   const links = props.links;
+  const listItems = Object.keys(links).map((elem: string, index: number): JSX.Element => {
+    return makeListItems(links, elem, index);
+  });
 
   return (
     <header className="Header-container">
@@ -15,11 +18,7 @@ function Header(props: IHeaderProps): JSX.Element {
       </div>
       <div className="Header-right">
         <nav className="Header-menu">
-          <ul className="Header-links">
-            {Object.keys(links).map((elem: string, index: number): JSX.Element => {
-              return makeListItems(links, elem, index);
-            })}
-          </ul>
+          <ul className="Header-links">{listItems}</ul>
         </nav>
       </div>
     </header>
