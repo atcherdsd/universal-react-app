@@ -7,11 +7,13 @@ import './Modal.css';
 function Modal(props: IModalProps): JSX.Element {
   const descriptionDiv = useRef() as RefObject<HTMLDivElement>;
 
+  const warning = useRef('');
   useEffect(() => {
     const replaceLink = (contentWithHTMLLinkTags: string): string => {
       descriptionDiv.current!.innerHTML = contentWithHTMLLinkTags;
       return decodeHtmlCharCodes(descriptionDiv.current!.innerHTML);
     };
+    warning.current = replaceLink(props.data.description);
     replaceLink(props.data.description);
   }, [props.data.description]);
 
@@ -38,7 +40,11 @@ function Modal(props: IModalProps): JSX.Element {
               }
             >
               <div className="Modal-title">{decodeHtmlCharCodes(props.data.title)}</div>
-              <div className="Modal-description" ref={descriptionDiv}></div>
+              <div
+                className="Modal-description"
+                ref={descriptionDiv}
+                dangerouslySetInnerHTML={{ __html: warning.current }}
+              ></div>
             </div>
           </div>
           <div className="Modal-content__footer">
