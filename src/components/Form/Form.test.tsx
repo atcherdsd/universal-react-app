@@ -165,9 +165,8 @@ describe('Form component', () => {
     expect(screen.queryByText(/sorry/i)).toBeNull();
 
     const inputField = document.querySelectorAll('.Form-input')[0];
-    act(() => {
-      fireEvent.change(inputField, { target: { value: 'Tom' } });
-    });
+
+    fireEvent.change(inputField, { target: { value: 'Tom' } });
 
     expect(screen.getByDisplayValue('Tom')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Tom')).not.toHaveClass('Form-radio__point');
