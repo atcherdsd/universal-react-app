@@ -88,11 +88,9 @@ function SearchBar(): JSX.Element {
         <hr className="SearchBar-line"></hr>
       </section>
       <div className="SearchBar-results">
-        {isLoading ? (
-          <div className="SearchBar-loader"></div>
-        ) : error ? (
-          <div className="SearchBar-error">{error}</div>
-        ) : contentItem.articles.length ? (
+        {isLoading && <div className="SearchBar-loader"></div>}
+        {error && <div className="SearchBar-error">{error}</div>}
+        {contentItem.articles.length > 0 &&
           contentItem.articles.map((item): ReactNode => {
             return (
               <SearchResult
@@ -105,8 +103,8 @@ function SearchBar(): JSX.Element {
                 url={item.url}
               />
             );
-          })
-        ) : (
+          })}
+        {!isLoading && !error && !contentItem.articles.length && (
           <p className="SearchBar-warning">List of articles is empty</p>
         )}
       </div>
