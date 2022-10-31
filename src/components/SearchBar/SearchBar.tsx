@@ -3,7 +3,7 @@ import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
 import { Data } from 'components/types/types';
 import { IContentItem } from 'components/types/interfaces';
-import { ErrorMessage, StatusCode } from 'components/utilities/enums';
+import { ErrorMessage, StatusCode } from 'components/types/enums';
 import { BASIC_URL, KEY } from 'components/utilities/utils';
 
 function SearchBar(): JSX.Element {
