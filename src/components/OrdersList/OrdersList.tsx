@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import './OrdersList.css';
 import OrderCard from 'components/OrderCard/OrderCard';
-import { InitialData } from 'components/utilities/types';
+import { InitialData } from 'components/types/types';
 
 function OrdersList(props: { data: InitialData[] }): JSX.Element {
   const data = props.data;

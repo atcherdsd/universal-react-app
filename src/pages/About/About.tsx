@@ -1,7 +1,7 @@
 import React from 'react';
 import './About.css';
 import about from 'data/about.json';
-import { IAboutData } from 'components/utilities/interfaces';
+import { IAboutData } from 'components/types/interfaces';
 
 const [aboutData1, aboutData2]: IAboutData[] = about.aboutData;
 

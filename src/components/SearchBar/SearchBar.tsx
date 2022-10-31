@@ -1,8 +1,8 @@
 import React, { ChangeEvent, ReactNode, useCallback, useEffect, useState } from 'react';
 import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
-import { Data } from 'components/utilities/types';
-import { IContentItem } from 'components/utilities/interfaces';
+import { Data } from 'components/types/types';
+import { IContentItem } from 'components/types/interfaces';
 import { ErrorMessage, StatusCode } from 'components/utilities/enums';
 import { BASIC_URL, KEY } from 'components/utilities/utils';
 

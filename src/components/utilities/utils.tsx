@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { links } from 'App/App';
-import { Links } from 'components/utilities/types';
+import { Links } from 'components/types/types';
 import React from 'react';
 
 export const BASIC_URL = 'https://gnews.io/api/v4/search';

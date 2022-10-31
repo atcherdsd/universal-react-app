@@ -1,5 +1,5 @@
 import IcoModalExit from 'components/IcoModalExit/IcoModalExit';
-import { IModalProps } from 'components/utilities/interfaces';
+import { IModalProps } from 'components/types/interfaces';
 import { decodeHtmlCharCodes } from 'components/utilities/utils';
 import React, { RefObject, useEffect, useRef } from 'react';
 import './Modal.css';

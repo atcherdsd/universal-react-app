@@ -1,4 +1,4 @@
-import { Positions } from 'components/utilities/types';
+import { Positions } from 'components/types/types';
 import React, { ReactNode } from 'react';
 import './Card.css';
 

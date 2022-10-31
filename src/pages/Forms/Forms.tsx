@@ -1,6 +1,6 @@
 import Form from 'components/Form/Form';
 import OrdersList from 'components/OrdersList/OrdersList';
-import { InitialData } from 'components/utilities/types';
+import { InitialData } from 'components/types/types';
 import React, { useState } from 'react';
 import './Forms.css';
 

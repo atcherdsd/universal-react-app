@@ -1,7 +1,7 @@
 import React, { ReactNode, RefObject, useRef } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
-import { InitialData, FormData, Country } from 'components/utilities/types';
+import { InitialData, FormData, Country } from 'components/types/types';
 import { useForm } from 'react-hook-form';
 
 function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element {
