@@ -8,7 +8,7 @@ import { BASIC_URL, KEY } from 'components/utilities/utils';
 
 function SearchBar(): JSX.Element {
   const [searchValueApi, setSearchValueApi] = useState(
-    (localStorage.getItem('searchValueApi') as string) || ''
+    localStorage.getItem('searchValueApi') || ''
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
