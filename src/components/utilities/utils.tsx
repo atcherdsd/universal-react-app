@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { links } from 'App/App';
-import { Links } from 'components/types/types';
+import { Data, Links } from 'components/types/types';
 import React from 'react';
+import { StatusCode, ErrorMessage } from 'components/types/enums';
+import { IContentItem } from 'components/types/interfaces';
+import { ApiActions, Types } from 'store/reducers';
 
 export const BASIC_URL = 'https://gnews.io/api/v4/search';
 export const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
@@ -27,3 +30,42 @@ export const decodeHtmlCharCodes = (str: string): string =>
     .replace(/&amp;/g, '&')
     .replace(/&reg;/g, '®')
     .replace(/&trade;/g, '™');
+
+export const fetchData = async (
+  searchValueApi: string,
+  dispatch: (value: ApiActions) => void,
+  setError: (value: React.SetStateAction<string>) => void,
+  setIsLoading: (value: React.SetStateAction<boolean>) => void,
+  apiData: {
+    articles: Data[];
+  }
+): Promise<void> => {
+  try {
+    const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValueApi}`);
+    switch (response.status.toString()) {
+      case StatusCode.BadRequest:
+        throw new Error(ErrorMessage.BadRequest);
+      case StatusCode.Unauthorized:
+        throw new Error(ErrorMessage.Unauthorized);
+      case StatusCode.Forbidden:
+        throw new Error(ErrorMessage.Forbidden);
+      case StatusCode.TooManyRequests:
+        throw new Error(ErrorMessage.TooManyRequests);
+      case StatusCode.InternalServerError:
+        throw new Error(ErrorMessage.InternalServerError);
+    }
+    if (!response.ok) throw Error(ErrorMessage.AnotherError);
+    const data: IContentItem = await response.json();
+    dispatch({
+      type: Types.SetNewsData,
+      payload: {
+        ...apiData,
+        articles: data.articles,
+      },
+    });
+  } catch (err) {
+    setError((err as Error).message);
+  } finally {
+    setIsLoading(false);
+  }
+};

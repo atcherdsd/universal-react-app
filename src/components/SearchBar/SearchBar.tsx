@@ -1,24 +1,23 @@
-import React, { ChangeEvent, ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
-import { Data } from 'components/types/types';
-import { IContentItem } from 'components/types/interfaces';
-import { ErrorMessage, StatusCode } from 'components/types/enums';
-import { BASIC_URL, KEY } from 'components/utilities/utils';
+// import { IContentItem } from 'components/types/interfaces';
+// import { ErrorMessage, StatusCode } from 'components/types/enums';
+import { fetchData } from 'components/utilities/utils';
+import { ApiContext } from 'store/context';
+import { Types } from 'store/reducers';
 
 function SearchBar(): JSX.Element {
-  const [searchValueApi, setSearchValueApi] = useState(
-    localStorage.getItem('searchValueApi') || ''
-  );
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { state, searchValueApi, setSearchValueApi, dispatch } = useContext(ApiContext);
+  const { apiData } = state.apiStateData;
 
-  const [contentItem, setContentItem] = useState({
-    articles: [] as Data[],
-  } as IContentItem);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
   function searchText(event: { target: { value: string } }): void {
-    setSearchValueApi(event.target.value);
+    const value = event.target.value;
+    dispatch({ type: Types.SearchNews, payload: value });
+    setSearchValueApi(value);
   }
   function setLocalStorage(): void {
     localStorage.setItem('searchValueApi', searchValueApi);
@@ -26,41 +25,29 @@ function SearchBar(): JSX.Element {
   useEffect(setLocalStorage, [searchValueApi]);
 
   const handleFormSubmit = useCallback(
-    async (event: ChangeEvent<HTMLFormElement>): Promise<void> => {
+    (event: ChangeEvent<HTMLFormElement>) => {
       event.preventDefault();
-      setContentItem({ articles: [] as Data[] });
       setIsLoading(true);
       setError('');
 
-      try {
-        const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValueApi}`);
-        switch (response.status.toString()) {
-          case StatusCode.BadRequest:
-            throw new Error(ErrorMessage.BadRequest);
-          case StatusCode.Unauthorized:
-            throw new Error(ErrorMessage.Unauthorized);
-          case StatusCode.Forbidden:
-            throw new Error(ErrorMessage.Forbidden);
-          case StatusCode.TooManyRequests:
-            throw new Error(ErrorMessage.TooManyRequests);
-          case StatusCode.InternalServerError:
-            throw new Error(ErrorMessage.InternalServerError);
-        }
-        if (!response.ok) throw Error(ErrorMessage.AnotherError);
-        const data: IContentItem = await response.json();
-        setContentItem(data);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setIsLoading(false);
-      }
+      fetchData(searchValueApi, dispatch, setError, setIsLoading, apiData);
     },
-    [searchValueApi]
+    [apiData, dispatch, searchValueApi]
   );
 
-  useEffect(() => {
-    return function clean() {};
-  }, []);
+  // useEffect(() => {
+  //   const inputValue = localStorage.getItem('searchValueApi');
+  //   console.log('inputValue: ', inputValue);
+  //   if (inputValue) {
+  //     setIsLoading(true);
+  //     setError('');
+  //     fetchData(searchValueApi, dispatch, setError, setIsLoading, apiData);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+  // useEffect(() => {
+  //   return function clean() {};
+  // }, []);
 
   return (
     <>
@@ -90,8 +77,8 @@ function SearchBar(): JSX.Element {
       <div className="SearchBar-results">
         {isLoading && <div className="SearchBar-loader"></div>}
         {error && <div className="SearchBar-error">{error}</div>}
-        {contentItem.articles.length > 0 &&
-          contentItem.articles.map((item): ReactNode => {
+        {apiData.articles.length > 0 &&
+          apiData.articles.map((item): ReactNode => {
             return (
               <SearchResult
                 key={item.url}
@@ -104,7 +91,7 @@ function SearchBar(): JSX.Element {
               />
             );
           })}
-        {!isLoading && !error && !contentItem.articles.length && (
+        {!isLoading && !error && !apiData.articles.length && (
           <p className="SearchBar-warning">List of articles is empty</p>
         )}
       </div>

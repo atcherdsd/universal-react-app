@@ -1,17 +1,44 @@
-import { IContentItem } from 'components/types/interfaces';
-import { Data } from 'components/types/types';
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, ReactNode, Dispatch, useReducer, useState } from 'react';
+import { ApiActions, apiReducer, ApiState } from './reducers';
 
-const initialState = { articles: [] };
-const ApiContext = createContext<IContentItem>(initialState);
+type InitialStateType = { apiStateData: ApiState };
 
-const ApiProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [contentItem] = useState({
-    articles: [] as Data[],
-  } as IContentItem);
-
-  return <ApiContext.Provider value={contentItem}>{children}</ApiContext.Provider>;
+type ContextType = {
+  state: InitialStateType;
+  searchValueApi: string;
+  setSearchValueApi: (v: string) => void;
+  dispatch: Dispatch<ApiActions>;
 };
 
-export default ApiContext;
-ApiProvider;
+const initialState = {
+  apiStateData: {
+    searchValueApi: '', // change to LS
+    apiData: { articles: [] },
+  } as ApiState,
+};
+const ApiContext = createContext<ContextType>({
+  state: initialState,
+  searchValueApi: '',
+  setSearchValueApi: () => {},
+  dispatch: () => null,
+});
+
+const reducer = ({ apiStateData }: InitialStateType, action: ApiActions) => ({
+  apiStateData: apiReducer(apiStateData, action),
+});
+
+const ApiProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [searchValueApi, setSearchValueApi] = useState(
+    localStorage.getItem('searchValueApi') || ''
+  );
+
+  return (
+    <ApiContext.Provider value={{ state, searchValueApi, setSearchValueApi, dispatch }}>
+      {children}
+    </ApiContext.Provider>
+  );
+};
+
+export { ApiContext, ApiProvider };
