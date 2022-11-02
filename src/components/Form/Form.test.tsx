@@ -117,18 +117,18 @@ describe('Form component', () => {
         render(
           <OrderCard
             key=""
-            gender=""
-            firstName=""
-            lastName=""
-            email=""
-            birthday=""
-            file=""
-            promotions=""
-            personalData=""
-            bonusProgram=""
-            country=""
-            zipCode=""
-            deliveryDate=""
+            // gender=""
+            // firstName=""
+            // lastName=""
+            // email=""
+            // birthday=""
+            // file=""
+            // promotions=""
+            // personalData=""
+            // bonusProgram=""
+            // country=""
+            // zipCode=""
+            // deliveryDate=""
           />
         )
       );

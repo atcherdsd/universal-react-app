@@ -1,28 +1,29 @@
-import React, { ReactNode, RefObject, useRef } from 'react';
+import React, { ReactNode, RefObject, useContext, useRef } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
-import { InitialData, FormData, Country } from 'components/types/types';
+import { FormData, Country } from 'components/types/types';
 import { useForm } from 'react-hook-form';
+import { AppContext } from 'store/context';
+import { Types } from 'store/reducers';
 
-function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element {
+function Form(props: { addData: (orderCard: FormData) => void }): JSX.Element {
+  const { state, dispatch } = useContext(AppContext);
+
+  const handleData = props.addData;
+  console.log('plug: ', handleData);
+
+  const initialFieldsValues = state.formStateData.formData;
+  const cardsGroup = state.formStateData.formDataGroup;
+  const buttonStatus = state.formStateData.isDisabledButton;
+
+  console.log('initialFieldsValues: ', initialFieldsValues);
+  console.log('cardsGroup: ', cardsGroup);
+  console.log('buttonStatus: ', buttonStatus);
+
   let formData = {} as FormData;
 
   function clearFormData() {
-    formData = {
-      key: '',
-      gender: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      birthday: '',
-      file: '',
-      promotions: '',
-      personalData: '',
-      bonusProgram: '',
-      country: 'country',
-      zipCode: '',
-      deliveryDate: '',
-    };
+    formData = initialFieldsValues;
   }
   const formRef = useRef() as RefObject<HTMLFormElement>;
 
@@ -43,7 +44,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
     formState: { errors },
     handleSubmit,
   } = useForm({
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
 
   const regexpName = /(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/;
@@ -51,14 +52,26 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
   const stringNow: string = new Date().toString();
   const regexpImage = /\.(png|svg|jpe?g|jpg|gif|ico)$/i;
 
+  const disableSubmitButton = () => {
+    if (
+      state.formStateData.isDisabledButton ||
+      errors.firstName ||
+      errors.lastName ||
+      errors.email ||
+      errors.promotions ||
+      errors.country ||
+      errors.zipCode ||
+      errors.deliveryDate
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   function generateChangeHandler<T extends keyof FormData>(propertyName: T) {
     return (event: { target: { value: FormData[T] } }) => {
       formData[propertyName] = event.target.value;
-
-      (formRef.current!.elements[14] as HTMLInputElement).disabled = false;
-      if (Object.keys(errors).length > 0)
-        (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
-      else (formRef.current!.elements[14] as HTMLInputElement).disabled = false;
     };
   }
 
@@ -81,9 +94,9 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
   const handleFileChange = (): string => {
     if ((formRef.current!.elements[6] as HTMLInputElement).files!.length) {
       formData.file = (formRef.current!.elements[6] as HTMLInputElement).files![0].name;
-      (formRef.current!.elements[14] as HTMLInputElement).disabled = false;
+      dispatch({ type: Types.EnableSubmit });
     } else {
-      (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
+      dispatch({ type: Types.DisableSubmit });
       formData.file = 'No data';
     }
     return formData.file;
@@ -117,11 +130,14 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
 
     const newCard = { ...formData };
 
-    props.addData(newCard);
+    console.log('buttonStatus in handleSubmit: ', buttonStatus);
+    dispatch({ type: Types.AddFormCard, payload: newCard });
+    dispatch({ type: Types.ChangeForm, payload: newCard });
+    // props.addData(newCard);
     alert('Your data has been successfully saved');
     clearFormData();
     clearFilledForm();
-    (formRef.current!.elements[14] as HTMLInputElement).disabled = true;
+    dispatch({ type: Types.DisableSubmit });
   }
 
   return (
@@ -130,6 +146,7 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
         <hr className="Form-line"></hr>
         <form
           className="Form-content__container"
+          onChange={() => dispatch({ type: Types.EnableSubmit })}
           onSubmit={handleSubmit(handleFormSubmit)}
           ref={formRef}
         >
@@ -385,7 +402,12 @@ function Form(props: { addData: (orderCard: InitialData) => void }): JSX.Element
               </div>
             </div>
           </div>
-          <input type="submit" className="Form-submit" value="Submit" disabled />
+          <input
+            type="submit"
+            className="Form-submit"
+            value="Submit"
+            disabled={disableSubmitButton()}
+          />
         </form>
         <hr className="Form-line"></hr>
       </section>

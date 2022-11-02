@@ -4,11 +4,11 @@ import SearchResult from 'components/SearchResult/SearchResult';
 // import { IContentItem } from 'components/types/interfaces';
 // import { ErrorMessage, StatusCode } from 'components/types/enums';
 import { fetchData } from 'components/utilities/utils';
-import { ApiContext } from 'store/context';
+import { AppContext } from 'store/context';
 import { Types } from 'store/reducers';
 
 function SearchBar(): JSX.Element {
-  const { state, searchValueApi, setSearchValueApi, dispatch } = useContext(ApiContext);
+  const { state, searchValueApi, setSearchValueApi, dispatch } = useContext(AppContext);
   const { apiData } = state.apiStateData;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -45,9 +45,9 @@ function SearchBar(): JSX.Element {
   //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
-  // useEffect(() => {
-  //   return function clean() {};
-  // }, []);
+  useEffect(() => {
+    return function clean() {};
+  }, []);
 
   return (
     <>

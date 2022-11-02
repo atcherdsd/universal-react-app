@@ -1,8 +1,14 @@
-import { InitialData } from 'components/types/types';
-import React from 'react';
+// import { FormData } from 'components/types/types';
+import React, { useContext } from 'react';
+import { AppContext } from 'store/context';
 import './OrderCard.css';
 
-function OrderCard(props: InitialData): JSX.Element {
+function OrderCard(): JSX.Element {
+  const { state } = useContext(AppContext);
+
+  const props = state.formStateData.formData;
+  console.log('what in card: ', props);
+
   return (
     <div className="OrderCard-container">
       <h2 className="OrderCard-title">Accepted order</h2>

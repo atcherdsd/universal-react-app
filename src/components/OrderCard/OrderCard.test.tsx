@@ -4,23 +4,7 @@ import OrderCard from './OrderCard';
 
 describe('OrderCard component', () => {
   test('shold render OrderCard component', () => {
-    render(
-      <OrderCard
-        key=""
-        gender=""
-        firstName=""
-        lastName=""
-        email=""
-        birthday=""
-        file=""
-        promotions=""
-        personalData=""
-        bonusProgram=""
-        country=""
-        zipCode=""
-        deliveryDate=""
-      />
-    );
+    render(<OrderCard key="" />);
     expect(screen.getAllByText(/accepted/i)[0]).toBeInTheDocument();
     expect(screen.getByRole('heading')).toBeInTheDocument();
 
@@ -29,43 +13,11 @@ describe('OrderCard component', () => {
     expect(screen.getByText(/Delivery date:/i)).toBeInTheDocument();
   });
   it('Classes are available', () => {
-    render(
-      <OrderCard
-        key=""
-        gender=""
-        firstName=""
-        lastName=""
-        email=""
-        birthday=""
-        file=""
-        promotions=""
-        personalData=""
-        bonusProgram=""
-        country=""
-        zipCode=""
-        deliveryDate=""
-      />
-    );
+    render(<OrderCard key="" />);
     expect(screen.getAllByRole('generic')[2]).toHaveClass('OrderCard-item');
   });
   test('OrderCard component do not have data', () => {
-    render(
-      <OrderCard
-        key=""
-        gender=""
-        firstName=""
-        lastName=""
-        email=""
-        birthday=""
-        file=""
-        promotions=""
-        personalData=""
-        bonusProgram=""
-        country=""
-        zipCode=""
-        deliveryDate=""
-      />
-    );
+    render(<OrderCard key="" />);
     expect(screen.queryByText(/samsung/i)).toBeNull();
     expect(screen.queryByRole('img')).toBeNull();
   });

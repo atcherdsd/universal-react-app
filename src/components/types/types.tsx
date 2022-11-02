@@ -19,7 +19,7 @@ export type Positions = {
   };
 };
 
-export type InitialData = {
+export type FormData = {
   key: string;
   gender: string;
   firstName: string;
@@ -34,8 +34,6 @@ export type InitialData = {
   zipCode: string;
   deliveryDate: string;
 };
-
-export type FormData = InitialData;
 
 export type Country = {
   name: string;

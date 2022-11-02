@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import Api from 'pages/Api/Api';
 import { Links } from 'components/types/types';
 import { IRoutes } from 'components/types/interfaces';
+import { AppProvider } from 'store/context';
 
 export const links: Links = {
   main: '/',
@@ -42,7 +43,7 @@ const routes: IRoutes[] = [
 
 function App(): JSX.Element {
   return (
-    <>
+    <AppProvider>
       <div className="App">
         <Header sitename="smartphone universe" links={links} />
       </div>
@@ -52,7 +53,7 @@ function App(): JSX.Element {
           <Route key={route.path} path={route.path} element={<route.element />} />
         ))}
       </Routes>
-    </>
+    </AppProvider>
   );
 }
 
