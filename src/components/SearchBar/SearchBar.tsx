@@ -1,15 +1,13 @@
 import React, { ChangeEvent, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
-// import { IContentItem } from 'components/types/interfaces';
-// import { ErrorMessage, StatusCode } from 'components/types/enums';
 import { fetchData } from 'components/utilities/utils';
 import { AppContext } from 'store/context';
 import { Types } from 'store/reducers';
 
 function SearchBar(): JSX.Element {
-  const { state, searchValueApi, setSearchValueApi, dispatch } = useContext(AppContext);
-  const { apiData } = state.apiStateData;
+  const { state, dispatch } = useContext(AppContext);
+  const { apiData, searchValueApi } = state.apiStateData;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -17,12 +15,7 @@ function SearchBar(): JSX.Element {
   function searchText(event: { target: { value: string } }): void {
     const value = event.target.value;
     dispatch({ type: Types.SearchNews, payload: value });
-    setSearchValueApi(value);
   }
-  function setLocalStorage(): void {
-    localStorage.setItem('searchValueApi', searchValueApi);
-  }
-  useEffect(setLocalStorage, [searchValueApi]);
 
   const handleFormSubmit = useCallback(
     (event: ChangeEvent<HTMLFormElement>) => {
@@ -35,16 +28,6 @@ function SearchBar(): JSX.Element {
     [apiData, dispatch, searchValueApi]
   );
 
-  // useEffect(() => {
-  //   const inputValue = localStorage.getItem('searchValueApi');
-  //   console.log('inputValue: ', inputValue);
-  //   if (inputValue) {
-  //     setIsLoading(true);
-  //     setError('');
-  //     fetchData(searchValueApi, dispatch, setError, setIsLoading, apiData);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
   useEffect(() => {
     return function clean() {};
   }, []);

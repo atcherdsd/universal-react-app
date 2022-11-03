@@ -1,5 +1,5 @@
 import { FormData } from 'components/types/types';
-import React, { createContext, ReactNode, Dispatch, useReducer, useState } from 'react';
+import React, { createContext, ReactNode, Dispatch, useReducer } from 'react';
 import { ApiActions, apiReducer, ApiState, FormActions, formReducer, FormState } from './reducers';
 
 type InitialStateType = {
@@ -9,14 +9,12 @@ type InitialStateType = {
 
 type ContextType = {
   state: InitialStateType;
-  searchValueApi: string;
-  setSearchValueApi: (v: string) => void;
   dispatch: Dispatch<ApiActions | FormActions>;
 };
 
 const initialState = {
   apiStateData: {
-    searchValueApi: '', // change to LS
+    searchValueApi: '',
     apiData: { articles: [] },
   } as ApiState,
 
@@ -42,8 +40,6 @@ const initialState = {
 };
 const AppContext = createContext<ContextType>({
   state: initialState,
-  searchValueApi: '',
-  setSearchValueApi: () => {},
   dispatch: () => null,
 });
 
@@ -58,15 +54,7 @@ const reducer = (
 const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const [searchValueApi, setSearchValueApi] = useState(
-    localStorage.getItem('searchValueApi') || ''
-  );
-
-  return (
-    <AppContext.Provider value={{ state, searchValueApi, setSearchValueApi, dispatch }}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 };
 
 export { AppContext, AppProvider };
