@@ -2,13 +2,18 @@ import { NavLink } from 'react-router-dom';
 import { links } from 'App/App';
 import { Data, Links } from 'components/types/types';
 import React from 'react';
-import { StatusCode, ErrorMessage, SortByType } from 'components/types/enums';
+import {
+  StatusCode,
+  ErrorMessage,
+  SortByType,
+  FilterByCountry,
+  FilterByLanguage,
+} from 'components/types/enums';
 import { IContentItem } from 'components/types/interfaces';
 import { ApiActions, Types } from 'store/reducers';
 
 export const BASIC_URL = 'https://gnews.io/api/v4/search';
 export const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
-// export const KEY = '';
 
 export const makeListItems = (object: Links, elem: string, index: number): JSX.Element => {
   const item: string = Object.values(object)[index];
@@ -40,12 +45,13 @@ export const fetchData = async (
   apiData: {
     articles: Data[];
     sortBy: SortByType;
+    filterByCountry: FilterByCountry;
+    filterByLanguage: FilterByLanguage;
   }
 ): Promise<void> => {
   try {
-    const response = await fetch(
-      `${BASIC_URL}?token=${KEY}&q=${searchValueApi}&sortby=${apiData.sortBy}`
-    );
+    const queryParameters = `&sortby=${apiData.sortBy}&lang=${apiData.filterByLanguage}&country=${apiData.filterByCountry}`;
+    const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValueApi}${queryParameters}`);
     switch (response.status.toString()) {
       case StatusCode.BadRequest:
         throw new Error(ErrorMessage.BadRequest);

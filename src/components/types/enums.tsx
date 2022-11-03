@@ -18,3 +18,20 @@ export enum SortByType {
   date = 'publishedAt',
   relevance = 'relevance',
 }
+export enum FilterByCountry {
+  Australia = 'au',
+  Canada = 'ca',
+  France = 'fr',
+  Germany = 'de',
+  HongKong = 'hk',
+  India = 'in',
+  Japan = 'jp',
+  UnitedState = 'us',
+}
+export enum FilterByLanguage {
+  English = 'en',
+  French = 'fr',
+  German = 'de',
+  Hindi = 'hi',
+  Japanese = 'ja',
+}

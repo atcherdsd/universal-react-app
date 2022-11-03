@@ -27,7 +27,7 @@
     text-align: center;
     margin: 0 auto;
     border-radius: 0.875rem;
-    height: 2rem;
+    height: 2.3rem;
 }
 .SearchBar-title {
     color: #61dafb;
@@ -68,14 +68,14 @@
 .SearchBar-sort__wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     color: #3677ab;
-    border: 0.1rem solid;
+    background: #e1e9e9;
     border-radius: 2rem;
     max-width: 80%;
     position: relative;
-    justify-content: center;
+    justify-content: space-evenly;
     margin: 0 auto;
+    gap: 2rem;
 }
 .SearchBar-sort {
     display: flex;
@@ -85,17 +85,17 @@
     margin: 1rem 0;
 }
 .SearchBar-search__label {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 .SearchBar-select {
-    width: 10rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     padding: 0.5rem;
     border: 0.1rem solid #389cb7;
     border-radius: 1rem;
     outline: none;
     cursor: pointer;
     color: #389cb7;
+    text-align: center;
 }
 .SearchBar-select:hover {
     background: whitesmoke;
@@ -108,7 +108,7 @@
     padding: 0.6rem;
     color: #fff;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     width: 7rem;
     margin: 0 auto;
 }
@@ -145,5 +145,12 @@
         transform: rotate(0deg);
     }to{
         transform: rotate(360deg);
+    }
+}
+
+@media(max-width: 800px) {
+    .SearchBar-sort__wrapper {
+        gap: 0.5rem;
+        padding: 0 1rem;
     }
 }

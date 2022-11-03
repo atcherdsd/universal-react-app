@@ -12,6 +12,24 @@ function SearchBar(): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
+  const availableCountries = {
+    Australia: 'au',
+    Canada: 'ca',
+    France: 'fr',
+    Germany: 'de',
+    'Hong Kong': 'hk',
+    India: 'in',
+    Japan: 'jp',
+    'United States': 'us',
+  };
+  const availableLanguages = {
+    English: 'en',
+    French: 'fr',
+    German: 'de',
+    Hindi: 'hi',
+    Japanese: 'ja',
+  };
+
   function searchText(event: { target: { value: string } }): void {
     const value = event.target.value;
     dispatch({ type: Types.SearchNews, payload: value });
@@ -63,7 +81,30 @@ function SearchBar(): JSX.Element {
           <input type="submit" className="SearchBar-submit" value="Search" disabled={isLoading} />
           <div className="SearchBar-sort__wrapper">
             <div className="SearchBar-sort">
-              <label className="SearchBar-search__label">Sort by </label>
+              <label className="SearchBar-search__label">Choose a country</label>
+              <select
+                name="filterByCountry"
+                className="SearchBar-select"
+                onChange={handleChangeSelect}
+                value={apiData.filterByCountry}
+              >
+                {Object.entries(availableCountries).map(([key, value]): ReactNode => {
+                  return (
+                    <option className="SearchBar__item" value={value} key={key}>
+                      {key}
+                    </option>
+                  );
+                })}
+              </select>
+              <input
+                type="submit"
+                className="SearchBar-submit__select"
+                value="Submit"
+                disabled={isLoading}
+              />
+            </div>
+            <div className="SearchBar-sort">
+              <label className="SearchBar-search__label">Sort by</label>
               <select
                 name="sortBy"
                 className="SearchBar-select"
@@ -76,6 +117,29 @@ function SearchBar(): JSX.Element {
                 <option className="SearchBar__item" value="relevance">
                   Relevance
                 </option>
+              </select>
+              <input
+                type="submit"
+                className="SearchBar-submit__select"
+                value="Submit"
+                disabled={isLoading}
+              />
+            </div>
+            <div className="SearchBar-sort">
+              <label className="SearchBar-search__label">Choose language</label>
+              <select
+                name="filterByLanguage"
+                className="SearchBar-select"
+                onChange={handleChangeSelect}
+                value={apiData.filterByLanguage}
+              >
+                {Object.entries(availableLanguages).map(([key, value]): ReactNode => {
+                  return (
+                    <option className="SearchBar__item" value={value} key={value}>
+                      {key}
+                    </option>
+                  );
+                })}
               </select>
               <input
                 type="submit"

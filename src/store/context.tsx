@@ -1,4 +1,4 @@
-import { SortByType } from 'components/types/enums';
+import { FilterByCountry, FilterByLanguage, SortByType } from 'components/types/enums';
 import { FormData } from 'components/types/types';
 import React, { createContext, ReactNode, Dispatch, useReducer } from 'react';
 import { ApiActions, apiReducer, ApiState, FormActions, formReducer, FormState } from './reducers';
@@ -16,7 +16,12 @@ type ContextType = {
 const initialState = {
   apiStateData: {
     searchValueApi: '',
-    apiData: { articles: [], sortBy: SortByType.date },
+    apiData: {
+      articles: [],
+      sortBy: SortByType.date,
+      filterByCountry: FilterByCountry.Australia,
+      filterByLanguage: FilterByLanguage.English,
+    },
   } as ApiState,
 
   formStateData: {

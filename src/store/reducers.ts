@@ -1,4 +1,4 @@
-import { SortByType } from 'components/types/enums';
+import { FilterByCountry, FilterByLanguage, SortByType } from 'components/types/enums';
 import { Data, FormData } from 'components/types/types';
 
 export enum Types {
@@ -17,6 +17,8 @@ export type ApiState = {
   apiData: {
     articles: Data[];
     sortBy: SortByType;
+    filterByCountry: FilterByCountry;
+    filterByLanguage: FilterByLanguage;
   };
 };
 
@@ -27,6 +29,8 @@ export type ApiActions =
       payload: {
         articles: Data[];
         sortBy: SortByType;
+        filterByCountry: FilterByCountry;
+        filterByLanguage: FilterByLanguage;
       };
     };
 
