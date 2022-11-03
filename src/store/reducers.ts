@@ -1,3 +1,4 @@
+import { SortByType } from 'components/types/enums';
 import { Data, FormData } from 'components/types/types';
 
 export enum Types {
@@ -15,6 +16,7 @@ export type ApiState = {
   searchValueApi: string;
   apiData: {
     articles: Data[];
+    sortBy: SortByType;
   };
 };
 
@@ -24,6 +26,7 @@ export type ApiActions =
       type: Types.SetNewsData;
       payload: {
         articles: Data[];
+        sortBy: SortByType;
       };
     };
 

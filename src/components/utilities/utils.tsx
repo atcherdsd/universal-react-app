@@ -2,12 +2,13 @@ import { NavLink } from 'react-router-dom';
 import { links } from 'App/App';
 import { Data, Links } from 'components/types/types';
 import React from 'react';
-import { StatusCode, ErrorMessage } from 'components/types/enums';
+import { StatusCode, ErrorMessage, SortByType } from 'components/types/enums';
 import { IContentItem } from 'components/types/interfaces';
 import { ApiActions, Types } from 'store/reducers';
 
 export const BASIC_URL = 'https://gnews.io/api/v4/search';
 export const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
+// export const KEY = '';
 
 export const makeListItems = (object: Links, elem: string, index: number): JSX.Element => {
   const item: string = Object.values(object)[index];
@@ -38,10 +39,13 @@ export const fetchData = async (
   setIsLoading: (value: React.SetStateAction<boolean>) => void,
   apiData: {
     articles: Data[];
+    sortBy: SortByType;
   }
 ): Promise<void> => {
   try {
-    const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValueApi}`);
+    const response = await fetch(
+      `${BASIC_URL}?token=${KEY}&q=${searchValueApi}&sortby=${apiData.sortBy}`
+    );
     switch (response.status.toString()) {
       case StatusCode.BadRequest:
         throw new Error(ErrorMessage.BadRequest);

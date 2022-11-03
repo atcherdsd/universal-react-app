@@ -27,6 +27,14 @@ function SearchBar(): JSX.Element {
     },
     [apiData, dispatch, searchValueApi]
   );
+  const handleChangeSelect = (event: ChangeEvent<HTMLSelectElement>) => {
+    const sortValue = event.target.value;
+    const name = event.target.name;
+    dispatch({
+      type: Types.SetNewsData,
+      payload: { ...apiData, [name]: sortValue },
+    });
+  };
 
   useEffect(() => {
     return function clean() {};
@@ -53,6 +61,30 @@ function SearchBar(): JSX.Element {
             </label>
           </div>
           <input type="submit" className="SearchBar-submit" value="Search" disabled={isLoading} />
+          <div className="SearchBar-sort__wrapper">
+            <div className="SearchBar-sort">
+              <label className="SearchBar-search__label">Sort by </label>
+              <select
+                name="sortBy"
+                className="SearchBar-select"
+                onChange={handleChangeSelect}
+                value={apiData.sortBy}
+              >
+                <option className="SearchBar__item" value="publishedAt">
+                  Date
+                </option>
+                <option className="SearchBar__item" value="relevance">
+                  Relevance
+                </option>
+              </select>
+              <input
+                type="submit"
+                className="SearchBar-submit__select"
+                value="Submit"
+                disabled={isLoading}
+              />
+            </div>
+          </div>
         </form>
 
         <hr className="SearchBar-line"></hr>

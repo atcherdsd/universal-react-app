@@ -13,6 +13,10 @@
     background: linear-gradient(90deg,transparent 0,#d8d8d8 5%,#61dafb 95%,transparent);
     margin: 0 0 1rem;
 }
+
+.SearchBar-content__container {
+    margin-bottom: 1.5rem;
+}
 .SearchBar-field {
     display: flex;
     justify-content: center;
@@ -54,10 +58,59 @@
     font-size: 1.3rem;
     width: 9rem;
 }
-.SearchBar-submit:hover {
+.SearchBar-submit:hover,
+.SearchBar-submit__select:hover {
     color: #800038;
     background-color: bisque;
     transition: 0.2s;
+}
+
+.SearchBar-sort__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #3677ab;
+    border: 0.1rem solid;
+    border-radius: 2rem;
+    max-width: 80%;
+    position: relative;
+    justify-content: center;
+    margin: 0 auto;
+}
+.SearchBar-sort {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.SearchBar-search__label {
+    font-size: 1.5rem;
+}
+.SearchBar-select {
+    width: 10rem;
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    border: 0.1rem solid #389cb7;
+    border-radius: 1rem;
+    outline: none;
+    cursor: pointer;
+    color: #389cb7;
+}
+.SearchBar-select:hover {
+    background: whitesmoke;
+    transition: 0.2s;
+}
+.SearchBar-submit__select {
+    cursor: pointer;
+    background-color: #61dafb;
+    border-radius: 0.6rem;
+    padding: 0.6rem;
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    width: 7rem;
+    margin: 0 auto;
 }
 
 .SearchBar-results {

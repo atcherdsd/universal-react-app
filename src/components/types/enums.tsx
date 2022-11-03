@@ -13,3 +13,8 @@ export enum ErrorMessage {
   InternalServerError = 'We had a problem with our server. Try again later',
   AnotherError = 'Server error. Try again later',
 }
+
+export enum SortByType {
+  date = 'publishedAt',
+  relevance = 'relevance',
+}
