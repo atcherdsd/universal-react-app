@@ -6,7 +6,7 @@ import OrderCard from 'components/OrderCard/OrderCard';
 
 describe('Form component', () => {
   test('should render Form component', () => {
-    render(<Form addData={function addData(): void {}} />);
+    render(<Form />);
 
     const section = document.querySelector('.Form-container');
     expect(section).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('Form component', () => {
     expect(screen.getByText(/Delivery date/i)).toBeInTheDocument();
   });
   it('onChange works', () => {
-    render(<Form addData={function addData(): void {}} />);
+    render(<Form />);
 
     const firstNameInput = screen.getAllByRole('textbox')[0];
     const lastNameInput = screen.getAllByRole('textbox')[1];
@@ -59,7 +59,7 @@ describe('Form component', () => {
     expect(error).toBeInTheDocument();
   });
   it('should render radio inputs', () => {
-    render(<Form addData={function addData(): void {}} />);
+    render(<Form />);
     const radioInputs = screen.getAllByRole('radio') as HTMLInputElement[];
     expect(radioInputs.length).toEqual(4);
     expect(radioInputs[0].value).toBe('Mr');
@@ -68,7 +68,7 @@ describe('Form component', () => {
     expect(radioInputs[3].value).toBe("Don't want receive");
   });
   it('should render date inputs', () => {
-    render(<Form addData={function addData(): void {}} />);
+    render(<Form />);
     const dateInputs = document.querySelectorAll(
       '.Form-input__date'
     ) as NodeListOf<HTMLInputElement>;
@@ -92,7 +92,7 @@ describe('Form component', () => {
     expect(onChangeCheckbox).toHaveBeenCalledTimes(1);
   });
   it('function onChangeCheckbox should work', () => {
-    render(<Form addData={function addData(): void {}} />);
+    render(<Form />);
 
     const checkboxInput1 = screen.getAllByRole('checkbox')[0] as HTMLInputElement;
     const checkboxInput2 = screen.getAllByRole('checkbox')[1] as HTMLInputElement;
@@ -113,25 +113,7 @@ describe('Form component', () => {
     const button = screen.getByRole('button');
     userEvent.click(button);
     act(() => {
-      expect(
-        render(
-          <OrderCard
-            key=""
-            // gender=""
-            // firstName=""
-            // lastName=""
-            // email=""
-            // birthday=""
-            // file=""
-            // promotions=""
-            // personalData=""
-            // bonusProgram=""
-            // country=""
-            // zipCode=""
-            // deliveryDate=""
-          />
-        )
-      );
+      expect(render(<OrderCard key="" />));
     });
 
     userEvent.click(checkboxInput2);
@@ -147,20 +129,20 @@ describe('Form component', () => {
     expect(checkboxInput2).not.toBeChecked();
   });
   it('Сlasses are available', () => {
-    render(<Form addData={function addData(): void {}} />);
+    render(<Form />);
 
     expect(screen.getByRole('combobox')).toHaveClass('Form-select');
     expect(screen.getByRole('button')).toHaveClass('Form-submit');
   });
   it('Styles are available', () => {
-    render(<Form addData={function addData(): void {}} />);
+    render(<Form />);
 
     const inputWrapper = document.querySelector('.Form-control__date') as Element;
     const inputWrapperBorder = window.getComputedStyle(inputWrapper).border;
     expect(inputWrapperBorder).toBeDefined();
   });
   test('Form renders without data', () => {
-    render(<Form addData={function addData(): void {}} />);
+    render(<Form />);
     expect(screen.queryByRole('searchbox')).toBeNull();
     expect(screen.queryByText(/sorry/i)).toBeNull();
 

@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useContext, useRef } from 'react';
+import React, { ReactNode, RefObject, useContext, useEffect, useRef } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
 import { FormData, Country } from 'components/types/types';
@@ -6,24 +6,69 @@ import { useForm } from 'react-hook-form';
 import { AppContext } from 'store/context';
 import { Types } from 'store/reducers';
 
-function Form(props: { addData: (orderCard: FormData) => void }): JSX.Element {
+const initialFormValues: FormData = {
+  key: '',
+  gender: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  birthday: '',
+  file: '',
+  promotions: '',
+  personalData: '',
+  bonusProgram: '',
+  country: 'country',
+  zipCode: '',
+  deliveryDate: '',
+};
+
+function Form(): JSX.Element {
   const { state, dispatch } = useContext(AppContext);
 
-  const handleData = props.addData;
-  console.log('plug: ', handleData);
-
   const initialFieldsValues = state.formStateData.formData;
-  const cardsGroup = state.formStateData.formDataGroup;
-  const buttonStatus = state.formStateData.isDisabledButton;
 
-  console.log('initialFieldsValues: ', initialFieldsValues);
-  console.log('cardsGroup: ', cardsGroup);
-  console.log('buttonStatus: ', buttonStatus);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    getValues,
+    reset,
+  } = useForm<FormData>({
+    mode: 'onSubmit',
+    defaultValues: {
+      key: state.formStateData.formData.key,
+      gender: state.formStateData.formData.gender,
+      firstName: state.formStateData.formData.firstName,
+      lastName: state.formStateData.formData.lastName,
+      email: state.formStateData.formData.email,
+      birthday: state.formStateData.formData.birthday,
+      file: state.formStateData.formData.file,
+      promotions: state.formStateData.formData.promotions,
+      personalData: state.formStateData.formData.personalData,
+      bonusProgram: state.formStateData.formData.bonusProgram,
+      country: state.formStateData.formData.country,
+      zipCode: state.formStateData.formData.zipCode,
+      deliveryDate: state.formStateData.formData.deliveryDate,
+    },
+  });
+
+  useEffect(() => {
+    return () => {
+      const { ...values } = getValues();
+      dispatch({
+        type: Types.ChangeForm,
+        payload: {
+          ...values,
+        },
+      });
+    };
+  }, [dispatch, getValues]);
 
   let formData = {} as FormData;
 
   function clearFormData() {
     formData = initialFieldsValues;
+    reset(initialFormValues);
   }
   const formRef = useRef() as RefObject<HTMLFormElement>;
 
@@ -37,15 +82,8 @@ function Form(props: { addData: (orderCard: FormData) => void }): JSX.Element {
         (elem as HTMLSelectElement).value = 'country';
       }
     });
+    dispatch({ type: Types.ChangeForm, payload: initialFormValues });
   }
-
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm({
-    mode: 'onSubmit',
-  });
 
   const regexpName = /(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/;
   const regexpEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -88,7 +126,7 @@ function Form(props: { addData: (orderCard: FormData) => void }): JSX.Element {
       formData.promotions = (formRef.current!.elements[7] as HTMLInputElement).value;
     else if ((formRef.current!.elements[8] as HTMLInputElement).checked)
       formData.promotions = (formRef.current!.elements[8] as HTMLInputElement).value;
-    else formData.promotions = '';
+
     return formData.promotions;
   };
   const handleFileChange = (): string => {
@@ -129,11 +167,8 @@ function Form(props: { addData: (orderCard: FormData) => void }): JSX.Element {
     formData.deliveryDate = (formRef.current!.elements[13] as HTMLInputElement).value;
 
     const newCard = { ...formData };
-
-    console.log('buttonStatus in handleSubmit: ', buttonStatus);
     dispatch({ type: Types.AddFormCard, payload: newCard });
-    dispatch({ type: Types.ChangeForm, payload: newCard });
-    // props.addData(newCard);
+
     alert('Your data has been successfully saved');
     clearFormData();
     clearFilledForm();
@@ -188,7 +223,7 @@ function Form(props: { addData: (orderCard: FormData) => void }): JSX.Element {
                       required: 'Mandatory field, please enter First Name',
                       pattern: {
                         value: regexpName,
-                        message: 'First Name is invalid',
+                        message: 'First Name is invalid. Use the latin alphabet',
                       },
                       onChange: generateChangeHandler('firstName'),
                     })}
@@ -208,7 +243,7 @@ function Form(props: { addData: (orderCard: FormData) => void }): JSX.Element {
                       required: 'Mandatory field, please enter Last Name',
                       pattern: {
                         value: regexpName,
-                        message: 'Last Name is invalid',
+                        message: 'Last Name is invalid. Use the latin alphabet',
                       },
                       onChange: generateChangeHandler('lastName'),
                     })}
