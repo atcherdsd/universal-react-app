@@ -18,12 +18,12 @@ function SearchBar(): JSX.Element {
   }
 
   const handleFormSubmit = useCallback(
-    (event: ChangeEvent<HTMLFormElement>) => {
+    async (event: ChangeEvent<HTMLFormElement>) => {
       event.preventDefault();
       setIsLoading(true);
       setError('');
 
-      fetchData(searchValueApi, dispatch, setError, setIsLoading, apiData);
+      await fetchData(searchValueApi, dispatch, setError, setIsLoading, apiData);
     },
     [apiData, dispatch, searchValueApi]
   );
