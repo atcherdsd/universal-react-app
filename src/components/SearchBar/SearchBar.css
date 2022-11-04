@@ -73,9 +73,16 @@
     border-radius: 2rem;
     max-width: 80%;
     position: relative;
-    justify-content: space-evenly;
     margin: 0 auto;
-    gap: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+.SearchBar-sort__content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 .SearchBar-sort {
     display: flex;
@@ -100,6 +107,14 @@
 .SearchBar-select:hover {
     background: whitesmoke;
     transition: 0.2s;
+}
+.SearchBar-form__line {
+    border: 0;
+    height: 0.1rem;
+    width: 50%;
+    background: linear-gradient(90deg,transparent 0,#d8d8d8 5%,#61dafb 95%,transparent);
+    margin: 0 0 1rem;
+    align-self: center;
 }
 .SearchBar-submit__select {
     cursor: pointer;
@@ -151,6 +166,6 @@
 @media(max-width: 800px) {
     .SearchBar-sort__wrapper {
         gap: 0.5rem;
-        padding: 0 1rem;
+        padding: 0 1rem 1rem;
     }
 }

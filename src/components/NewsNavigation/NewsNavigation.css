@@ -1,0 +1,40 @@
+.NewsNavigation-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80%;    
+    margin-bottom: 1rem;
+    min-height: 1.5rem;
+}
+.NewsNavigation-content__container {
+    display: flex;
+    flex-wrap: wrap;
+    color: #3677ab;
+    align-items: center;    
+}
+.NewsNavigation-main-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.NewsNavigation-title {
+    min-width: 7.2rem;
+    font-size: 1.4rem;
+}
+.NewsNavigation-number,
+.NewsNavigation-number.active {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    color: #3677ab;
+    border: 0.1rem solid;
+}
+.NewsNavigation-number.active {
+    background: #fff;
+}
+.NewsNavigation-number:hover {
+    background: #fff;
+    transition: 0.2s;
+}

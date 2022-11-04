@@ -4,31 +4,48 @@ import SearchResult from 'components/SearchResult/SearchResult';
 import { fetchData } from 'components/utilities/utils';
 import { AppContext } from 'store/context';
 import { Types } from 'store/reducers';
+import NewsNavigation from 'components/NewsNavigation/NewsNavigation';
+import { NewsCount, PageNumber } from 'components/types/enums';
+import { Data } from 'components/types/types';
+
+const availableCountries = {
+  Australia: 'au',
+  Canada: 'ca',
+  France: 'fr',
+  Germany: 'de',
+  'Hong Kong': 'hk',
+  India: 'in',
+  Japan: 'jp',
+  'United States': 'us',
+};
+const availableLanguages = {
+  English: 'en',
+  French: 'fr',
+  German: 'de',
+  Hindi: 'hi',
+  Japanese: 'ja',
+};
+const availableNewsCountPerPage = {
+  5: '5',
+  10: '10',
+};
+
+const renderOptions = (availableItems: Record<string, string>): ReactNode[] => {
+  return Object.entries(availableItems).map(([key, value]): ReactNode => {
+    return (
+      <option className="SearchBar__item" value={value} key={key}>
+        {key}
+      </option>
+    );
+  });
+};
 
 function SearchBar(): JSX.Element {
   const { state, dispatch } = useContext(AppContext);
-  const { apiData, searchValueApi } = state.apiStateData;
+  const { apiData, searchValueApi, newsCount, pageNumber } = state.apiStateData;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-
-  const availableCountries = {
-    Australia: 'au',
-    Canada: 'ca',
-    France: 'fr',
-    Germany: 'de',
-    'Hong Kong': 'hk',
-    India: 'in',
-    Japan: 'jp',
-    'United States': 'us',
-  };
-  const availableLanguages = {
-    English: 'en',
-    French: 'fr',
-    German: 'de',
-    Hindi: 'hi',
-    Japanese: 'ja',
-  };
 
   function searchText(event: { target: { value: string } }): void {
     const value = event.target.value;
@@ -52,6 +69,25 @@ function SearchBar(): JSX.Element {
       type: Types.SetNewsData,
       payload: { ...apiData, [name]: sortValue },
     });
+  };
+  const handleNewsCount = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    dispatch({ type: Types.SetNewsCount, payload: value });
+    dispatch({ type: Types.SetPageNumber, payload: PageNumber.One });
+  };
+
+  let workedArticlesList: Data[];
+  const setOutputData = (): Data[] => {
+    if (newsCount === NewsCount.Ten) {
+      workedArticlesList = apiData.articles;
+    } else if (apiData.articles.length > +NewsCount.Five) {
+      if (newsCount === NewsCount.Five && pageNumber === PageNumber.One) {
+        workedArticlesList = apiData.articles.slice(0, +NewsCount.Five);
+      } else if (newsCount === NewsCount.Five && pageNumber === PageNumber.Two) {
+        workedArticlesList = apiData.articles.slice(+NewsCount.Five, apiData.articles.length);
+      }
+    }
+    return workedArticlesList;
   };
 
   useEffect(() => {
@@ -80,74 +116,65 @@ function SearchBar(): JSX.Element {
           </div>
           <input type="submit" className="SearchBar-submit" value="Search" disabled={isLoading} />
           <div className="SearchBar-sort__wrapper">
-            <div className="SearchBar-sort">
-              <label className="SearchBar-search__label">Choose a country</label>
-              <select
-                name="filterByCountry"
-                className="SearchBar-select"
-                onChange={handleChangeSelect}
-                value={apiData.filterByCountry}
-              >
-                {Object.entries(availableCountries).map(([key, value]): ReactNode => {
-                  return (
-                    <option className="SearchBar__item" value={value} key={key}>
-                      {key}
-                    </option>
-                  );
-                })}
-              </select>
-              <input
-                type="submit"
-                className="SearchBar-submit__select"
-                value="Submit"
-                disabled={isLoading}
-              />
+            <div className="SearchBar-sort__content">
+              <div className="SearchBar-sort">
+                <label className="SearchBar-search__label">Choose a country</label>
+                <select
+                  name="filterByCountry"
+                  className="SearchBar-select"
+                  onChange={handleChangeSelect}
+                  value={apiData.filterByCountry}
+                >
+                  {renderOptions(availableCountries)}
+                </select>
+              </div>
+              <div className="SearchBar-sort">
+                <label className="SearchBar-search__label">Sort by</label>
+                <select
+                  name="sortBy"
+                  className="SearchBar-select"
+                  onChange={handleChangeSelect}
+                  value={apiData.sortBy}
+                >
+                  <option className="SearchBar__item" value="publishedAt">
+                    Date
+                  </option>
+                  <option className="SearchBar__item" value="relevance">
+                    Relevance
+                  </option>
+                </select>
+              </div>
+              <div className="SearchBar-sort">
+                <label className="SearchBar-search__label">Choose language</label>
+                <select
+                  name="filterByLanguage"
+                  className="SearchBar-select"
+                  onChange={handleChangeSelect}
+                  value={apiData.filterByLanguage}
+                >
+                  {renderOptions(availableLanguages)}
+                </select>
+              </div>
+              <div className="SearchBar-sort">
+                <label className="SearchBar-search__label">Max</label>
+                <select
+                  name="newsCount"
+                  className="SearchBar-select"
+                  onChange={handleNewsCount}
+                  value={newsCount}
+                >
+                  {renderOptions(availableNewsCountPerPage)}
+                </select>
+              </div>
             </div>
-            <div className="SearchBar-sort">
-              <label className="SearchBar-search__label">Sort by</label>
-              <select
-                name="sortBy"
-                className="SearchBar-select"
-                onChange={handleChangeSelect}
-                value={apiData.sortBy}
-              >
-                <option className="SearchBar__item" value="publishedAt">
-                  Date
-                </option>
-                <option className="SearchBar__item" value="relevance">
-                  Relevance
-                </option>
-              </select>
-              <input
-                type="submit"
-                className="SearchBar-submit__select"
-                value="Submit"
-                disabled={isLoading}
-              />
-            </div>
-            <div className="SearchBar-sort">
-              <label className="SearchBar-search__label">Choose language</label>
-              <select
-                name="filterByLanguage"
-                className="SearchBar-select"
-                onChange={handleChangeSelect}
-                value={apiData.filterByLanguage}
-              >
-                {Object.entries(availableLanguages).map(([key, value]): ReactNode => {
-                  return (
-                    <option className="SearchBar__item" value={value} key={value}>
-                      {key}
-                    </option>
-                  );
-                })}
-              </select>
-              <input
-                type="submit"
-                className="SearchBar-submit__select"
-                value="Submit"
-                disabled={isLoading}
-              />
-            </div>
+
+            <hr className="SearchBar-form__line" />
+            <input
+              type="submit"
+              className="SearchBar-submit__select"
+              value="Submit"
+              disabled={isLoading}
+            />
           </div>
         </form>
 
@@ -156,8 +183,9 @@ function SearchBar(): JSX.Element {
       <div className="SearchBar-results">
         {isLoading && <div className="SearchBar-loader"></div>}
         {error && <div className="SearchBar-error">{error}</div>}
+        {apiData.articles.length > 0 && <NewsNavigation />}
         {apiData.articles.length > 0 &&
-          apiData.articles.map((item): ReactNode => {
+          setOutputData().map((item): ReactNode => {
             return (
               <SearchResult
                 key={item.url}

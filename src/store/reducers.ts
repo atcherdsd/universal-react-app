@@ -8,6 +8,8 @@ export enum Types {
   ChangeForm = 'CHANGE_FORM',
   DisableSubmit = 'DISABLE_SUBMIT_BUTTON',
   EnableSubmit = 'ENABLE_SUBMIT_BUTTON',
+  SetNewsCount = 'SET_NEWS_COUNT',
+  SetPageNumber = 'SET_PAGE_NUMBER',
 }
 
 // API Section
@@ -19,7 +21,10 @@ export type ApiState = {
     sortBy: SortByType;
     filterByCountry: FilterByCountry;
     filterByLanguage: FilterByLanguage;
+    // newsCount: NewsCount;
   };
+  newsCount: string;
+  pageNumber: string;
 };
 
 export type ApiActions =
@@ -31,8 +36,11 @@ export type ApiActions =
         sortBy: SortByType;
         filterByCountry: FilterByCountry;
         filterByLanguage: FilterByLanguage;
+        // newsCount: NewsCount;
       };
-    };
+    }
+  | { type: Types.SetNewsCount; payload: string }
+  | { type: Types.SetPageNumber; payload: string };
 
 export const apiReducer = (state: ApiState, action: ApiActions) => {
   switch (action.type) {
@@ -45,6 +53,16 @@ export const apiReducer = (state: ApiState, action: ApiActions) => {
       return {
         ...state,
         apiData: action.payload,
+      };
+    case Types.SetNewsCount:
+      return {
+        ...state,
+        newsCount: action.payload,
+      };
+    case Types.SetPageNumber:
+      return {
+        ...state,
+        pageNumber: action.payload,
       };
     default:
       return state;

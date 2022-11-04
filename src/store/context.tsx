@@ -1,4 +1,10 @@
-import { FilterByCountry, FilterByLanguage, SortByType } from 'components/types/enums';
+import {
+  FilterByCountry,
+  FilterByLanguage,
+  NewsCount,
+  PageNumber,
+  SortByType,
+} from 'components/types/enums';
 import { FormData } from 'components/types/types';
 import React, { createContext, ReactNode, Dispatch, useReducer } from 'react';
 import { ApiActions, apiReducer, ApiState, FormActions, formReducer, FormState } from './reducers';
@@ -22,6 +28,8 @@ const initialState = {
       filterByCountry: FilterByCountry.Australia,
       filterByLanguage: FilterByLanguage.English,
     },
+    newsCount: NewsCount.Ten,
+    pageNumber: PageNumber.One,
   } as ApiState,
 
   formStateData: {

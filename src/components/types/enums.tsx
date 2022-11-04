@@ -35,3 +35,13 @@ export enum FilterByLanguage {
   Hindi = 'hi',
   Japanese = 'ja',
 }
+
+export enum NewsCount {
+  Five = '5',
+  Ten = '10',
+}
+
+export enum PageNumber {
+  One = '1',
+  Two = '2',
+}

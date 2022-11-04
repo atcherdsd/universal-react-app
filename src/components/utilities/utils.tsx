@@ -8,6 +8,7 @@ import {
   SortByType,
   FilterByCountry,
   FilterByLanguage,
+  // NewsCount,
 } from 'components/types/enums';
 import { IContentItem } from 'components/types/interfaces';
 import { ApiActions, Types } from 'store/reducers';
@@ -47,11 +48,15 @@ export const fetchData = async (
     sortBy: SortByType;
     filterByCountry: FilterByCountry;
     filterByLanguage: FilterByLanguage;
+    // newsCount: NewsCount;
   }
 ): Promise<void> => {
   try {
-    const queryParameters = `&sortby=${apiData.sortBy}&lang=${apiData.filterByLanguage}&country=${apiData.filterByCountry}`;
-    const response = await fetch(`${BASIC_URL}?token=${KEY}&q=${searchValueApi}${queryParameters}`);
+    const querySortParameters = `&sortby=${apiData.sortBy}&lang=${apiData.filterByLanguage}&country=${apiData.filterByCountry}`;
+    // const countNewsPerPage = `&max=${apiData.newsCount}`;
+    const response = await fetch(
+      `${BASIC_URL}?token=${KEY}&q=${searchValueApi}${querySortParameters}`
+    );
     switch (response.status.toString()) {
       case StatusCode.BadRequest:
         throw new Error(ErrorMessage.BadRequest);
