@@ -48,7 +48,7 @@ describe('SearchResult component', () => {
               title: '',
               description: '',
               url: '',
-              image: undefined,
+              image: '',
               publishedAt: '',
             }}
             date=""

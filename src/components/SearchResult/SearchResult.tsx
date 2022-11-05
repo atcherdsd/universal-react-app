@@ -1,14 +1,14 @@
-import Modal from 'components/Modal/Modal';
 import { Data } from 'components/types/types';
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SearchResult.css';
 
 function SearchResult(props: Data): JSX.Element {
+  const navigate = useNavigate();
   const date = props.publishedAt.slice(0, 10);
-  const [isOpenedModal, setIsOpenedModal] = useState(false);
 
   function handleResult(): void {
-    setIsOpenedModal(!isOpenedModal);
+    navigate(`/api/${props.title}`);
   }
 
   return (
@@ -19,11 +19,6 @@ function SearchResult(props: Data): JSX.Element {
           <div className="SearchResult-date">Publication date: {date}</div>
         </div>
       </div>
-      {isOpenedModal && (
-        <div className="SearchResult-modal" onClick={handleResult}>
-          <Modal data={props} date={date} handleResult={handleResult} />
-        </div>
-      )}
     </div>
   );
 }

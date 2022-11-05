@@ -26,8 +26,9 @@ const availableLanguages = {
   Japanese: 'ja',
 };
 const availableNewsCountPerPage = {
-  5: '5',
   10: '10',
+  5: '5',
+  1: '1',
 };
 
 const renderOptions = (availableItems: Record<string, string>): ReactNode[] => {
@@ -76,9 +77,42 @@ function SearchBar(): JSX.Element {
     dispatch({ type: Types.SetPageNumber, payload: PageNumber.One });
   };
 
-  let workedArticlesList: Data[];
+  let workedArticlesList = apiData.articles;
   const setOutputData = (): Data[] => {
-    if (newsCount === NewsCount.Ten) {
+    if (newsCount === NewsCount.One) {
+      switch (pageNumber) {
+        case '1':
+          workedArticlesList = Array.of(apiData.articles[0]);
+          break;
+        case '2':
+          workedArticlesList = Array.of(apiData.articles[1]);
+          break;
+        case '3':
+          workedArticlesList = Array.of(apiData.articles[2]);
+          break;
+        case '4':
+          workedArticlesList = Array.of(apiData.articles[3]);
+          break;
+        case '5':
+          workedArticlesList = Array.of(apiData.articles[4]);
+          break;
+        case '6':
+          workedArticlesList = Array.of(apiData.articles[5]);
+          break;
+        case '7':
+          workedArticlesList = Array.of(apiData.articles[6]);
+          break;
+        case '8':
+          workedArticlesList = Array.of(apiData.articles[7]);
+          break;
+        case '9':
+          workedArticlesList = Array.of(apiData.articles[8]);
+          break;
+        case '10':
+          workedArticlesList = Array.of(apiData.articles[9]);
+          break;
+      }
+    } else if (newsCount === NewsCount.Ten || apiData.articles.length <= +NewsCount.Five) {
       workedArticlesList = apiData.articles;
     } else if (apiData.articles.length > +NewsCount.Five) {
       if (newsCount === NewsCount.Five && pageNumber === PageNumber.One) {

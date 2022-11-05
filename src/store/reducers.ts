@@ -21,7 +21,6 @@ export type ApiState = {
     sortBy: SortByType;
     filterByCountry: FilterByCountry;
     filterByLanguage: FilterByLanguage;
-    // newsCount: NewsCount;
   };
   newsCount: string;
   pageNumber: string;
@@ -36,7 +35,6 @@ export type ApiActions =
         sortBy: SortByType;
         filterByCountry: FilterByCountry;
         filterByLanguage: FilterByLanguage;
-        // newsCount: NewsCount;
       };
     }
   | { type: Types.SetNewsCount; payload: string }

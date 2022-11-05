@@ -6,14 +6,16 @@ import './NewsNavigation.css';
 
 function NewsNavigation(): JSX.Element {
   const { state, dispatch } = useContext(AppContext);
-  const { newsCount, pageNumber } = state.apiStateData;
+  const { newsCount, pageNumber, apiData } = state.apiStateData;
 
-  const getPageCount = () => {
+  const getPagesCount = () => {
     switch (newsCount) {
       case NewsCount.Ten:
         return PageNumber.One;
       case NewsCount.Five:
-        return PageNumber.Two;
+        return apiData.articles.length > +NewsCount.Five ? PageNumber.Two : PageNumber.One;
+      case NewsCount.One:
+        return apiData.articles.length;
     }
   };
 
@@ -30,7 +32,29 @@ function NewsNavigation(): JSX.Element {
           </button>
         );
       case NewsCount.Five:
-        return Array(+PageNumber.Two)
+        const buttonsCount =
+          apiData.articles.length > +NewsCount.Five ? +PageNumber.Two : +PageNumber.One;
+        return Array(buttonsCount)
+          .fill(1)
+          .map(
+            (elem: ReactNode, index: number): ReactNode =>
+              (elem = (
+                <button
+                  className={
+                    index + 1 === +pageNumber
+                      ? 'NewsNavigation-number active'
+                      : 'NewsNavigation-number'
+                  }
+                  key={index}
+                  onClick={handleClick}
+                  value={index + 1}
+                >
+                  {index + 1}
+                </button>
+              ))
+          );
+      case NewsCount.One:
+        return Array(apiData.articles.length)
           .fill(1)
           .map(
             (elem: ReactNode, index: number): ReactNode =>
@@ -55,12 +79,10 @@ function NewsNavigation(): JSX.Element {
   return (
     <div className="NewsNavigation-container">
       <div className="NewsNavigation-content__container">
-        <div className="NewsNavigation-main-content">
-          <div className="NewsNavigation-title">
-            Page {pageNumber}/{getPageCount()}
-          </div>
+        <div className="NewsNavigation-title">
+          Page {pageNumber}/{getPagesCount()}
         </div>
-        {getPageButtons()}
+        <div className="NewsNavigation-buttons">{getPageButtons()}</div>
       </div>
     </div>
   );

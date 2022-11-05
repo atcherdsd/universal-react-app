@@ -10,6 +10,7 @@ import Api from 'pages/Api/Api';
 import { Links } from 'components/types/types';
 import { IRoutes } from 'components/types/interfaces';
 import { AppProvider } from 'store/context';
+import News from 'pages/News/News';
 
 export const links: Links = {
   main: '/',
@@ -34,6 +35,10 @@ const routes: IRoutes[] = [
   {
     path: links['about us'],
     element: About,
+  },
+  {
+    path: '/api/:title',
+    element: News,
   },
   {
     path: '*',

@@ -37,8 +37,9 @@ export enum FilterByLanguage {
 }
 
 export enum NewsCount {
-  Five = '5',
   Ten = '10',
+  Five = '5',
+  One = '1',
 }
 
 export enum PageNumber {

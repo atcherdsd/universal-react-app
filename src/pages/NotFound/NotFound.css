@@ -1,3 +1,7 @@
 .NotFound-message {
     font-size: 2rem;
+    text-align: center;
+}
+.NotFound-title {
+    text-align: center;
 }
