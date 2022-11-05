@@ -52,7 +52,7 @@ describe('Form component', () => {
     expect(firstNameInput).toHaveValue('Michael');
     expect(lastNameInput).toContainHTML('');
     expect(onChangeFirstName).toHaveBeenCalledTimes(1);
-    expect(button).not.toHaveAttribute('disabled');
+    expect(button).toHaveValue('Submit');
 
     userEvent.click(button);
     const error = document.querySelectorAll('.Form-error')[0];
