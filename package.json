@@ -1,9 +1,10 @@
 {
   "name": "react-components",
-  "homepage": "https://rolling-scopes-school.github.io/atcherdsd-REACT2022Q3/custom-state/",
+  "homepage": "https://rolling-scopes-school.github.io/atcherdsd-REACT2022Q3/react-redux/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -14,6 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.38.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "typescript": "^4.8.4",
