@@ -10,8 +10,7 @@ function OrderCard(): JSX.Element {
 
   return (
     <>
-      {data.length > 0 &&
-        data.map((props) => {
+      {data.map((props) => {
           return (
             <div className="OrderCard-container" key={props.key}>
               <h2 className="OrderCard-title">Accepted order</h2>
