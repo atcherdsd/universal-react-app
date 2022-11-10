@@ -4,11 +4,11 @@ import SearchResult from 'components/SearchResult/SearchResult';
 import NewsNavigation from 'components/NewsNavigation/NewsNavigation';
 import { NewsCount, PageNumber } from 'types/enums';
 import { Data } from 'types/types';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { RootReducer } from 'store/store';
 import { searchNews, setNewsCount, setNewsData, setPageNumber } from 'store/apiSlice';
 import { fetchApiThunkCreator } from 'components/utilities/utils';
 import { AnyAction } from '@reduxjs/toolkit';
+import { apiStateData } from 'store/selectors';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 // import { fetchData } from 'components/utilities/utils';
 
 const availableCountries = {
@@ -45,12 +45,8 @@ const renderOptions = (availableItems: Record<string, string>): ReactNode[] => {
 };
 
 function SearchBar(): JSX.Element {
-  const selector: TypedUseSelectorHook<RootReducer> = useSelector;
-  const { searchValueApi, apiData, newsCount, pageNumber } = selector(
-    (state) => state.apiStateData
-  );
-
-  const dispatch = useDispatch();
+  const { searchValueApi, apiData, newsCount, pageNumber } = useAppSelector(apiStateData);
+  const dispatch = useAppDispatch();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');

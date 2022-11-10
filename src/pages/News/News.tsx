@@ -1,16 +1,15 @@
 import { decodeHtmlCharCodes } from 'components/utilities/utils';
 import React, { RefObject, useEffect, useRef } from 'react';
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { RootReducer } from 'store/store';
+import { useAppSelector } from 'store/hooks';
+import { apiStateData } from 'store/selectors';
 import './News.css';
 
 const News: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
   const current = params.title;
-  const selector: TypedUseSelectorHook<RootReducer> = useSelector;
-  const { apiData } = selector((state) => state.apiStateData);
+  const { apiData } = useAppSelector(apiStateData);
 
   const newsList = apiData.articles.filter((item) => item.title === current);
 

@@ -1,11 +1,11 @@
-import React, { ReactNode, RefObject, useEffect, useRef } from 'react';
+import React, { ReactNode, RefObject, useRef } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
 import { FormData, Country } from 'types/types';
 import { useForm } from 'react-hook-form';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { RootReducer } from 'store/store';
 import { addFormCard, changeForm, disableSubmit, enableSubmit } from 'store/formSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { formDataSelector, isDisabledButtonSelector } from 'store/selectors';
 
 const initialFormValues: FormData = {
   key: '',
@@ -24,11 +24,10 @@ const initialFormValues: FormData = {
 };
 
 function Form(): JSX.Element {
-  const selector: TypedUseSelectorHook<RootReducer> = useSelector;
-  const initialFieldsValues = selector((state) => state.formStateData.formData);
-  const isDisabledButton = selector((state) => state.formStateData.isDisabledButton);
+  const initialFieldsValues = useAppSelector(formDataSelector);
+  const isDisabledButton = useAppSelector(isDisabledButtonSelector);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -54,13 +53,6 @@ function Form(): JSX.Element {
       deliveryDate: initialFieldsValues.deliveryDate,
     },
   });
-
-  useEffect(() => {
-    return () => {
-      const { ...values } = getValues();
-      dispatch(changeForm(values));
-    };
-  }, [dispatch, getValues]);
 
   let formData = {} as FormData;
 
@@ -178,6 +170,8 @@ function Form(): JSX.Element {
     clearFormData();
     clearFilledForm();
     dispatch(disableSubmit());
+    const { ...values } = getValues();
+    dispatch(changeForm(values));
   }
 
   return (

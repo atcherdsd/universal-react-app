@@ -1,14 +1,12 @@
 import React, { ReactNode, SyntheticEvent } from 'react';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { setPageNumber } from 'store/apiSlice';
-import { RootReducer } from 'store/store';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { apiStateData } from 'store/selectors';
 import './NewsNavigation.css';
 
 function NewsNavigation(): JSX.Element {
-  const selector: TypedUseSelectorHook<RootReducer> = useSelector;
-  const { apiData, newsCount, pageNumber } = selector((state) => state.apiStateData);
-
-  const dispatch = useDispatch();
+  const { apiData, newsCount, pageNumber } = useAppSelector(apiStateData);
+  const dispatch = useAppDispatch();
 
   const getPagesCount = () => {
     switch (newsCount) {
