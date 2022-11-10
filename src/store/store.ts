@@ -9,4 +9,6 @@ const store = configureStore({
   // composedEnhancer,
 });
 
+export type RootReducer = ReturnType<typeof rootReducer>;
+
 export default store;

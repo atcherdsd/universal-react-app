@@ -1,4 +1,3 @@
-import { Types } from './types';
 import { FormData } from 'components/types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
@@ -7,12 +6,6 @@ export type FormState = {
   formData: FormData;
   isDisabledButton: boolean;
 };
-
-export type FormActions =
-  | { type: Types.AddFormCard; payload: FormData }
-  | { type: Types.ChangeForm; payload: FormData }
-  | { type: Types.DisableSubmit }
-  | { type: Types.EnableSubmit };
 
 const initialState: FormState = {
   formDataGroup: [] as FormData[],

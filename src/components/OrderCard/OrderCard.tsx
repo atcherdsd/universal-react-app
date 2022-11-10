@@ -1,12 +1,11 @@
-// import { FormData } from 'components/types/types';
-import React, { useContext } from 'react';
-import { AppContext } from 'store/context';
+import React from 'react';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { RootReducer } from 'store/store';
 import './OrderCard.css';
 
 function OrderCard(): JSX.Element {
-  const { state } = useContext(AppContext);
-
-  const data = state.formStateData.formDataGroup;
+  const selector: TypedUseSelectorHook<RootReducer> = useSelector;
+  const data = selector((state) => state.formStateData.formDataGroup);
 
   return (
     <>

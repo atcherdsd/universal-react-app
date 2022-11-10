@@ -1,10 +1,11 @@
-import React, { ReactNode, RefObject, useContext, useEffect, useRef } from 'react';
+import React, { ReactNode, RefObject, useEffect, useRef } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
 import { FormData, Country } from 'components/types/types';
 import { useForm } from 'react-hook-form';
-import { AppContext } from 'store/context';
-import { Types } from 'store/reducers';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { RootReducer } from 'store/store';
+import { addFormCard, changeForm, disableSubmit, enableSubmit } from 'store/formSlice';
 
 const initialFormValues: FormData = {
   key: '',
@@ -23,9 +24,11 @@ const initialFormValues: FormData = {
 };
 
 function Form(): JSX.Element {
-  const { state, dispatch } = useContext(AppContext);
+  const selector: TypedUseSelectorHook<RootReducer> = useSelector;
+  const initialFieldsValues = selector((state) => state.formStateData.formData);
+  const isDisabledButton = selector((state) => state.formStateData.isDisabledButton);
 
-  const initialFieldsValues = state.formStateData.formData;
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -36,31 +39,26 @@ function Form(): JSX.Element {
   } = useForm<FormData>({
     mode: 'onSubmit',
     defaultValues: {
-      key: state.formStateData.formData.key,
-      gender: state.formStateData.formData.gender,
-      firstName: state.formStateData.formData.firstName,
-      lastName: state.formStateData.formData.lastName,
-      email: state.formStateData.formData.email,
-      birthday: state.formStateData.formData.birthday,
-      file: state.formStateData.formData.file,
-      promotions: state.formStateData.formData.promotions,
-      personalData: state.formStateData.formData.personalData,
-      bonusProgram: state.formStateData.formData.bonusProgram,
-      country: state.formStateData.formData.country,
-      zipCode: state.formStateData.formData.zipCode,
-      deliveryDate: state.formStateData.formData.deliveryDate,
+      key: initialFieldsValues.key,
+      gender: initialFieldsValues.gender,
+      firstName: initialFieldsValues.firstName,
+      lastName: initialFieldsValues.lastName,
+      email: initialFieldsValues.email,
+      birthday: initialFieldsValues.birthday,
+      file: initialFieldsValues.file,
+      promotions: initialFieldsValues.promotions,
+      personalData: initialFieldsValues.personalData,
+      bonusProgram: initialFieldsValues.bonusProgram,
+      country: initialFieldsValues.country,
+      zipCode: initialFieldsValues.zipCode,
+      deliveryDate: initialFieldsValues.deliveryDate,
     },
   });
 
   useEffect(() => {
     return () => {
       const { ...values } = getValues();
-      dispatch({
-        type: Types.ChangeForm,
-        payload: {
-          ...values,
-        },
-      });
+      dispatch(changeForm(values));
     };
   }, [dispatch, getValues]);
 
@@ -82,7 +80,7 @@ function Form(): JSX.Element {
         (elem as HTMLSelectElement).value = 'country';
       }
     });
-    dispatch({ type: Types.ChangeForm, payload: initialFormValues });
+    dispatch(changeForm(initialFormValues));
   }
 
   const regexpName = /(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/;
@@ -92,7 +90,7 @@ function Form(): JSX.Element {
 
   const disableSubmitButton = () => {
     if (
-      state.formStateData.isDisabledButton ||
+      isDisabledButton ||
       errors.firstName ||
       errors.lastName ||
       errors.email ||
@@ -132,9 +130,9 @@ function Form(): JSX.Element {
   const handleFileChange = (): string => {
     if ((formRef.current!.elements[6] as HTMLInputElement).files!.length) {
       formData.file = (formRef.current!.elements[6] as HTMLInputElement).files![0].name;
-      dispatch({ type: Types.EnableSubmit });
+      dispatch(enableSubmit());
     } else {
-      dispatch({ type: Types.DisableSubmit });
+      dispatch(disableSubmit());
       formData.file = 'No data';
     }
     return formData.file;
@@ -167,12 +165,12 @@ function Form(): JSX.Element {
     formData.deliveryDate = (formRef.current!.elements[13] as HTMLInputElement).value;
 
     const newCard = { ...formData };
-    dispatch({ type: Types.AddFormCard, payload: newCard });
+    dispatch(addFormCard(newCard));
 
     alert('Your data has been successfully saved');
     clearFormData();
     clearFilledForm();
-    dispatch({ type: Types.DisableSubmit });
+    dispatch(disableSubmit());
   }
 
   return (
@@ -181,7 +179,7 @@ function Form(): JSX.Element {
         <hr className="Form-line"></hr>
         <form
           className="Form-content__container"
-          onChange={() => dispatch({ type: Types.EnableSubmit })}
+          onChange={() => dispatch(enableSubmit())}
           onSubmit={handleSubmit(handleFormSubmit)}
           ref={formRef}
         >
