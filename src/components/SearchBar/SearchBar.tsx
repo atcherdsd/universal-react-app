@@ -9,7 +9,6 @@ import { fetchApiThunkCreator } from 'components/utilities/utils';
 import { AnyAction } from '@reduxjs/toolkit';
 import { apiStateData } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-// import { fetchData } from 'components/utilities/utils';
 
 const availableCountries = {
   Australia: 'au',
