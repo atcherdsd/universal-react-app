@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../.././logo-phone.svg';
 import './Header.css';
-import { IHeaderProps } from 'components/types/interfaces';
+import { IHeaderProps } from 'types/interfaces';
 import { makeListItems } from 'components/utilities/utils';
 
 function Header(props: IHeaderProps): JSX.Element {

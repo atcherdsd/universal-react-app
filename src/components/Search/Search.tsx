@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import './Search.css';
 import goodsData from '../../data/goods.json';
 import Card from '../../components/Card/Card';
-import { Positions } from 'components/types/types';
+import { Positions } from 'types/types';
 
 function Search(): JSX.Element {
   const [searchValue, setSearchValue] = useState(

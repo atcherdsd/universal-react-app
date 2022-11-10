@@ -7,8 +7,8 @@ import Main from 'pages/Main/Main';
 import NotFound from 'pages/NotFound/NotFound';
 import { Routes, Route } from 'react-router-dom';
 import Api from 'pages/Api/Api';
-import { Links } from 'components/types/types';
-import { IRoutes } from 'components/types/interfaces';
+import { Links } from 'types/types';
+import { IRoutes } from 'types/interfaces';
 // import { AppProvider } from 'store/context';
 import News from 'pages/News/News';
 

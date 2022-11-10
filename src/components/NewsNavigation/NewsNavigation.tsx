@@ -1,39 +1,40 @@
-import { NewsCount, PageNumber } from 'components/types/enums';
-import React, { ReactNode, SyntheticEvent, useContext } from 'react';
-import { AppContext } from 'store/context';
-import { Types } from 'store/reducers';
+import React, { ReactNode, SyntheticEvent } from 'react';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { setPageNumber } from 'store/apiSlice';
+import { RootReducer } from 'store/store';
 import './NewsNavigation.css';
 
 function NewsNavigation(): JSX.Element {
-  const { state, dispatch } = useContext(AppContext);
-  const { newsCount, pageNumber, apiData } = state.apiStateData;
+  const selector: TypedUseSelectorHook<RootReducer> = useSelector;
+  const { apiData, newsCount, pageNumber } = selector((state) => state.apiStateData);
+
+  const dispatch = useDispatch();
 
   const getPagesCount = () => {
     switch (newsCount) {
-      case NewsCount.Ten:
-        return PageNumber.One;
-      case NewsCount.Five:
-        return apiData.articles.length > +NewsCount.Five ? PageNumber.Two : PageNumber.One;
-      case NewsCount.One:
+      case '10':
+        return '1';
+      case '5':
+        return apiData.articles.length > 5 ? '2' : '1';
+      case '1':
         return apiData.articles.length;
     }
   };
 
   const handleClick = (event: SyntheticEvent<HTMLButtonElement>) => {
-    dispatch({ type: Types.SetPageNumber, payload: event.currentTarget.value });
+    dispatch(setPageNumber(event.currentTarget.value));
   };
 
   const getPageButtons = () => {
     switch (newsCount) {
-      case NewsCount.Ten:
+      case '10':
         return (
           <button className="NewsNavigation-number active" onClick={handleClick} value="1">
-            {PageNumber.One}
+            1
           </button>
         );
-      case NewsCount.Five:
-        const buttonsCount =
-          apiData.articles.length > +NewsCount.Five ? +PageNumber.Two : +PageNumber.One;
+      case '5':
+        const buttonsCount = apiData.articles.length > 5 ? 2 : 1;
         return Array(buttonsCount)
           .fill(1)
           .map(
@@ -53,7 +54,7 @@ function NewsNavigation(): JSX.Element {
                 </button>
               ))
           );
-      case NewsCount.One:
+      case '1':
         return Array(apiData.articles.length)
           .fill(1)
           .map(

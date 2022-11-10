@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { links } from 'App/App';
-import { Data, Links } from 'components/types/types';
+import { Data, Links } from 'types/types';
 import React from 'react';
 import {
   StatusCode,
@@ -8,9 +8,10 @@ import {
   SortByType,
   FilterByCountry,
   FilterByLanguage,
-} from 'components/types/enums';
-import { IContentItem } from 'components/types/interfaces';
-import { ApiActions, Types } from 'store/reducers';
+} from 'types/enums';
+import { IContentItem } from 'types/interfaces';
+import { getNewsData } from 'store/apiSlice';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
 export const BASIC_URL = 'https://gnews.io/api/v4/search';
 export const KEY = 'b1a198162ce907ddfd42b009b63ab35e';
@@ -39,7 +40,7 @@ export const decodeHtmlCharCodes = (str: string): string =>
 
 export const fetchData = async (
   searchValueApi: string,
-  dispatch: (value: ApiActions) => void,
+  dispatch: Dispatch<AnyAction>,
   setError: (value: React.SetStateAction<string>) => void,
   setIsLoading: (value: React.SetStateAction<boolean>) => void,
   apiData: {
@@ -68,13 +69,7 @@ export const fetchData = async (
     }
     if (!response.ok) throw Error(ErrorMessage.AnotherError);
     const data: IContentItem = await response.json();
-    dispatch({
-      type: Types.SetNewsData,
-      payload: {
-        ...apiData,
-        articles: data.articles,
-      },
-    });
+    dispatch(getNewsData(data.articles));
   } catch (err) {
     setError((err as Error).message);
   } finally {

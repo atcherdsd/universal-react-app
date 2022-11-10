@@ -1,12 +1,13 @@
-import React, { ChangeEvent, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, ReactNode, useCallback, useEffect, useState } from 'react';
 import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
 import { fetchData } from 'components/utilities/utils';
-import { AppContext } from 'store/context';
-import { Types } from 'store/reducers';
 import NewsNavigation from 'components/NewsNavigation/NewsNavigation';
-import { NewsCount, PageNumber } from 'components/types/enums';
-import { Data } from 'components/types/types';
+import { NewsCount, PageNumber } from 'types/enums';
+import { Data } from 'types/types';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { RootReducer } from 'store/store';
+import { searchNews, setNewsCount, setNewsData, setPageNumber } from 'store/apiSlice';
 
 const availableCountries = {
   Australia: 'au',
@@ -42,15 +43,19 @@ const renderOptions = (availableItems: Record<string, string>): ReactNode[] => {
 };
 
 function SearchBar(): JSX.Element {
-  const { state, dispatch } = useContext(AppContext);
-  const { apiData, searchValueApi, newsCount, pageNumber } = state.apiStateData;
+  const selector: TypedUseSelectorHook<RootReducer> = useSelector;
+  const { searchValueApi, apiData, newsCount, pageNumber } = selector(
+    (state) => state.apiStateData
+  );
+
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
   function searchText(event: { target: { value: string } }): void {
     const value = event.target.value;
-    dispatch({ type: Types.SearchNews, payload: value });
+    dispatch(searchNews(value));
   }
 
   const handleFormSubmit = useCallback(
@@ -63,55 +68,22 @@ function SearchBar(): JSX.Element {
     },
     [apiData, dispatch, searchValueApi]
   );
+
   const handleChangeSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     const sortValue = event.target.value;
     const name = event.target.name;
-    dispatch({
-      type: Types.SetNewsData,
-      payload: { ...apiData, [name]: sortValue },
-    });
+    dispatch(setNewsData({ ...apiData, [name]: sortValue }));
   };
   const handleNewsCount = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    dispatch({ type: Types.SetNewsCount, payload: value });
-    dispatch({ type: Types.SetPageNumber, payload: PageNumber.One });
+    dispatch(setNewsCount(value));
+    dispatch(setPageNumber(PageNumber.One));
   };
 
   let workedArticlesList = apiData.articles;
   const setOutputData = (): Data[] => {
     if (newsCount === NewsCount.One) {
-      switch (pageNumber) {
-        case '1':
-          workedArticlesList = Array.of(apiData.articles[0]);
-          break;
-        case '2':
-          workedArticlesList = Array.of(apiData.articles[1]);
-          break;
-        case '3':
-          workedArticlesList = Array.of(apiData.articles[2]);
-          break;
-        case '4':
-          workedArticlesList = Array.of(apiData.articles[3]);
-          break;
-        case '5':
-          workedArticlesList = Array.of(apiData.articles[4]);
-          break;
-        case '6':
-          workedArticlesList = Array.of(apiData.articles[5]);
-          break;
-        case '7':
-          workedArticlesList = Array.of(apiData.articles[6]);
-          break;
-        case '8':
-          workedArticlesList = Array.of(apiData.articles[7]);
-          break;
-        case '9':
-          workedArticlesList = Array.of(apiData.articles[8]);
-          break;
-        case '10':
-          workedArticlesList = Array.of(apiData.articles[9]);
-          break;
-      }
+      workedArticlesList = Array.of(apiData.articles[+pageNumber - 1]);
     } else if (newsCount === NewsCount.Ten || apiData.articles.length <= +NewsCount.Five) {
       workedArticlesList = apiData.articles;
     } else if (apiData.articles.length > +NewsCount.Five) {

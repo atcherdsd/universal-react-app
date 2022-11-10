@@ -1,4 +1,4 @@
-import { Data } from 'components/types/types';
+import { Data } from 'types/types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SearchResult.css';

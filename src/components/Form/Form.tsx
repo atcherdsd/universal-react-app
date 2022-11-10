@@ -1,7 +1,7 @@
 import React, { ReactNode, RefObject, useEffect, useRef } from 'react';
 import './Form.css';
 import countries from '../../data/countries.json';
-import { FormData, Country } from 'components/types/types';
+import { FormData, Country } from 'types/types';
 import { useForm } from 'react-hook-form';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { RootReducer } from 'store/store';
@@ -67,20 +67,27 @@ function Form(): JSX.Element {
   function clearFormData() {
     formData = initialFieldsValues;
     reset(initialFormValues);
+    dispatch(changeForm(initialFormValues));
   }
   const formRef = useRef() as RefObject<HTMLFormElement>;
 
   function clearFilledForm(): void {
-    Array.from(formRef.current!.elements).forEach((elem, index) => {
-      if (index < 2 || (index > 6 && index < 11)) {
+    Array.from(formRef.current!.elements).forEach((elem) => {
+      if (
+        (elem as HTMLInputElement).type === 'radio' ||
+        (elem as HTMLInputElement).type === 'checkbox'
+      ) {
         (elem as HTMLInputElement).checked = false;
-      } else if ((index >= 2 && index < 7) || index > 11) {
+      } else if (
+        (elem as HTMLInputElement).type === 'text' ||
+        (elem as HTMLInputElement).type === 'file' ||
+        (elem as HTMLInputElement).type === 'date'
+      ) {
         (elem as HTMLInputElement).value = '';
-      } else if (index === 11) {
+      } else if ((elem as HTMLSelectElement).name === 'country') {
         (elem as HTMLSelectElement).value = 'country';
       }
     });
-    dispatch(changeForm(initialFormValues));
   }
 
   const regexpName = /(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/;

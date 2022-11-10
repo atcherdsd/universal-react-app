@@ -1,5 +1,5 @@
-import { FilterByCountry, FilterByLanguage, SortByType } from 'components/types/enums';
-import { Data, FormData } from 'components/types/types';
+import { FilterByCountry, FilterByLanguage, SortByType } from 'types/enums';
+import { Data, FormData } from 'types/types';
 
 export enum Types {
   SearchNews = 'SEARCH_NEWS',

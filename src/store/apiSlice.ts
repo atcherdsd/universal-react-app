@@ -1,13 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  FilterByCountry,
-  FilterByLanguage,
-  NewsCount,
-  PageNumber,
-  SortByType,
-} from 'components/types/enums';
-import { Data } from 'components/types/types';
-import { Types } from './types';
+import { FilterByCountry, FilterByLanguage, NewsCount, PageNumber, SortByType } from 'types/enums';
+import { Data } from 'types/types';
 
 export type ApiState = {
   searchValueApi: string;
@@ -21,20 +14,6 @@ export type ApiState = {
   pageNumber: string;
 };
 
-export type ApiActions =
-  | { type: Types.SearchNews; payload: string }
-  | {
-      type: Types.SetNewsData;
-      payload: {
-        articles: Data[];
-        sortBy: SortByType;
-        filterByCountry: FilterByCountry;
-        filterByLanguage: FilterByLanguage;
-      };
-    }
-  | { type: Types.SetNewsCount; payload: string }
-  | { type: Types.SetPageNumber; payload: string };
-
 const initialState: ApiState = {
   searchValueApi: '',
   apiData: {
@@ -47,33 +26,6 @@ const initialState: ApiState = {
   pageNumber: PageNumber.One,
 };
 
-// export const apiReducer = (state: ApiState = initialState, action: ApiActions) => {
-//   switch (action.type) {
-//     case Types.SearchNews:
-//       return {
-//         ...state,
-//         searchValueApi: action.payload,
-//       };
-//     case Types.SetNewsData:
-//       return {
-//         ...state,
-//         apiData: action.payload,
-//       };
-//     case Types.SetNewsCount:
-//       return {
-//         ...state,
-//         newsCount: action.payload,
-//       };
-//     case Types.SetPageNumber:
-//       return {
-//         ...state,
-//         pageNumber: action.payload,
-//       };
-//     default:
-//       return state;
-//   }
-// };
-
 const apiSlice = createSlice({
   name: 'api',
   initialState,
@@ -84,6 +36,9 @@ const apiSlice = createSlice({
     setNewsData(state, action: PayloadAction<ApiState['apiData']>) {
       state.apiData = { ...action.payload };
     },
+    getNewsData(state, action: PayloadAction<Data[]>) {
+      state.apiData.articles = action.payload;
+    },
     setNewsCount(state, action: PayloadAction<string>) {
       state.newsCount = action.payload;
     },
@@ -93,6 +48,7 @@ const apiSlice = createSlice({
   },
 });
 
-export const { searchNews, setNewsData, setNewsCount, setPageNumber } = apiSlice.actions;
+export const { searchNews, setNewsData, getNewsData, setNewsCount, setPageNumber } =
+  apiSlice.actions;
 
 export default apiSlice.reducer;

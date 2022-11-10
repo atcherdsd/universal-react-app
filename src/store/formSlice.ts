@@ -1,4 +1,4 @@
-import { FormData } from 'components/types/types';
+import { FormData } from 'types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type FormState = {

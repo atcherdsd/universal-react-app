@@ -4,8 +4,8 @@ import {
   NewsCount,
   PageNumber,
   SortByType,
-} from 'components/types/enums';
-import { FormData } from 'components/types/types';
+} from 'types/enums';
+import { FormData } from 'types/types';
 import React, { createContext, ReactNode, Dispatch, useReducer } from 'react';
 import { ApiActions, apiReducer, ApiState, FormActions, formReducer, FormState } from './reducers';
 
