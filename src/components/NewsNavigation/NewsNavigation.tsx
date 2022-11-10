@@ -13,7 +13,8 @@ function NewsNavigation(): JSX.Element {
       case NewsCount.Ten:
         return PageNumber.One;
       case NewsCount.Five:
-        return apiData.articles.length > +NewsCount.Five ? PageNumber.Two : PageNumber.One;
+        const isMoreThanOnePage = apiData.articles.length > 5;
+        return isMoreThanOnePage ? 2 : 1;
       case NewsCount.One:
         return apiData.articles.length;
     }
