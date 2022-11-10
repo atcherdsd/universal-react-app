@@ -1,13 +1,15 @@
 import React, { ChangeEvent, ReactNode, useCallback, useEffect, useState } from 'react';
 import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
-import { fetchData } from 'components/utilities/utils';
 import NewsNavigation from 'components/NewsNavigation/NewsNavigation';
 import { NewsCount, PageNumber } from 'types/enums';
 import { Data } from 'types/types';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { RootReducer } from 'store/store';
 import { searchNews, setNewsCount, setNewsData, setPageNumber } from 'store/apiSlice';
+import { fetchApiThunkCreator } from 'components/utilities/utils';
+import { AnyAction } from '@reduxjs/toolkit';
+// import { fetchData } from 'components/utilities/utils';
 
 const availableCountries = {
   Australia: 'au',
@@ -63,8 +65,14 @@ function SearchBar(): JSX.Element {
       event.preventDefault();
       setIsLoading(true);
       setError('');
-
-      await fetchData(searchValueApi, dispatch, setError, setIsLoading, apiData);
+      dispatch(
+        fetchApiThunkCreator(
+          searchValueApi,
+          setError,
+          setIsLoading,
+          apiData
+        ) as unknown as AnyAction
+      );
     },
     [apiData, dispatch, searchValueApi]
   );

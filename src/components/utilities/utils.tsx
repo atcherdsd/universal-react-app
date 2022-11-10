@@ -38,9 +38,8 @@ export const decodeHtmlCharCodes = (str: string): string =>
     .replace(/&reg;/g, '®')
     .replace(/&trade;/g, '™');
 
-export const fetchData = async (
+export const fetchApiThunkCreator = (
   searchValueApi: string,
-  dispatch: Dispatch<AnyAction>,
   setError: (value: React.SetStateAction<string>) => void,
   setIsLoading: (value: React.SetStateAction<boolean>) => void,
   apiData: {
@@ -49,30 +48,70 @@ export const fetchData = async (
     filterByCountry: FilterByCountry;
     filterByLanguage: FilterByLanguage;
   }
-): Promise<void> => {
-  try {
+) => {
+  return async (dispatch: Dispatch<AnyAction>) => {
     const querySortParameters = `&sortby=${apiData.sortBy}&lang=${apiData.filterByLanguage}&country=${apiData.filterByCountry}`;
-    const response = await fetch(
-      `${BASIC_URL}?token=${KEY}&q=${searchValueApi}${querySortParameters}`
-    );
-    switch (response.status.toString()) {
-      case StatusCode.BadRequest:
-        throw new Error(ErrorMessage.BadRequest);
-      case StatusCode.Unauthorized:
-        throw new Error(ErrorMessage.Unauthorized);
-      case StatusCode.Forbidden:
-        throw new Error(ErrorMessage.Forbidden);
-      case StatusCode.TooManyRequests:
-        throw new Error(ErrorMessage.TooManyRequests);
-      case StatusCode.InternalServerError:
-        throw new Error(ErrorMessage.InternalServerError);
+    try {
+      const response = await fetch(
+        `${BASIC_URL}?token=${KEY}&q=${searchValueApi}${querySortParameters}`
+      );
+      switch (response.status.toString()) {
+        case StatusCode.BadRequest:
+          throw new Error(ErrorMessage.BadRequest);
+        case StatusCode.Unauthorized:
+          throw new Error(ErrorMessage.Unauthorized);
+        case StatusCode.Forbidden:
+          throw new Error(ErrorMessage.Forbidden);
+        case StatusCode.TooManyRequests:
+          throw new Error(ErrorMessage.TooManyRequests);
+        case StatusCode.InternalServerError:
+          throw new Error(ErrorMessage.InternalServerError);
+      }
+      if (!response.ok) throw Error(ErrorMessage.AnotherError);
+      const data: IContentItem = await response.json();
+      dispatch(getNewsData(data.articles));
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setIsLoading(false);
     }
-    if (!response.ok) throw Error(ErrorMessage.AnotherError);
-    const data: IContentItem = await response.json();
-    dispatch(getNewsData(data.articles));
-  } catch (err) {
-    setError((err as Error).message);
-  } finally {
-    setIsLoading(false);
-  }
+  };
 };
+// export const fetchData = async (
+//   searchValueApi: string,
+//   dispatch: Dispatch<AnyAction>,
+//   setError: (value: React.SetStateAction<string>) => void,
+//   setIsLoading: (value: React.SetStateAction<boolean>) => void,
+//   apiData: {
+//     articles: Data[];
+//     sortBy: SortByType;
+//     filterByCountry: FilterByCountry;
+//     filterByLanguage: FilterByLanguage;
+//   }
+// ): Promise<void> => {
+//   try {
+//     const querySortParameters = `&sortby=${apiData.sortBy}&lang=${apiData.filterByLanguage}&country=${apiData.filterByCountry}`;
+//     const response = await fetch(
+//       `${BASIC_URL}?token=${KEY}&q=${searchValueApi}${querySortParameters}`
+//     );
+//     switch (response.status.toString()) {
+//       case StatusCode.BadRequest:
+//         throw new Error(ErrorMessage.BadRequest);
+//       case StatusCode.Unauthorized:
+//         throw new Error(ErrorMessage.Unauthorized);
+//       case StatusCode.Forbidden:
+//         throw new Error(ErrorMessage.Forbidden);
+//       case StatusCode.TooManyRequests:
+//         throw new Error(ErrorMessage.TooManyRequests);
+//       case StatusCode.InternalServerError:
+//         throw new Error(ErrorMessage.InternalServerError);
+//     }
+//     if (!response.ok) throw Error(ErrorMessage.AnotherError);
+//     const data: IContentItem = await response.json();
+//     dispatch(getNewsData(data.articles));
+//   } catch (err) {
+//     setError((err as Error).message);
+//   } finally {
+//     setIsLoading(false);
+//   }
+// };
