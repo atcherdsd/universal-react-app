@@ -10,7 +10,7 @@ import {
   FilterByLanguage,
 } from 'types/enums';
 import { IContentItem } from 'types/interfaces';
-import { getNewsData } from 'store/apiSlice';
+import { getNewsData, setError, toggleIsLoading } from 'store/apiSlice';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
 export const BASIC_URL = 'https://gnews.io/api/v4/search';
@@ -40,8 +40,6 @@ export const decodeHtmlCharCodes = (str: string): string =>
 
 export const fetchApiThunkCreator = (
   searchValueApi: string,
-  setError: (value: React.SetStateAction<string>) => void,
-  setIsLoading: (value: React.SetStateAction<boolean>) => void,
   apiData: {
     articles: Data[];
     sortBy: SortByType;
@@ -50,6 +48,9 @@ export const fetchApiThunkCreator = (
   }
 ) => {
   return async (dispatch: Dispatch<AnyAction>) => {
+    dispatch(toggleIsLoading(true));
+    dispatch(setError(''));
+
     const querySortParameters = `&sortby=${apiData.sortBy}&lang=${apiData.filterByLanguage}&country=${apiData.filterByCountry}`;
     try {
       const response = await fetch(
@@ -71,9 +72,9 @@ export const fetchApiThunkCreator = (
       const data: IContentItem = await response.json();
       dispatch(getNewsData(data.articles));
     } catch (err) {
-      setError((err as Error).message);
+      dispatch(setError((err as Error).message));
     } finally {
-      setIsLoading(false);
+      dispatch(toggleIsLoading(false));
     }
   };
 };

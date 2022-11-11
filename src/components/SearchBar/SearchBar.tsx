@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, ReactNode, useCallback, useEffect } from 'react';
 import './SearchBar.css';
 import SearchResult from 'components/SearchResult/SearchResult';
 import NewsNavigation from 'components/NewsNavigation/NewsNavigation';
@@ -6,7 +6,6 @@ import { NewsCount, PageNumber } from 'types/enums';
 import { Data } from 'types/types';
 import { searchNews, setNewsCount, setNewsData, setPageNumber } from 'store/apiSlice';
 import { fetchApiThunkCreator } from 'components/utilities/utils';
-import { AnyAction } from '@reduxjs/toolkit';
 import { apiStateData } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
@@ -44,11 +43,9 @@ const renderOptions = (availableItems: Record<string, string>): ReactNode[] => {
 };
 
 function SearchBar(): JSX.Element {
-  const { searchValueApi, apiData, newsCount, pageNumber } = useAppSelector(apiStateData);
+  const { searchValueApi, apiData, newsCount, pageNumber, isLoading, error } =
+    useAppSelector(apiStateData);
   const dispatch = useAppDispatch();
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
 
   function searchText(event: { target: { value: string } }): void {
     const value = event.target.value;
@@ -58,16 +55,7 @@ function SearchBar(): JSX.Element {
   const handleFormSubmit = useCallback(
     async (event: ChangeEvent<HTMLFormElement>) => {
       event.preventDefault();
-      setIsLoading(true);
-      setError('');
-      dispatch(
-        fetchApiThunkCreator(
-          searchValueApi,
-          setError,
-          setIsLoading,
-          apiData
-        ) as unknown as AnyAction
-      );
+      dispatch(fetchApiThunkCreator(searchValueApi, apiData));
     },
     [apiData, dispatch, searchValueApi]
   );
