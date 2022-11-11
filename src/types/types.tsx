@@ -1,3 +1,7 @@
+import { AnyAction } from '@reduxjs/toolkit';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from 'store/store';
+
 export type Links = {
   main: string;
   forms: string;
@@ -52,3 +56,5 @@ export type Data = {
 };
 
 export type HandleResult = { (): void };
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>;

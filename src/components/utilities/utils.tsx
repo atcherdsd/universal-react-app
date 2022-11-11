@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { links } from 'App/App';
-import { Data, Links } from 'types/types';
+import { AppThunk, Data, Links } from 'types/types';
 import React from 'react';
 import {
   StatusCode,
@@ -46,7 +46,7 @@ export const fetchApiThunkCreator = (
     filterByCountry: FilterByCountry;
     filterByLanguage: FilterByLanguage;
   }
-) => {
+): AppThunk => {
   return async (dispatch: Dispatch<AnyAction>) => {
     dispatch(toggleIsLoading(true));
     dispatch(setError(''));
