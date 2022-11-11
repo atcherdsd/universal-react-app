@@ -1,20 +1,9 @@
-import { CombinedState } from '@reduxjs/toolkit';
-import { ApiState } from './apiSlice';
-import { FormState } from './formSlice';
-import { FormData } from 'types/types';
+import { RootState } from './store';
 
-export const formDataSelector = (state: { formStateData: { formData: FormData } }) =>
-  state.formStateData.formData;
+export const formDataSelector = (state: RootState) => state.formStateData.formData;
 
-export const isDisabledButtonSelector = (state: { formStateData: { isDisabledButton: boolean } }) =>
-  state.formStateData.isDisabledButton;
+export const isDisabledButtonSelector = (state: RootState) => state.formStateData.isDisabledButton;
 
-export const formDataGroup = (state: { formStateData: { formDataGroup: FormData[] } }) =>
-  state.formStateData.formDataGroup;
+export const formDataGroup = (state: RootState) => state.formStateData.formDataGroup;
 
-export const apiStateData = (
-  state: CombinedState<{
-    apiStateData: ApiState;
-    formStateData: FormState;
-  }>
-) => state.apiStateData;
+export const apiStateData = (state: RootState) => state.apiStateData;
