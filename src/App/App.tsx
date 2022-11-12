@@ -9,7 +9,6 @@ import { Routes, Route } from 'react-router-dom';
 import Api from 'pages/Api/Api';
 import { Links } from 'types/types';
 import { IRoutes } from 'types/interfaces';
-// import { AppProvider } from 'store/context';
 import News from 'pages/News/News';
 
 export const links: Links = {
