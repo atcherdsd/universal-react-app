@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/universal-react-app/react-redux/static/css/main.7d70cc78.css",
+    "main.js": "/universal-react-app/react-redux/static/js/main.e8313bf5.js",
+    "static/js/787.a95b438b.chunk.js": "/universal-react-app/react-redux/static/js/787.a95b438b.chunk.js",
+    "static/media/logo-phone.svg": "/universal-react-app/react-redux/static/media/logo-phone.04cc12a40365641130e37e1ffc69da1c.svg",
+    "index.html": "/universal-react-app/react-redux/index.html",
+    "main.7d70cc78.css.map": "/universal-react-app/react-redux/static/css/main.7d70cc78.css.map",
+    "main.e8313bf5.js.map": "/universal-react-app/react-redux/static/js/main.e8313bf5.js.map",
+    "787.a95b438b.chunk.js.map": "/universal-react-app/react-redux/static/js/787.a95b438b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7d70cc78.css",
+    "static/js/main.e8313bf5.js"
+  ]
+}
