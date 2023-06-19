@@ -1,6 +1,6 @@
 {
-  "name": "react-components",
-  "homepage": "https://rolling-scopes-school.github.io/atcherdsd-REACT2022Q3/react-redux/",
+  "name": "react-redux",
+  "homepage": "https://atcherdsd.github.io/react-redux/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
