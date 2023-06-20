@@ -2,16 +2,16 @@ import { decodeHtmlCharCodes } from 'components/utilities/utils';
 import React, { RefObject, useEffect, useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from 'store/hooks';
-import { apiStateData } from 'store/selectors';
+import { apiStateDataSelector } from 'store/selectors';
 import './News.css';
 
 const News: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
-  const current = params.title;
-  const { apiData } = useAppSelector(apiStateData);
+  const uriTitle = decodeURIComponent(params.title as string);
+  const { apiData } = useAppSelector(apiStateDataSelector);
 
-  const newsList = apiData.articles.filter((item) => item.title === current);
+  const newsList = apiData.articles.filter((item) => item.title === uriTitle);
 
   useEffect(() => {
     if (newsList.length === 0) {
@@ -22,7 +22,7 @@ const News: React.FC = (): JSX.Element => {
   const newsItem = newsList[0];
 
   const date = newsItem.publishedAt.slice(0, 10);
-  const title = `"${newsItem.title}"`;
+  const title = newsItem.title;
 
   const descriptionDiv = useRef() as RefObject<HTMLDivElement>;
   const warning = useRef('');
@@ -44,9 +44,7 @@ const News: React.FC = (): JSX.Element => {
         </Link>
       </div>
       <div className="News-title__wrapper">
-        <h2 className="News-title">News</h2>
-        <div className="News-title">{title}</div>
-        <h2 className="News-title">in detail</h2>
+        <h2 className="News-title">News in detail</h2>
       </div>
       <div className="News-container">
         <div className="News-content__container">
@@ -65,7 +63,7 @@ const News: React.FC = (): JSX.Element => {
                   newsItem.image ? 'News-content__info  info__w60' : 'News-content__info info__w100'
                 }
               >
-                <div className="News-title">{decodeHtmlCharCodes(newsItem.title)}</div>
+                <div className="News-title">{decodeHtmlCharCodes(title)}</div>
                 <div
                   className="News-description"
                   ref={descriptionDiv}

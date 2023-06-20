@@ -6,4 +6,4 @@ export const isDisabledButtonSelector = (state: RootState) => state.formStateDat
 
 export const formDataGroup = (state: RootState) => state.formStateData.formDataGroup;
 
-export const apiStateData = (state: RootState) => state.apiStateData;
+export const apiStateDataSelector = (state: RootState) => state.apiStateData;

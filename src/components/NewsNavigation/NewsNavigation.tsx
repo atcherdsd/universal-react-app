@@ -1,11 +1,11 @@
 import React, { ReactNode, SyntheticEvent } from 'react';
 import { setPageNumber } from 'store/apiSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { apiStateData } from 'store/selectors';
+import { apiStateDataSelector } from 'store/selectors';
 import './NewsNavigation.css';
 
 function NewsNavigation(): JSX.Element {
-  const { apiData, newsCount, pageNumber } = useAppSelector(apiStateData);
+  const { apiData, newsCount, pageNumber } = useAppSelector(apiStateDataSelector);
   const dispatch = useAppDispatch();
 
   const getPagesCount = () => {

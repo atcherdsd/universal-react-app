@@ -6,7 +6,7 @@ import { NewsCount, PageNumber } from 'types/enums';
 import { Data } from 'types/types';
 import { searchNews, setNewsCount, setNewsData, setPageNumber } from 'store/apiSlice';
 import { fetchApiThunkCreator } from 'components/utilities/utils';
-import { apiStateData } from 'store/selectors';
+import { apiStateDataSelector } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 const availableCountries = {
@@ -44,7 +44,7 @@ const renderOptions = (availableItems: Record<string, string>): ReactNode[] => {
 
 function SearchBar(): JSX.Element {
   const { searchValueApi, apiData, newsCount, pageNumber, isLoading, error } =
-    useAppSelector(apiStateData);
+    useAppSelector(apiStateDataSelector);
   const dispatch = useAppDispatch();
 
   function searchText(event: { target: { value: string } }): void {
@@ -104,6 +104,7 @@ function SearchBar(): JSX.Element {
               <input
                 className="SearchBar-search"
                 type="search"
+                name="searchNews"
                 placeholder="What are you looking for?"
                 autoFocus
                 onChange={searchText}
@@ -111,12 +112,21 @@ function SearchBar(): JSX.Element {
               />
             </label>
           </div>
-          <input type="submit" className="SearchBar-submit" value="Search" disabled={isLoading} />
+          <input
+            type="submit"
+            name="searchSubmit"
+            className="SearchBar-submit"
+            value="Search"
+            disabled={isLoading}
+          />
           <div className="SearchBar-sort__wrapper">
             <div className="SearchBar-sort__content">
               <div className="SearchBar-sort">
-                <label className="SearchBar-search__label">Choose a country</label>
+                <label htmlFor="filterByCountry" className="SearchBar-search__label">
+                  Choose a country
+                </label>
                 <select
+                  id="filterByCountry"
                   name="filterByCountry"
                   className="SearchBar-select"
                   onChange={handleChangeSelect}
@@ -126,8 +136,11 @@ function SearchBar(): JSX.Element {
                 </select>
               </div>
               <div className="SearchBar-sort">
-                <label className="SearchBar-search__label">Sort by</label>
+                <label htmlFor="sortBy" className="SearchBar-search__label">
+                  Sort by
+                </label>
                 <select
+                  id="sortBy"
                   name="sortBy"
                   className="SearchBar-select"
                   onChange={handleChangeSelect}
@@ -142,8 +155,11 @@ function SearchBar(): JSX.Element {
                 </select>
               </div>
               <div className="SearchBar-sort">
-                <label className="SearchBar-search__label">Choose language</label>
+                <label htmlFor="filterByLanguage" className="SearchBar-search__label">
+                  Choose language
+                </label>
                 <select
+                  id="filterByLanguage"
                   name="filterByLanguage"
                   className="SearchBar-select"
                   onChange={handleChangeSelect}
@@ -153,8 +169,11 @@ function SearchBar(): JSX.Element {
                 </select>
               </div>
               <div className="SearchBar-sort">
-                <label className="SearchBar-search__label">Max</label>
+                <label htmlFor="newsCount" className="SearchBar-search__label">
+                  Max
+                </label>
                 <select
+                  id="newsCount"
                   name="newsCount"
                   className="SearchBar-select"
                   onChange={handleNewsCount}
@@ -168,6 +187,7 @@ function SearchBar(): JSX.Element {
             <hr className="SearchBar-form__line" />
             <input
               type="submit"
+              name="submitForm"
               className="SearchBar-submit__select"
               value="Submit"
               disabled={isLoading}

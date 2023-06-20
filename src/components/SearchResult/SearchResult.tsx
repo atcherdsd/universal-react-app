@@ -6,9 +6,10 @@ import './SearchResult.css';
 function SearchResult(props: Data): JSX.Element {
   const navigate = useNavigate();
   const date = props.publishedAt.slice(0, 10);
+  const encodedTitle = encodeURIComponent(props.title);
 
   function handleResult(): void {
-    navigate(`/api/${props.title}`);
+    navigate(`/api/${encodedTitle}`);
   }
 
   return (
