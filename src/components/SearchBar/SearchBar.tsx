@@ -55,7 +55,7 @@ function SearchBar(): JSX.Element {
   const handleFormSubmit = useCallback(
     async (event: ChangeEvent<HTMLFormElement>) => {
       event.preventDefault();
-      dispatch(fetchApiThunkCreator(searchValueApi, apiData));
+      dispatch(fetchApiThunkCreator(searchValueApi.trim(), apiData));
     },
     [apiData, dispatch, searchValueApi]
   );
