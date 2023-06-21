@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/universal-react-app/news-maker/static/css/main.230e5b5b.css",
+    "main.js": "/universal-react-app/news-maker/static/js/main.2901fc64.js",
+    "static/js/787.7b7aeb95.chunk.js": "/universal-react-app/news-maker/static/js/787.7b7aeb95.chunk.js",
+    "static/media/logo.svg": "/universal-react-app/news-maker/static/media/logo.04cc12a40365641130e37e1ffc69da1c.svg",
+    "index.html": "/universal-react-app/news-maker/index.html",
+    "main.230e5b5b.css.map": "/universal-react-app/news-maker/static/css/main.230e5b5b.css.map",
+    "main.2901fc64.js.map": "/universal-react-app/news-maker/static/js/main.2901fc64.js.map",
+    "787.7b7aeb95.chunk.js.map": "/universal-react-app/news-maker/static/js/787.7b7aeb95.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.230e5b5b.css",
+    "static/js/main.2901fc64.js"
+  ]
+}
