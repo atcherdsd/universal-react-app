@@ -1,10 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import Api from './Api';
+import store from 'store/store';
 
 describe('Api component', () => {
   beforeEach(() => {
-    render(<Api />);
+    render(
+      <Provider store={store}>
+        <Api />
+      </Provider>
+    );
   });
 
   test('should render Api component', () => {

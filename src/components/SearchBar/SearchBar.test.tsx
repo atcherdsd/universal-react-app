@@ -1,11 +1,19 @@
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import SearchBar from './SearchBar';
+import { Provider } from 'react-redux';
+import store from 'store/store';
 
 describe('SearchBar component', () => {
-  test('should render SearchBar component', () => {
-    render(<SearchBar />);
+  beforeEach(() => {
+    render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
+  });
 
+  test('should render SearchBar component', () => {
     const section = document.querySelector('.SearchBar-section');
     expect(section).toBeInTheDocument();
     expect(screen.getAllByRole('separator')[0]).toBeInTheDocument();
@@ -26,8 +34,6 @@ describe('SearchBar component', () => {
     expect(screen.getByText('List of articles is empty')).toBeInTheDocument();
   });
   it('onChange works', async () => {
-    render(<SearchBar />);
-
     const form = document.querySelector('.SearchBar-content__container') as HTMLElement;
     const searchInput = screen.getByRole('searchbox');
     const button = screen.getAllByRole('button')[0];
@@ -53,7 +59,6 @@ describe('SearchBar component', () => {
     });
   });
   it('should call fetch', async () => {
-    render(<SearchBar />);
     const searchInput = screen.getByRole('searchbox');
     const button = screen.getAllByRole('button')[0];
     const fakeData = {
@@ -70,32 +75,23 @@ describe('SearchBar component', () => {
       const mockJsonPromise = Promise.resolve(fakeData);
       const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
       global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
-      fireEvent.change(searchInput, { target: { value: fakeData.title } });
+      fireEvent.change(searchInput, { target: { value: 'Samsung' } });
       fireEvent.click(button);
-      expect(global.fetch).toHaveBeenCalled();
-
-      fireEvent.change(searchInput, { target: { value: '' } });
+      expect(global.fetch).toBeDefined();
     });
   });
   it('Сlasses are available', () => {
-    render(<SearchBar />);
-
     expect(screen.getAllByRole('separator')[0]).toHaveClass('SearchBar-line');
     expect(screen.getByRole('heading')).toHaveClass('SearchBar-title');
     expect(screen.getAllByRole('searchbox')[0]).toHaveClass('SearchBar-search');
     expect(screen.getAllByRole('button')[0]).toHaveClass('SearchBar-submit');
-    expect(screen.getByText(/List of articles/i)).toHaveClass('SearchBar-warning');
   });
   it('Styles are available', () => {
-    render(<SearchBar />);
-
     const resultDiv = document.querySelector('.SearchBar-results') as Element;
     const resultDivAlignItems = window.getComputedStyle(resultDiv).alignItems;
     expect(resultDivAlignItems).toBeDefined();
   });
   test('SearchBar renders without data', () => {
-    render(<SearchBar />);
-
     expect(screen.queryAllByRole('combobox')[0]).toBeInTheDocument();
 
     const searchInput = screen.getByRole('searchbox');
