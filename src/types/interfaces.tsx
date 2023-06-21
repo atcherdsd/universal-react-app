@@ -1,4 +1,4 @@
-import { Data, HandleResult, Links } from './types';
+import { Data, Links } from './types';
 
 export interface IRoutes {
   path: string;
@@ -16,10 +16,4 @@ export interface IAboutData {
 
 export interface IContentItem {
   articles: Data[];
-}
-
-export interface IModalProps {
-  data: Data;
-  date: string;
-  handleResult: HandleResult;
 }
