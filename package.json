@@ -33,7 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build web": "webpack --config ./webpack.config.js"
+    "buildweb": "webpack --config ./webpack.config.js"
   },
   "eslintConfig": {
     "extends": [
