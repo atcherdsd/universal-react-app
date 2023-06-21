@@ -4,8 +4,6 @@ import { RootState } from 'store/store';
 
 export type Links = {
   main: string;
-  forms: string;
-  API: string;
   'about us': string;
 };
 

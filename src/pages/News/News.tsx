@@ -15,7 +15,7 @@ const News: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (newsList.length === 0) {
-      navigate('/api');
+      navigate('/');
     }
   }, [newsList, navigate]);
 
@@ -23,7 +23,6 @@ const News: React.FC = (): JSX.Element => {
 
   const date = newsItem.publishedAt.slice(0, 10);
   const title = newsItem.title;
-
   const descriptionDiv = useRef() as RefObject<HTMLDivElement>;
   const warning = useRef('');
   useEffect(() => {
@@ -39,7 +38,7 @@ const News: React.FC = (): JSX.Element => {
     <>
       <hr className="News-line" />
       <div className="News-button__back">
-        <Link to="/api">
+        <Link to="/">
           <button className="News-button">Back to news</button>
         </Link>
       </div>
