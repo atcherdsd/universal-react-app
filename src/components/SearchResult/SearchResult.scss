@@ -1,0 +1,49 @@
+$clr-bg-hover: #5281d5;
+$bg-container: linear-gradient(310deg,transparent 0,#d8d8d8 5%,#90bfe5 95%, transparent);
+$fs-title: 1.5rem;
+
+.SearchResult-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 0.1rem solid $clr-bg-hover;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    background-color: $clr-bg-hover;
+    text-decoration: underline;
+  }
+  .SearchResult-content__container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    background: $bg-container;
+    .SearchResult-main-content {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 0 0.5rem;
+      width: 70%;
+      .SearchResult-title,
+      .SearchResult-date {
+        margin-bottom: 0.5rem;
+      }
+      .SearchResult-date {
+        font-style: italic;
+        .SearchResult-parse {
+          @media (max-width: 360px) {
+            display: block;
+          }
+        }
+      }
+      .SearchResult-title {
+        font-size: $fs-title;
+        padding-top: 1rem;
+      }
+    }
+  }
+}

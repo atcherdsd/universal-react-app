@@ -1,0 +1,109 @@
+@import '../../index.scss';
+
+$clr-hover-link: #800038;
+$bg-active-link: bisque;
+$fs: 1.5rem;
+
+.Header-container {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  min-height: 4rem;
+  flex-wrap: wrap;
+  @media (max-width: 590px) {
+    flex-direction: column;
+  }
+  .Header-logo__container {
+    display: flex;
+    @media (max-width: 590px) {
+      padding-bottom: 1rem;
+    }
+    .Header-logo {
+      text-decoration: none;
+    }
+    .Headear-title {
+      text-transform: uppercase;
+      max-width: 11rem;
+      font-size: $fs;
+      line-height: 1.2;
+      text-align: left;
+      font-style: oblique;
+      color: $clr-primary-text;
+      @media (max-width: 590px) {
+        max-width: none;
+      }
+      @media (max-width: 360px) {
+        text-align: center;
+      }
+    }
+  }
+  .Header-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 80%;
+    @media (max-width: 360px) {
+      width: 100%;
+    }
+    .Header-menu {
+      @media (max-width: 360px) {
+        width: 100%;
+      }
+      .Header-links {
+        display: flex;
+        list-style: none;
+        font-size: $fs;
+        flex-wrap: wrap;
+        margin: 0;
+        @media (max-width: 590px) {
+          padding: 0;
+        }
+        @media (max-width: 360px) {
+          justify-content: space-between;
+        }
+        .Header-link-item {
+          margin: 0.5rem 0;
+          .Header-link {
+            margin: 0 20px;
+            display: list-item;
+            cursor: pointer;
+            background-color: $clr-primary-text;
+            border-radius: 0.6rem;
+            padding: 0.2rem 0.6rem 0.5rem;
+            color: $clr-secondary-text;
+            text-decoration: none;
+            text-transform: capitalize;
+            @media (max-width: 360px) {
+              margin: 0;
+            }
+            &:last-child {
+              margin-right: 0;
+            }
+            &:hover,
+            &.active {
+              transition: 0.2s;
+              background-color: $bg-active-link;
+              color: $clr-primary-text;
+            }
+            &:hover {
+              color: $clr-hover-link;
+            }
+            &:active {
+              transform: scale(0.9);
+            }
+            &.active {
+              color: $clr-title;
+              cursor: default;
+              transform: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { Data } from 'types/types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './SearchResult.css';
+import './SearchResult.scss';
 
 function SearchResult(props: Data): JSX.Element {
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ function SearchResult(props: Data): JSX.Element {
       <div className="SearchResult-content__container">
         <div className="SearchResult-main-content">
           <div className="SearchResult-title">{props.title}</div>
-          <div className="SearchResult-date">Publication date: {date}</div>
+          <div className="SearchResult-date">
+            Publication date: <span className="SearchResult-parse">{date}</span>
+          </div>
         </div>
       </div>
     </div>

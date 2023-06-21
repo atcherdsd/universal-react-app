@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ReactNode, useCallback, useEffect } from 'react';
-import './SearchBar.css';
+import './SearchBar.scss';
 import SearchResult from 'components/SearchResult/SearchResult';
 import NewsNavigation from 'components/NewsNavigation/NewsNavigation';
 import { NewsCount, PageNumber } from 'types/enums';

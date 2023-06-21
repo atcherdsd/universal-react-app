@@ -1,0 +1,197 @@
+@import '../../index.scss';
+
+$clr-search-text: #389cb7;
+$clr-sort-text: #3677ab;
+$clr-button-hover: #800038;
+$clr-border-loader-main: #a97862;
+$clr-border-loader-top: #bd5341;
+$bg-sort: #e1e9e9;
+$bg-search-line: linear-gradient(90deg,transparent 0,#d8d8d8 5%,$clr-primary-text 95%,transparent);
+$fs-select: 1rem;
+$fs-input: 1.1rem;
+$fs-label: 1.2rem;
+$fs-submit: 1.3rem;
+$fs-warning: 2rem;
+
+.SearchBar-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  padding: 0 2rem;
+  margin: 0 auto;
+  text-align: center;
+  .SearchBar-line {
+    border: 0;
+    height: 0.15rem;
+    background: $bg-search-line;
+    margin: 0 0 1rem;
+  }
+  .SearchBar-title {
+    color: $clr-primary-text;
+    margin-top: 0;
+  }
+  .SearchBar-content__container {
+    margin-bottom: 1.5rem;
+    .SearchBar-field {
+      display: flex;
+      justify-content: center;
+      border: 0.2rem solid $clr-primary-text;
+      width: 100%;
+      max-width: 25rem;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
+      border-radius: 0.875rem;
+      height: 2.3rem;
+      .SearchBar-search__label {
+        width: 100%;
+        .SearchBar-search {
+          width: 100%;
+          height: 2rem;
+          padding: 0 1rem;
+          border: none;
+          border-radius: 0.875rem;
+          outline: none;
+          font-size: $fs-input;
+          color: $clr-search-text;
+        }
+      }
+    }
+    .SearchBar-sort__wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      color: $clr-sort-text;
+      background: $bg-sort;
+      border-radius: 2rem;
+      max-width: 80%;
+      position: relative;
+      margin: 0 auto;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 1rem;
+      @media(max-width: 768px) {
+        gap: 0.5rem;
+        padding: 0 1rem 1rem;
+      }
+      .SearchBar-sort__content {
+        display: grid;
+        grid-template-columns: repeat(3, 0.7fr) 0.4fr;
+        justify-content: center;
+        justify-items: center;
+        gap: 0.5rem;
+        @media(max-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        @media(max-width: 500px) {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .SearchBar-sort {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          gap: 1rem;
+          margin: 1rem 0;
+          .SearchBar-search__label {
+            font-size: $fs-label;
+          }
+          .SearchBar-select {
+            font-size: $fs-select;
+            padding: 0.5rem;
+            border: 0.1rem solid $clr-search-text;
+            border-radius: 1rem;
+            outline: none;
+            cursor: pointer;
+            color: $clr-search-text;
+            text-align: center;
+            &:hover {
+              background: whitesmoke;
+              transition: 0.2s;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.SearchBar-submit {
+  margin: 2rem 0 1rem;
+  cursor: pointer;
+  background-color: $clr-primary-text;
+  border-radius: 0.6rem;
+  padding: 0.6rem;
+  color: $clr-secondary-text;
+  border: none;
+  font-size: $fs-submit;
+  width: 9rem;
+}
+.SearchBar-submit:hover,
+.SearchBar-submit__select:hover {
+  color: $clr-button-hover;
+  background-color: bisque;
+  transition: 0.2s;
+}
+
+.SearchBar-form__line {
+  border: 0;
+  height: 0.1rem;
+  width: 50%;
+  background: $bg-search-line;
+  margin: 0 0 1rem;
+  align-self: center;
+}
+.SearchBar-submit__select {
+  cursor: pointer;
+  background-color: $clr-primary-text;
+  border-radius: 0.6rem;
+  padding: 0.6rem;
+  color: $clr-secondary-text;
+  border: none;
+  font-size: $fs-select;
+  width: 7rem;
+  margin: 0 auto;
+}
+
+.SearchBar-results {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  text-align: center;
+  padding: 0 20px 2rem;
+}
+.SearchBar-warning {
+  font-size: $fs-warning;
+  color: $clr-title;
+  margin: 0 auto;
+}
+
+.SearchBar-loader {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 0.2rem solid $clr-border-loader-main;
+  border-top: 0.25rem solid $clr-border-loader-top;
+  border-radius: 100%;
+  animation: spin 1s infinite linear;
+}
+.SearchBar-error {
+  font-size: $fs-warning;
+  color: $clr-title;
+}
+
+@keyframes spin {
+  from{
+    transform: rotate(0deg);
+  }to{
+    transform: rotate(360deg);
+  }
+}
+
+@media(max-width: 800px) {
+  .SearchBar-sort__wrapper {
+    gap: 0.5rem;
+    padding: 0 1rem 1rem;
+  }
+}

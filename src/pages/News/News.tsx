@@ -3,7 +3,7 @@ import React, { RefObject, useEffect, useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from 'store/hooks';
 import { apiStateDataSelector } from 'store/selectors';
-import './News.css';
+import './News.scss';
 
 const News: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
@@ -49,7 +49,10 @@ const News: React.FC = (): JSX.Element => {
         <div className="News-content__container">
           <div className="News-main-content">
             <div className="News-content__header">
-              <div className="News-source">Source: {decodeHtmlCharCodes(newsItem.source.name)}</div>
+              <div className="News-source">
+                Source:{' '}
+                <span className="News-parse">{decodeHtmlCharCodes(newsItem.source.name)}</span>
+              </div>
             </div>
             <div className="News-content__main">
               {newsItem.image && (
@@ -71,7 +74,9 @@ const News: React.FC = (): JSX.Element => {
               </div>
             </div>
             <div className="News-content__footer">
-              <div className="News-date">Publication date: {date}</div>
+              <div className="News-date">
+                Publication date: <span className="News-parse">{date}</span>
+              </div>
               <a href={newsItem.url} className="News-url" target="blank" rel="noreferrer">
                 See in source
               </a>

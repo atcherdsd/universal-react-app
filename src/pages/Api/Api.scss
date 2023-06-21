@@ -1,0 +1,17 @@
+@import '../../index.scss';
+
+.Api-line {
+  border: 0;
+  height: 0.15rem;
+  background: $bg-line;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.Api-title {
+  text-transform: uppercase;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+  color: $clr-title;
+}

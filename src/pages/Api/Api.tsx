@@ -1,6 +1,6 @@
 import SearchBar from 'components/SearchBar/SearchBar';
 import React from 'react';
-import './Api.css';
+import './Api.scss';
 
 const Api: React.FC = (): JSX.Element => {
   return (

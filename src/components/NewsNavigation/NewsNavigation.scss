@@ -1,0 +1,47 @@
+@import '../../index.scss';
+$clr-nav: #3677ab;
+$fs-title: 1.4rem;
+$fs-number: 1rem;
+
+.NewsNavigation-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 80%;    
+  margin-bottom: 1rem;
+  min-height: 1.5rem;
+  .NewsNavigation-content__container {
+    display: flex;
+    flex-wrap: wrap;
+    color: $clr-nav;
+    align-items: center;   
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .NewsNavigation-title {
+    min-width: 7.2rem;
+    font-size: $fs-title;
+  }
+  .NewsNavigation-number,
+  .NewsNavigation-number.active {
+    width: 2rem;
+    height: 2rem;
+    font-size: $fs-number;
+    margin: 0.5rem;
+    cursor: pointer;
+    color: $clr-nav;
+    border: 0.1rem solid;
+  }
+  .NewsNavigation-number.active {
+    background: $clr-secondary-text;
+  }
+  .NewsNavigation-number:hover {
+    background: $clr-secondary-text;
+    transition: 0.2s;
+  }
+  .NewsNavigation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

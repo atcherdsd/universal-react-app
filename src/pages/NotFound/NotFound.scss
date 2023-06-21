@@ -1,5 +1,7 @@
+$fs-message: 2rem;
+
 .NotFound-message {
-    font-size: 2rem;
+    font-size: $fs-message;
     text-align: center;
 }
 .NotFound-title {

@@ -1,0 +1,40 @@
+@import '../../index.scss';
+
+$clr-link: blue;
+$bg-second-line: linear-gradient(90deg,transparent 0,#d8d8d8 5%,#d8d8d8 95%,transparent);
+
+.About-line__common {
+  border: 0;
+  height: 0.15rem;
+  background: $bg-line;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.About-title {
+  text-transform: uppercase;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 0;
+  text-align: center;
+}
+.About-text {
+  margin: 0 auto;
+  padding: 2rem;
+  max-width: 1200px;
+  text-align: center;
+  .About-link {
+    display: block;
+    font-weight: bold;
+  }
+  .About-link > a {
+    text-decoration: none;
+    color: $clr-link;
+  }
+}
+.About-line {
+  border: 0;
+  height: 1px;
+  background: $bg-second-line;
+  max-width: 1200px;
+  margin: 0 auto;
+}

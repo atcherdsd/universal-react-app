@@ -2,7 +2,7 @@ import React, { ReactNode, SyntheticEvent } from 'react';
 import { setPageNumber } from 'store/apiSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { apiStateDataSelector } from 'store/selectors';
-import './NewsNavigation.css';
+import './NewsNavigation.scss';
 
 function NewsNavigation(): JSX.Element {
   const { apiData, newsCount, pageNumber } = useAppSelector(apiStateDataSelector);

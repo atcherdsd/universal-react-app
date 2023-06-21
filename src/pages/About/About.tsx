@@ -1,5 +1,5 @@
 import React from 'react';
-import './About.css';
+import './About.scss';
 import about from 'data/about.json';
 import { IAboutData } from 'types/interfaces';
 
