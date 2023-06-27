@@ -1,1 +1,1 @@
-# React App with news API
+# Next JS Omline Store App

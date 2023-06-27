@@ -1,6 +1,6 @@
 {
-  "name": "react-redux",
-  "homepage": "https://atcherdsd.github.io/universal-react-app/react-redux/",
+  "name": "store-next-js",
+  "homepage": "https://atcherdsd.github.io/universal-react-app/store-next-js/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,8 @@
     "@types/node": "^16.11.62",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "eslint-config-next": "^13.4.7",
+    "next": "^13.4.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.38.0",
@@ -24,18 +26,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set PORT=3005 && react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "browserslist": {
     "production": [

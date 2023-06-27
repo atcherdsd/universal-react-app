@@ -1,0 +1,423 @@
+{
+    "goods": [
+        {
+            "id": "1",
+            "title": "Xiaomi 11T 5G Dual-SIM EU Google Android Smartphone in blue  with 128 GB storage",
+            "review": "based on 8 Reviews",
+            "rating": "4,7",
+            "price": "293,27 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/14304BFA00002DB374B44B1E2C075.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/9084642069A92196B6BB4F4EB1008EA8.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.9 cm (6.67\"), 108.0 MP camera",
+                    "CPU: 8x (1x 3.00 GHz + 3x 2.60 GHz + 4x 2.00 GHz)",
+                    "128 GB storage, Dual-Sim",
+                    "5G, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP53 certified, Fingerprint scanner, USB Type-C, HDR"
+                ]
+            }
+        },
+        {
+            "id": "2",
+            "title": "Nokia X10 Google Android Smartphone in white  with 128 GB storage",
+            "review": "based on 5 Reviews",
+            "rating": "4,5",
+            "price": "167,98 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/11286B6ABB671E355443094F4C906.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90832704BCB87E46F019484EBEC99B4C.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.9 cm (6.67\"), 48 MP camera",
+                    "CPU: 8x (2x 2.00 GHz + 6x 1.80 GHz)",
+                    "128 GB storage, microSD-Slot, Dual-Sim",
+                    "5G, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, Fingerprint scanner, USB Type-C"
+                ]
+            }
+        },
+        {
+            "id": "3",
+            "title": "Samsung Galaxy XCover 5 Enterprise Google Android Smartphone in black  with 64.0 GB storage",
+            "review": "based on 2 Reviews",
+            "rating": "4,4",
+            "price": "217,55 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/908286002381ACC90D054660AB75DCFA.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 10.0",
+                    "Display: 13.5 cm (5.3\"), 16.0 MP camera",
+                    "CPU: 8x (2.0 GHz)",
+                    "64.0 GB storage, microSD-Slot, Dual-Sim",
+                    "LTE, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP68 certified"
+                ]
+            }
+        },
+        {
+            "id": "4",
+            "title": "Samsung Galaxy S20 Google Android Smartphone in gray  with 128 GB storage",
+            "review": "based on 41 Reviews",
+            "rating": "4,5",
+            "price": "426,81 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90793169DE0E049D7A1B4D7D9FFCA0F9.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 10.0",
+                    "Display: 15.7 cm (6.2\"), 64.0 MP camera",
+                    "CPU: 8x (2x 2.73 GHz + 2x 2.50 GHz + 4x 2.00 GHz)",
+                    "128 GB storage, microSD-Slot, Dual-Sim",
+                    "LTE, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP68 certified, Fingerprint scanner, Qi compatible, USB Type-C, HDR"
+                ]
+            }
+        },
+        {
+            "id": "5",
+            "title": "Xiaomi Redmi Note 10S Google Android Smartphone in gray  with 64.0 GB storage",
+            "review": "based on 13 Reviews",
+            "rating": "4,6",
+            "price": "146,21 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/14304BFA00002DB374B44B1E2C075.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90843689A88A1D3D0F8B4626BF7526A7.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.3 cm (6.44\"), 64.0 MP camera",
+                    "CPU: 8x (2.05 GHz)",
+                    "64.0 GB storage, microSD-Slot, Dual-Sim",
+                    "Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP53 certified, Fingerprint scanner, USB Type-C"
+                ]
+            }
+        },
+        {
+            "id": "6",
+            "title": "Xiaomi 12 Lite 5G EU Google Android Smartphone in black  with 128 GB storage",
+            "review": "based on 10 Reviews",
+            "rating": "4,8",
+            "price": "343,55 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/14304BFA00002DB374B44B1E2C075.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90910567EDF9E7C32DDA4611B72EEF53.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 12.0",
+                    "Display: 16.6 cm (6.55\"), 108.0 MP camera",
+                    "CPU: 8x (1 x 2.40 GHz + 3x 2.20 GHz + 4x 1.90 GHz)",
+                    "128 GB storage, Dual-Sim",
+                    "5G, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, Fingerprint scanner, USB Type-C, HDR, 120 Hz Display"
+                ]
+            }
+        },
+        {
+            "id": "7",
+            "title": "Google Pixel 6a Google Android Smartphone in black  with 128 GB storage",
+            "review": "based on 43 Reviews",
+            "rating": "5,0",
+            "price": "360,50 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/1402461AD6B7E3A8F460C9FFFAE3A.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90908326EEC361E0064C49E696A63B94.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 12.0",
+                    "Display: 15.5 cm (6.1\"), 12.2 MP camera",
+                    "128 GB storage, Dual-Sim",
+                    "5G, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP67 certified, Fingerprint scanner, USB Type-C, HDR"
+                ]
+            }
+        },
+        {
+            "id": "8",
+            "title": "Samsung Galaxy A53 A536B 5G Dual-Sim EU Google Android Smartphone in blue  with 256 GB storage",
+            "review": "based on 30 Reviews",
+            "rating": "4,8",
+            "price": "357,98 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/908902552DDA37A5AEFC4404A5C2A7A7.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 12.0",
+                    "Display: 16.5 cm (6.5\"), 64.0 MP camera",
+                    "CPU: 8x (2 x 2.40 GHz + 6x 2.00 GHz)",
+                    "256 GB storage, microSD-Slot, Dual-Sim",
+                    "5G, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP67 certified, Fingerprint scanner, USB Type-C, 120 Hz Display"
+                ]
+            }
+        },
+        {
+            "id": "9",
+            "title": "Samsung Galaxy A33 A336B 5G Dual-Sim EU Google Android Smartphone in blue  with 128 GB storage",
+            "review": "based on 14 Reviews",
+            "rating": "4,8",
+            "price": "246,22 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/9088991397F4DE1843914F4EB2A9116C.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 12",
+                    "Display: 16.2 cm (6.4\"), 48 MP camera",
+                    "CPU: 8x (2 x 2.40 GHz + 6x 2.00 GHz)",
+                    "128 GB storage, microSD-Slot, Dual-Sim",
+                    "5G, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP67 certified, Fingerprint scanner, USB Type-C"
+                ]
+            }
+        },
+        {
+            "id": "10",
+            "title": "Samsung Galaxy S22 S901B 5G EU Google Android Smartphone in black  with 128 GB storage",
+            "review": "based on 32 Reviews",
+            "rating": "4,8",
+            "price": "585,32 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/908586271698DC1EC8C44E76BAF77A81.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 12.0",
+                    "Display: 15.5 cm (6.1\"), 50 MP camera",
+                    "CPU: 8x (1x 2.80 GHz + 3x 2.50 GHz + 4x 1.70 GHz)",
+                    "128 GB storage, Dual-Sim",
+                    "5G, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP68 certified, Fingerprint scanner, Qi compatible, USB Type-C, HDR, 120 Hz Display"
+                ]
+            }
+        },
+        {
+            "id": "11",
+            "title": "Samsung Galaxy S21 G990B FE 5G EU Google Android Smartphone in green  with 256 GB storage",
+            "review": "based on 38 Reviews",
+            "rating": "4,8",
+            "price": "539,50 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90853065673EC81E2BB14ACDB8874A81.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 12.0",
+                    "Display: 16.2 cm (6.4\"), 12.0 MP camera",
+                    "CPU: 8x (1x 2.84 GHz + 3x 2.42 GHz + 4x 1.80 GHz)",
+                    "256 GB storage, Dual-Sim",
+                    "5G, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP68 certified, Fingerprint scanner, Qi compatible, USB Type-C, HDR"
+                ]
+            }
+        },
+        {
+            "id": "12",
+            "title": "Xiaomi Redmi Note 11 Pro 5G Google Android Smartphone in blue  with 128 GB storage",
+            "review": "based on 18 Reviews",
+            "rating": "4,7",
+            "price": "242,86 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/14304BFA00002DB374B44B1E2C075.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90894688324E7B4BB3C241ABBB5BCAD8.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.9 cm (6.67\"), 108.0 MP camera",
+                    "CPU: 8x (2x 2.20 Ghz + 6x 1.70 GHz)",
+                    "128 GB storage, microSD-Slot, Dual-Sim",
+                    "5G, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, Fingerprint scanner, USB Type-C, 120 Hz Display"
+                ]
+            }
+        },
+        {
+            "id": "13",
+            "title": "Samsung Galaxy A53 A536B 5G Dual-Sim EU Google Android Smartphone in blue  with 128 GB storage",
+            "review": "based on 30 Reviews",
+            "rating": "4,8",
+            "price": "308,02 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/908899181037DBC7893F4364B5EBD68A.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 12.0",
+                    "Display: 16.5 cm (6.5\"), 64.0 MP camera",
+                    "CPU: 8x (2 x 2.40 GHz + 6x 2.00 GHz)",
+                    "128 GB storage, microSD-Slot, Dual-Sim",
+                    "5G, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP67 certified, Fingerprint scanner, USB Type-C, 120 Hz Display"
+                ]
+            }
+        },
+        {
+            "id": "14",
+            "title": "Samsung Galaxy A53 A536B 5G Dual-Sim Google Android Smartphone in white  with 128 GB storage",
+            "review": "based on 30 Reviews",
+            "rating": "4,8",
+            "price": "306,72 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90890048E18FBCC7949D431EB16BD7A8.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 12.0",
+                    "Display: 16.5 cm (6.5\"), 64.0 MP camera",
+                    "CPU: 8x (2 x 2.40 GHz + 6x 2.00 GHz)",
+                    "128 GB storage, microSD-Slot, Dual-Sim",
+                    "5G, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP67 certified, Fingerprint scanner, USB Type-C, 120 Hz Display"
+                ]
+            }
+        },
+        {
+            "id": "15",
+            "title": "Xiaomi 11T 5G  Dual-SIM EU Google Android Smartphone in black  with 128 GB storage",
+            "review": "based on 8 Reviews",
+            "rating": "4,7",
+            "price": "284,87 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/14304BFA00002DB374B44B1E2C075.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90846425E92DBCCEA9674924B5C071C5.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.9 cm (6.67\"), 108.0 MP camera",
+                    "CPU: 8x (1x 3.00 GHz + 3x 2.60 GHz + 4x 2.00 GHz)",
+                    "128 GB storage, Dual-Sim",
+                    "5G, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP53 certified, Fingerprint scanner, USB Type-C, HDR"
+                ]
+            }
+        },
+        {
+            "id": "16",
+            "title": "Xiaomi 11T Pro 5G Dual-SIM EU Google Android Smartphone in blue  with 256 GB storage",
+            "review": "based on 30 Reviews",
+            "rating": "4,7",
+            "price": "398,68 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/14304BFA00002DB374B44B1E2C075.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/9084642309F71EECBBC042CCB4B042DD.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.9 cm (6.67\"), 108.0 MP camera",
+                    "CPU: 8x (1x 2.84 GHz + 3x 2.42 GHz + 4x 1.80 GHz)",
+                    "256 GB storage, Dual-Sim",
+                    "5G, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP53 certified, Fingerprint scanner, USB Type-C, HDR"
+                ]
+            }
+        },
+        {
+            "id": "17",
+            "title": "Xiaomi Redmi Note 10S Dual-SIM Google Android Smartphone in blue  with 64.0 GB storage",
+            "review": "based on 13 Reviews",
+            "rating": "4,6",
+            "price": "167,03 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/14304BFA00002DB374B44B1E2C075.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90843688E457EAA483DE49069BD3084A.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.3 cm (6.44\"), 64.0 MP camera",
+                    "CPU: 8x (2.05 GHz)",
+                    "64.0 GB storage, microSD-Slot, Dual-Sim",
+                    "LTE, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP53 certified, Fingerprint scanner, USB Type-C"
+                ]
+            }
+        },
+        {
+            "id": "18",
+            "title": "Xiaomi Redmi Note 10 Pro Google Android Smartphone in blue  with 128 GB storage",
+            "review": "based on 13 Reviews",
+            "rating": "4,6",
+            "price": "207,44 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/14304BFA00002DB374B44B1E2C075.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90829390A97CBF0857E64B8D8B93FBDA.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.9 cm (6.67\"), 108.0 MP camera",
+                    "CPU: 8x (2x 2.30 GHz + 6x 1.8 GHz)",
+                    "128 GB storage, Dual-Sim",
+                    "LTE, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP53 certified, Fingerprint scanner, USB Type-C, HDR"
+                ]
+            }
+        },
+        {
+            "id": "19",
+            "title": "Apple iPhone SE MHGT3ZD/A Apple iOS Smartphone in black  with 128 GB storage",
+            "review": "based on 53 Reviews",
+            "rating": "4,6",
+            "price": "419,33 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/10161B95091BE581548B0AA901C8F.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/9080002588B1C4A7486B43E0B8B8F93B.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Apple iOS 14",
+                    "Display: 11.9 cm (4.7\"), 12.0 MP camera",
+                    "CPU: 6x (2x 2.65 GHz + 4x 1.80 GHz)",
+                    "128 GB storage, Dual-Sim",
+                    "LTE, Wi-Fi 6 (802.11ax), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock, IP67 certified, Fingerprint scanner, Qi compatible, HDR"
+                ]
+            }
+        },
+        {
+            "id": "20",
+            "title": "Samsung Galaxy A03 A035 Google Android Smartphone in black  with 64.0 GB storage",
+            "review": "based on 2 Reviews",
+            "rating": "4,4",
+            "price": "123,45 €",
+            "stock": "In stock and immediately available",
+            "delivery": "Dispatched in 2-4 days",
+            "logo": "https://cdn.computeruniverse.net/media/images/manu/list/100639A941389274B4BB4938DEECC.jpg",
+            "img": "https://img.computerunivers.net/images/250x250/90893576E0CE57E8816944FF89437457.jpg",
+            "description": {
+                "info": [
+                    "Smartphone, Google Android 11.0",
+                    "Display: 16.5 cm (6.5\"), 48 MP camera",
+                    "CPU: 8x (1.6 GHz)",
+                    "64.0 GB storage, microSD-Slot, Dual-Sim",
+                    "LTE, Wi-Fi 5 (802.11ac), Bluetooth , NFC, GPS",
+                    "no branding, no SIMlock"
+                ]
+            }
+        }
+    ]
+}
