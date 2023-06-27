@@ -1,1 +1,1 @@
-# Next JS Omline Store App
+# Next JS Online Store App
