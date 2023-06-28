@@ -1,25 +1,27 @@
 import { useRouter } from 'next/router';
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-// import { getAllPosts, getOnePost, Post } from '../../services/post';
 import Head from 'next/head';
 import React from 'react';
-import { StorageItems } from '../../types/enums';
-import { GoodsData, Links, Positions } from '../../types/types';
-import Header from '../../components/Header';
-import Card from '../../components/Card';
+import { LinksItems } from '../types/enums';
+import { GoodsData, Links, Positions } from '../types/types';
+import Header from '../components/Header';
+import Card from '../components/Card';
 
 interface PropsTypes {
   storeName: string;
   links: Links;
-  unit: Positions;
+  goodsData: GoodsData;
 }
 
-const GoodsUnit: NextPage<{ storeName: string; links: Links; unit: Positions }> = ({
+const GoodsUnit: NextPage<{ storeName: string; links: Links; goodsData: GoodsData }> = ({
   storeName,
   links,
-  unit,
+  goodsData,
 }: PropsTypes): React.JSX.Element => {
-  const { back } = useRouter();
+  const { back, query } = useRouter();
+
+  const { id } = query;
+  const unit = goodsData.goods.find((elem) => elem.id === id) as Positions;
 
   const goBack = () => back();
   return (
@@ -53,30 +55,29 @@ const GoodsUnit: NextPage<{ storeName: string; links: Links; unit: Positions }> 
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  //   const post = await getOnePost(context.params.id);
   const storeName = 'smartphone universe';
   const links: Links = {
-    main: '/',
-    about: '/about',
+    main: LinksItems.Goods,
+    about: LinksItems.About,
   };
-  const goodsData: GoodsData = await import('../../data/goods.json', { assert: { type: 'json' } });
-  const unit = goodsData.goods.find(
-    (elem) => elem.id === (localStorage.getItem(StorageItems.SelectedUnit) as string)
-  ) as Positions;
+  const goodsData: GoodsData = JSON.parse(
+    JSON.stringify(await import('../data/goods.json', { assert: { type: 'json' } }))
+  );
 
   return {
     props: {
-      // post: post,
       storeName,
       links,
-      unit,
+      goodsData,
     },
     revalidate: 10,
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const goodsData: GoodsData = await import('../../data/goods.json', { assert: { type: 'json' } });
+  const goodsData: GoodsData = JSON.parse(
+    JSON.stringify(await import('../data/goods.json', { assert: { type: 'json' } }))
+  );
 
   return {
     paths: goodsData.goods.map(({ id }) => ({ params: { id: id.toString() } })),

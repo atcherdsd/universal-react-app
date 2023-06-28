@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
-import Header from '../../components/Header';
-import { GoodsData, Links, Positions } from '../../types/types';
-import Search from '../../components/Search';
-import { StorageItems } from '../../types/enums';
-import '../../styles/global.css';
+import Header from '../components/Header';
+import { GoodsData, Links, Positions } from '../types/types';
+import Search from '../components/Search';
+import { LinksItems, StorageItems } from '../types/enums';
 
 export interface PropsTypes {
   storeName: string;
@@ -17,9 +16,12 @@ const Main: NextPage<{ storeName: string; links: Links; goodsData: GoodsData }> 
   links,
   goodsData,
 }: PropsTypes): React.JSX.Element => {
-  const [searchedValue, setSearchedValue] = useState(
-    (localStorage.getItem(StorageItems.SearchedValue) as string) || ''
-  );
+  let value: string | undefined;
+
+  if (typeof window !== 'undefined') {
+    value = localStorage.getItem(StorageItems.SearchedValue) as string;
+  }
+  const [searchedValue, setSearchedValue] = useState(value || '');
 
   function searchText(event: { target: { value: string } }): void {
     setSearchedValue(event.target.value);
@@ -35,7 +37,8 @@ const Main: NextPage<{ storeName: string; links: Links; goodsData: GoodsData }> 
   );
 
   function setLocalStorage(): void {
-    localStorage.setItem(StorageItems.SearchedValue, searchedValue);
+    if (typeof window !== undefined)
+      localStorage.setItem(StorageItems.SearchedValue, searchedValue);
   }
   useEffect(setLocalStorage, [searchedValue]);
 
@@ -50,10 +53,12 @@ const Main: NextPage<{ storeName: string; links: Links; goodsData: GoodsData }> 
 export const getServerSideProps: GetServerSideProps = async () => {
   const storeName = 'smartphone universe';
   const links: Links = {
-    main: '/',
-    about: '/about',
+    main: LinksItems.Goods,
+    about: LinksItems.About,
   };
-  const goodsData: GoodsData = await import('../../data/goods.json', { assert: { type: 'json' } });
+  const goodsData: GoodsData = JSON.parse(
+    JSON.stringify(await import('../data/goods.json', { assert: { type: 'json' } }))
+  );
 
   return {
     props: {

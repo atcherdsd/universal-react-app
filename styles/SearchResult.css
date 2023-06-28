@@ -19,7 +19,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    background: linear-gradient(310deg,transparent 0,#d8d8d8 5%,#90bfe5 95%, transparent);
+    background: linear-gradient(310deg,transparent 0,#ece9e9 5%,#d2e4f3 95%, transparent);
 }
 
 .SearchResult-main-content {

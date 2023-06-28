@@ -10,6 +10,6 @@ export interface ISearchProps {
   dataSearch: Positions[];
 }
 export interface ISearchResultProps {
-  key: string;
   title: string;
+  id: string;
 }

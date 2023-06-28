@@ -1,8 +1,8 @@
 import React from 'react';
 import { GetServerSideProps, NextPage } from 'next';
-import '../../styles/About.css';
 import Header from '../../components/Header';
 import { AboutData, Links } from '../../types/types';
+import { LinksItems } from '../../types/enums';
 
 export interface PropsTypes {
   storeName: string;
@@ -31,10 +31,12 @@ const About: NextPage<{ storeName: string; links: Links; aboutData: AboutData }>
 export const getServerSideProps: GetServerSideProps = async () => {
   const storeName = 'smartphone universe';
   const links: Links = {
-    main: '/',
-    about: '/about',
+    main: LinksItems.Goods,
+    about: LinksItems.About,
   };
-  const aboutData: AboutData = await import('../../data/about.json', { assert: { type: 'json' } });
+  const aboutData: AboutData = JSON.parse(
+    JSON.stringify(await import('../../data/about.json', { assert: { type: 'json' } }))
+  );
 
   return {
     props: {

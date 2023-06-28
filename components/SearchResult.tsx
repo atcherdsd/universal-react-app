@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/SearchResult.css';
 import { ISearchResultProps } from '../types/interfaces';
 import { StorageItems } from '../types/enums';
+import { useRouter } from 'next/router';
 
 const SearchResult = (props: ISearchResultProps): React.JSX.Element => {
-  const navigate = useNavigate();
-  const [selectedUnit, setSelectedUnit] = useState(
-    (localStorage.getItem(StorageItems.SelectedUnit) as string) || ''
-  );
+  let unit: string | undefined;
+
+  if (typeof window !== 'undefined') {
+    unit = localStorage.getItem(StorageItems.SelectedUnit) as string;
+  }
+  const router = useRouter();
+  const [selectedUnit, setSelectedUnit] = useState(unit || '');
 
   function handleResult(): void {
-    setSelectedUnit(props.key);
-    navigate(`/goods/${props.title}`);
+    setSelectedUnit(props.id);
+    router.push(`/${props.id}`);
   }
 
   function setLocalStorage(): void {
-    localStorage.setItem(StorageItems.SelectedUnit, selectedUnit);
+    if (typeof window !== undefined) localStorage.setItem(StorageItems.SelectedUnit, selectedUnit);
   }
   useEffect(setLocalStorage, [selectedUnit]);
 

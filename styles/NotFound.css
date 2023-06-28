@@ -5,3 +5,27 @@
 .NotFound-title {
     text-align: center;
 }
+.NotFound-button__back {
+    display: flex;
+    justify-content: right;
+    max-width: 1200px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.NotFound-button {
+    cursor: pointer;
+    background-color: #61dafb;
+    border-radius: 0.6rem;
+    padding: 0.6rem;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    width: 7rem;
+    margin: 0 auto;
+}
+.NotFound-button:hover {
+    background: bisque;
+    color: #48412d;
+    transition: 0.2s;
+}

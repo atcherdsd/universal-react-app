@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import logo from '../public/logo-phone.svg';
-import '../styles/Header.css';
 import { IHeaderProps } from '../types/interfaces';
 import { makeListItems } from '../utilities/utils';
 
