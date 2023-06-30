@@ -10,18 +10,15 @@ import Card from '../components/Card';
 interface PropsTypes {
   storeName: string;
   links: Links;
-  goodsData: GoodsData;
+  unit: Positions;
 }
 
-const GoodsUnit: NextPage<{ storeName: string; links: Links; goodsData: GoodsData }> = ({
+const GoodsUnit: NextPage<{ storeName: string; links: Links; unit: Positions }> = ({
   storeName,
   links,
-  goodsData,
+  unit,
 }: PropsTypes): React.JSX.Element => {
-  const { back, query } = useRouter();
-
-  const { id } = query;
-  const unit = goodsData.goods.find((elem) => elem.id === id) as Positions;
+  const { back } = useRouter();
 
   const goBack = () => back();
   return (
@@ -54,7 +51,7 @@ const GoodsUnit: NextPage<{ storeName: string; links: Links; goodsData: GoodsDat
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const storeName = 'smartphone universe';
   const links: Links = {
     main: LinksItems.Goods,
@@ -63,12 +60,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const goodsData: GoodsData = JSON.parse(
     JSON.stringify(await import('../data/goods.json', { assert: { type: 'json' } }))
   );
+  const unit = goodsData.goods.find((el) => el.id === params!.id) as Positions;
 
   return {
     props: {
       storeName,
       links,
-      goodsData,
+      unit,
     },
     revalidate: 10,
   };
