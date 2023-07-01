@@ -3,10 +3,13 @@ import Image from 'next/image';
 import logo from '../public/logo-phone.svg';
 import { IHeaderProps } from '../types/interfaces';
 import { makeListItems } from '../utilities/utils';
+import { useRouter } from 'next/router';
 
 const Header = ({ storeName, links }: IHeaderProps): JSX.Element => {
+  const { pathname } = useRouter();
+
   const listItems = Object.keys(links).map((elem: string, index: number): JSX.Element => {
-    return makeListItems(links, elem, index);
+    return makeListItems(links, elem, index, pathname);
   });
 
   return (

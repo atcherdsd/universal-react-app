@@ -46,7 +46,7 @@
 .Header-link-item {
     margin: 0.5rem 0;
 }
-.Header-link a {
+.Header-link {
     margin: 0 20px;
     display: list-item;
     cursor: pointer;
@@ -57,18 +57,25 @@
     text-decoration: none;
     text-transform: capitalize;
 }
-.Header-link a:last-child {
+.Header-link:last-child {
     margin-right: 0;
 }
 
-.Header-link a:hover {
+.Header-link:hover,
+.Header-link.active {
     transition: 0.2s;
     background-color: bisque;
     color:#61dafb;
 }
-.Header-link a:hover {
+.Header-link:hover {
     color: #800038;
 }
-.Header-link a:active {
+.Header-link:active {
     transform: scale(0.9);
+}
+
+.Header-link.active {
+    color: #48412d;
+    cursor: default;
+    transform: none;
 }
