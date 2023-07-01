@@ -11,7 +11,7 @@ export const makeListItems = (
   const item = Object.values(links)[index];
   return (
     <li key={item} className="Header-link-item">
-      <Link href={item}>
+      <Link href={item} passHref legacyBehavior>
         <a className={pathname === item ? 'Header-link active' : 'Header-link'}>{elem}</a>
       </Link>
     </li>

@@ -61,14 +61,13 @@
     margin-right: 0;
 }
 
-.Header-link:hover,
 .Header-link.active {
-    transition: 0.2s;
     background-color: bisque;
-    color:#61dafb;
 }
 .Header-link:hover {
     color: #800038;
+    transition: 0.2s;
+    background-color: bisque;
 }
 .Header-link:active {
     transform: scale(0.9);
